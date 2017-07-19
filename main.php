@@ -68,7 +68,7 @@ require_once(ClipIt_ADMIN . '/admin-functions.php');
 require_once(ClipIt_ADMIN . '/admin-emails.php');
 
 require_once( ClipIt_MAIN . 'lib/updater/github-updater.php' );
-new GitHubPluginUpdater( __FILE__, 'LeadsNearby', 'clipit-coupons' );
+new GitHubPluginUpdater( __FILE__, 'LeadsNearby', 'Clipit-Coupons' );
 
 
 ?>
