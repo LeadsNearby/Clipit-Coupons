@@ -25,7 +25,8 @@
 			'show_exp' => 'yes',
 			'show_views' => 'yes',
 			'show_discount' => 'no',
-			'show_comments' => 'yes'
+			'show_comments' => 'yes',
+			'category' => ''
 		), $atts));
 
 		if($columns == 1) {
@@ -51,6 +52,13 @@
 			'post_type'       => 'coupon',
 			'tag'             => $tag,
 			'posts_per_page'  => $number_posts,
+			'tax_query' => array(
+				array(
+					'taxonomy' => 'display-category',
+					'field' => 'slug',
+					'terms'    => $category,
+				),
+			),
 		);
 
 		// The Query
@@ -112,7 +120,7 @@
 						if ($sidebar == 'yes') {
 							if ($coupon_action == 'url') {
 								$html .= '<a class="coupon_sidebar_img" href="'.$coupon_destination_url.'"><img itemprop="image" src="'.$coupon_main_upload.'" /></a>';
-								$html .='<div style="display:none" itemprop="itemOffered">'.the_title().'</div>';
+								$html .='<div style="display:none" itemprop="itemOffered">'.get_the_title().'</div>';
 								$html .= '<div style="display:none" itemprop="validFrom">' .get_the_date('m/d/Y'). '</div>';
 								if ( $coupon_dynamic_expiration == 'on' && $show_exp == 'yes' ) {
 									$html .='<span class="div" style="display:none;">';
@@ -125,7 +133,7 @@
 								}
 							} elseif ($coupon_action == 'print') {
 								$html .= '<a class="coupon_sidebar_img" href="' .get_permalink().  '"><img itemprop="image" src="'.$coupon_main_upload.'" /></a>';
-								$html .='<div style="display:none" itemprop="itemOffered">'.the_title().'</div>';
+								$html .='<div style="display:none" itemprop="itemOffered">'.get_the_title().'</div>';
 								$html .= '<div style="display:none" itemprop="validFrom">' .get_the_date('m/d/Y'). '</div>';
 								if ( $coupon_dynamic_expiration == 'on' && $show_exp == 'yes' ) {
 									$html .='<span class="div" style="display:none;">';
@@ -140,7 +148,7 @@
 						} else {
 							if ($coupon_action == 'url') {
 								$html .= '<a class="coupon_main_img" href="'.$coupon_destination_url.'"><img itemprop="image" src="'.$coupon_main_upload.'" /></a>';
-								$html .='<div style="display:none" itemprop="itemOffered">'.the_title().'</div>';
+								$html .='<div style="display:none" itemprop="itemOffered">'.get_the_title().'</div>';
 								$html .= '<div style="display:none" itemprop="validFrom">' .get_the_date('m/d/Y'). '</div>';
 								if ( $coupon_dynamic_expiration == 'on' && $show_exp == 'yes' ) {
 									$html .='<span class="div" style="display:none;">';
@@ -153,7 +161,7 @@
 								}								
 							} elseif ($coupon_action == 'print') {
 								$html .= '<a class="coupon_main_img" href="' .get_permalink().  '"><img itemprop="image" src="'.$coupon_main_upload.'" /></a>';
-								$html .='<div style="display:none" itemprop="itemOffered">'.the_title().'</div>';
+								$html .='<div style="display:none" itemprop="itemOffered">'.get_the_title().'</div>';
 								$html .= '<div style="display:none" itemprop="validFrom">' .get_the_date('m/d/Y'). '</div>';
 								if ( $coupon_dynamic_expiration == 'on' && $show_exp == 'yes' ) {
 									$html .='<span class="div" style="display:none;">';
@@ -183,12 +191,12 @@
 						}
 						$html .='<div class="col-2-3 last single-coup-content">';
 						if ( $show_title == 'yes' ) {
-							$html .='<div class="coupon-title" itemprop="itemOffered">'.the_title().'</div>';
+							$html .='<div class="coupon-title" itemprop="itemOffered">'.get_the_title().'</div>';
 						}
 						if ( $show_desc == 'yes' && $trim_desc == 'yes' ) {
-							$html .='<p class="description trim" itemprop="description">' .wp_trim_words( the_content(), $num_words = 55, $more = null ). '</p>';
+							$html .='<p class="description trim" itemprop="description">' .wp_trim_words( get_the_content(), $num_words = 55, $more = null ). '</p>';
 						} elseif( $show_desc == 'yes') {
-							$html .='<p class="description" itemprop="description">' .the_content(). '</p>';
+							$html .='<p class="description" itemprop="description">' .get_the_content(). '</p>';
 						}					
 						if (get_post_meta($post->ID, 'coupon_fineprint', true) && $show_fine == 'yes') {
 							$html .='<hr />';
@@ -281,8 +289,8 @@
 													}
 												$html .='</div>';
 												$html .='<div class="col-2-3 last single-coup-content">';
-													$html .='<div class="coupon-title" itemprop="itemOffered">'. the_title() .'</div>';
-													$html .='<p class="description" itemprop="description">'.the_content.'</p>';
+													$html .='<div class="coupon-title" itemprop="itemOffered">'. get_the_title() .'</div>';
+													$html .='<p class="description" itemprop="description">'.get_the_content.'</p>';
 												$html .='</div>';
 												$html .='<div class="clear"></div>';
 											$html .='</div>';	
