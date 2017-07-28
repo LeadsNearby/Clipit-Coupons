@@ -8,7 +8,6 @@ get_header(); ?>
 		$coupon_promo_code = get_post_meta($post->ID, 'coupon_promo_code', true);
 		$coupon_action = get_post_meta($post->ID, 'coupon_action', true);
 		$coupon_type = get_post_meta($post->ID, 'coupon_type', true);
-		$coupon_main_upload = get_post_meta($post->ID, 'coupon_main_upload', true);
 		$coupon_expiration = get_post_meta($post->ID, 'coupon_expiration', true);
 		$coupon_dynamic_expiration = get_post_meta($post->ID, 'coupon_dynamic_expiration', true);
 		$coupon_dynamic_expiration_plus_days = get_post_meta($post->ID, 'coupon_dynamic_expiration_plus_days', true);
@@ -107,9 +106,16 @@ get_header(); ?>
 					<!-- To be displayed on print only -->
 					<div class="page-body pg-promotions print-trigger printstyles">
 						<div class="logo"><img src="<?php echo get_option('clipit_customer_logo'); ?>" /></div>
-						<?php if ($coupon_type == 'Upload') { ?>
-								<img src="<?php echo( $coupon_main_upload ); ?>" />
-						<?php } elseif ($coupon_type == 'Build') { ?>
+						<?php if ($coupon_type == 'Upload') {
+
+							if(has_post_thumbnail()) {                    
+								$image_src = wp_get_attachment_image_src( get_post_thumbnail_id(),'full' );
+								 echo '<img id="image-slide" itemprop="image" src="' . $image_src[0]  . '" style="height:auto; width:100%; margin:0 auto 20px; display:block;" />';
+							}else {
+								echo'<img id="image-slide" itemprop="image" src="' . plugins_url('clipit-coupons/lib/inc/images/default-image.png') . '" style="height:auto; width:100%; margin:0 auto 20px; display:block;" />';
+							} 
+							
+						} elseif ($coupon_type == 'Build') { ?>
 						<ul class="print-coupons">
 							<li class="">
 								<div class="coupon-title"><?php the_title(); ?></div>
@@ -143,11 +149,27 @@ get_header(); ?>
 						<div class="right-border col-2-3">
 						<?php if ($coupon_type == 'Upload') { ?>
 							<?php if ($coupon_action == 'url') { ?>
-								<a class="<?php if ($coupon_print_qrcode == 'on') { ?>bypassme<?php } ?>" href="<?php echo( $coupon_destination_url ); ?>"><img src="<?php echo( $coupon_main_upload ); ?>" /></a>
-							<?php } elseif ($coupon_action == 'print') { ?>
-								<img class="main-upload <?php if ($coupon_print_qrcode == 'on') { ?>bypassme<?php } ?>" src="<?php echo( $coupon_main_upload ); ?>" />
-							<?php } ?>
-						<?php } elseif ($coupon_type == 'Build') { ?>
+								<a class="<?php if ($coupon_print_qrcode == 'on') { ?>bypassme<?php } ?>" href="<?php echo( $coupon_destination_url ); ?>">
+									<?php	
+									// Default, blog-size thumbnail
+									if(has_post_thumbnail()) {                    
+										$image_src = wp_get_attachment_image_src( get_post_thumbnail_id(),'full' );
+										 echo '<img class="main-upload" id="image-slide" itemprop="image" src="' . $image_src[0]  . '" style="height:auto; width:100%; margin:0 auto 20px; display:block;" />';
+									} else {
+										echo'<img class="main-upload" id="image-slide" itemprop="image" src="' . plugins_url('clipit-coupons/lib/inc/images/default-image.png') . '"height:auto; width:100%; margin:0 auto 20px; display:block;" />';
+									}?>	
+								</a>
+								<?php } elseif ($coupon_action == 'print') { 
+
+									// Default, blog-size thumbnail
+									if(has_post_thumbnail()) {                    
+										$image_src = wp_get_attachment_image_src( get_post_thumbnail_id(),'full' );
+										 echo '<img class="main-upload" id="image-slide" itemprop="image" src="' . $image_src[0]  . '" style="height:auto; width:100%; margin:0 auto 20px; display:block;" />';
+									} else {
+										echo'<img class="main-upload" id="image-slide" itemprop="image" src="' . plugins_url('clipit-coupons/lib/inc/images/default-image.png') . '"height:auto; width:100%; margin:0 auto 20px; display:block;" />';
+									} 
+								}
+							} elseif ($coupon_type == 'Build') { ?>
 							<div class="col-1-1 border-container">
 								<?php if ($coupon_feature == 'on') { ?>
 									<div class="featured-banner bypassme"></div>
@@ -547,43 +569,51 @@ get_header(); ?>
 				'order' => 'DESC',
 				'orderby' => 'ID',
 				'post_type' => 'coupon',
-				'post__not_in' => array( $post->ID )
+				'post__not_in' => array( $post->ID ),
+				'meta_query'  => array(
+		            array(
+						'meta_key' => 'coupon_expiration',
+						'meta_value' => current_time( 'F j, Y' ),
+						'meta_compare' => '>='
+		            )
+		        )
 			);
 
 			// Create the related query
 			$custom_posts = new WP_Query( $args );
 		    if ($custom_posts->have_posts()) : while ($custom_posts->have_posts()) : $custom_posts->the_post();
 			
-			$coupon_expiration = get_post_meta($post->ID, 'coupon_expiration', true);
 		        $coupon_savings = get_post_meta($post->ID, 'coupon_savings', true);
-		        $coupon_value = get_post_meta($post->ID, 'coupon_value', true); 
+		        $coupon_value = get_post_meta($post->ID, 'coupon_value', true);
+				$expirationtime = get_post_meta($post->ID, 'coupon_expiration', true);
+
 			?>
 					<li class="col-1-4">
-					<a href="<?php the_permalink() ?>" title="<?php the_title() ?>" rel="bookmark">
-						<article>
-							<?php if(has_post_thumbnail()) {                    
-								$image_src = wp_get_attachment_image_src( get_post_thumbnail_id(),'full' );
-								 echo '<img id="image-slide" itemprop="image" src="' . $image_src[0]  . '" style="width:100%; margin:0 auto; display:block;" />';
-							}else {
-								echo'<img id="image-slide" itemprop="image" src="' . plugins_url('clipit-coupons/lib/inc/images/default-image.png') . '" style="height:auto; width:100%; margin:0 auto 20px; display:block;" />';
-							} ?>
-                <div class="recent-container">
-                <h1 class="entry-title"><?php the_content; ?></h1>
-				<div class="theExcerpt"><?php the_content(); ?></div>
-                <div class="expiry-date">Expires on: <?php echo( $coupon_expiration ); ?></div>
-                <?php if (get_post_meta($post->ID, 'coupon_value', true) &&  get_post_meta($post->ID, 'coupon_savings', true)) { ?>
-                <div data-pingdom-id="deal-price" class="cui-price ">
-                    <s class="cui-price-original">$<?php echo( $coupon_value ); ?></s>
-                    <span class="cui-price-discount ">$<?php echo( $coupon_savings ); ?></span>
-                </div>
-                <?php } ?>
-                </div>
-						</article>
-					</a>
+						<a href="<?php the_permalink() ?>" title="<?php the_title() ?>" rel="bookmark">
+							<article>
+								<?php if(has_post_thumbnail()) {                    
+									$image_src = wp_get_attachment_image_src( get_post_thumbnail_id(),'full' );
+									 echo '<img id="image-slide" itemprop="image" src="' . $image_src[0]  . '" style="width:100%; margin:0 auto; display:block;" />';
+								}else {
+									echo'<img id="image-slide" itemprop="image" src="' . plugins_url('clipit-coupons/lib/inc/images/default-image.png') . '" style="height:auto; width:100%; margin:0 auto 20px; display:block;" />';
+								} ?>
+				                <div class="recent-container">
+				                	<h1 class="entry-title"><?php the_title(); ?></h1>
+									<div class="theExcerpt"><?php wp_trim_words( the_content(), $num_words = 55, $more = null ); ?></div>
+				                	<div class="expiry-date">Expires on: <?php echo( $expirationtime ); ?></div>
+				                	<?php if (get_post_meta($post->ID, 'coupon_value', true) &&  get_post_meta($post->ID, 'coupon_savings', true)) { ?>
+				                	<div data-pingdom-id="deal-price" class="cui-price ">
+					                    <s class="cui-price-original">$<?php echo( $coupon_value ); ?></s>
+					                    <span class="cui-price-discount ">$<?php echo( $coupon_savings ); ?></span>
+					                </div>
+				                <?php } ?>
+				                </div>
+							</article>
+						</a>
 					</li>
-			<?php
-				 endwhile; endif;
-				 wp_reset_query();
+			<?php 
+				endwhile; endif;
+				wp_reset_query();
 			?>
 				<div class="clear"></div>
 				</ul><!-- .group -->

@@ -557,7 +557,8 @@ function register_daily_post_delete_event() {
 		//'thumbs_rating_up_count' =>  __( '+ Votes', 'thumbs-rating' ),
 	    //'thumbs_rating_down_count' => __( '- Votes', 'thumbs-rating' ),
 		'coupon_type' => __( 'Coupon Type' ),
-		'coupon_img' => __( 'Coupon Image' ),		
+		'display-category' => __( 'Display Type' ),
+		'coupon_img' => __( 'Coupon Image' ),			
 	  );
 	  return $cols;
 	}
@@ -576,6 +577,27 @@ function register_daily_post_delete_event() {
 				$coupon_type = get_post_meta( $post_id, 'coupon_type', true);
 				echo '<span>' . $coupon_type. '</span>';
 				break; 
+			case "display-category" :
+				/* Get the genres for the post. */
+				$terms = get_the_terms( $post_id, 'display-category' );
+				/* If terms were found. */
+				if ( !empty( $terms ) ) {
+					$out = array();
+					/* Loop through each term, linking to the 'edit posts' page for the specific term. */
+					foreach ( $terms as $term ) {
+						$out[] = sprintf( '<a href="%s">%s</a>',
+							esc_url( add_query_arg( array( 'post_type' => $post->post_type, 'display_category' => $term->slug ), 'edit.php' ) ),
+							esc_html( sanitize_term_field( 'name', $term->name, $term->term_id, 'display_category', 'display' ) )
+						);
+					}
+					/* Join the terms, separating them with a comma. */
+					echo join( ', ', $out );
+				}
+				/* If no terms were found, output a default message. */
+				else {
+					_e( 'No Display Types' );
+				}
+			break;
 			case "coupon_img":
 				$coupon_type = get_post_meta( $post_id, 'coupon_type', true);
 				$coupon_image = get_post_meta($post_id, 'coupon_main_upload', true);
@@ -595,6 +617,7 @@ function register_daily_post_delete_event() {
 		'exp'       	=> 'exp',
 		'tags'      	=> 'tags',
 		'coupon_type'   => 'coupon_type',
+		'display-category'   => 'display-category',
 	  );
 	}
 	add_filter( "manage_edit-coupon_sortable_columns", "sortable_columns" );

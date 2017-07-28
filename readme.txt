@@ -85,6 +85,7 @@ Q. Can I share my license?
 A. No, each domain owner needs to have their own license/account. Our licensing system does track logins and accounts may be suspended if we discover several logins from IPs in different locations.
 
 == Changelog ==
+Version 1.3.1 - Featured Posts now managing coupon upload and build actions.
 Version 1.3.0 - Added WP API ability
 Version 1.2.3 - Updated Offer schema has been added to the shortcode and single-coupon template. Users can now insert a custom class to the shortcode. Functions.php has been reduced.
 Version 1.2.2 - Email Submissions Download added. Related Coupons to single-coupon.php added. Dynamic + days added.

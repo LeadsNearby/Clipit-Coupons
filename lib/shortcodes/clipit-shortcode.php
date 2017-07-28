@@ -67,7 +67,6 @@
 			$coupon_promo_code = get_post_meta($post->ID, 'coupon_promo_code', true);
 			$coupon_action = get_post_meta($post->ID, 'coupon_action', true);
 			$coupon_type = get_post_meta($post->ID, 'coupon_type', true);
-			$coupon_main_upload = get_post_meta($post->ID, 'coupon_main_upload', true);
 			$coupon_dynamic_expiration = get_post_meta($post->ID, 'coupon_dynamic_expiration', true);
 			$coupon_dynamic_expiration_plus_days = get_post_meta($post->ID, 'coupon_dynamic_expiration_plus_days', true);
 			$coupon_expiration = get_post_meta($post->ID, 'coupon_expiration', true);
@@ -104,10 +103,10 @@
 					$coupon_total = $coupon_value - $coupon_savings;		
 
 					if ($coupon_type == 'Build' && $sidebar == 'yes') {
-						$html .= '<article id="clipit-style-two '.$coupon_css_id.'" class="'.$coupon_css_class.' sidewidget '.$columns_words.'">';
+						$html .= '<article id="clipit-style-two" class="'.$coupon_css_class.' sidewidget '.$columns_words.'">';
 					}
 					elseif ($coupon_type == 'Build') {
-						$html .= '<article id="clipit-style-two'.$coupon_css_id.'" class="'.$coupon_css_class.' border-container coupon-container '.$columns_words.'">';
+						$html .= '<article id="clipit-style-two" class="'.$coupon_css_class.' border-container coupon-container '.$columns_words.'">';
 					}
 					elseif ($sidebar == 'yes') {
 						$html .= '<article id="'.$coupon_css_id.'" class="'.$coupon_css_class.' sidewidget '.$columns_words.'">';
@@ -119,7 +118,14 @@
 					if ($coupon_type == 'Upload') {
 						if ($sidebar == 'yes') {
 							if ($coupon_action == 'url') {
-								$html .= '<a class="coupon_sidebar_img" href="'.$coupon_destination_url.'"><img itemprop="image" src="'.$coupon_main_upload.'" /></a>';
+								$html .= '<a class="coupon_sidebar_img" href="'.$coupon_destination_url.'">';
+								if(has_post_thumbnail()) {                    
+    									$image_src = wp_get_attachment_image_src( get_post_thumbnail_id(),'full' );
+    									$html .='<img itemprop="image" alt="'.get_post_field('post_excerpt', get_post_thumbnail_id(get_the_ID())).'" id="image-slide" src="' . $image_src[0]  . '" style="height:auto; width:100%; margin:0; display:block;" />';
+    								}else{
+    									$html .='<img id="image-slide" itemprop="image" src="' . plugins_url('clipit-coupons/lib/inc/images/default-image.png') . '" style="max-width:480px; height:auto; width:100%; margin:0; display:block;" />';
+    								}								
+								$html .= '</a>';
 								$html .='<div style="display:none" itemprop="itemOffered">'.get_the_title().'</div>';
 								$html .= '<div style="display:none" itemprop="validFrom">' .get_the_date('m/d/Y'). '</div>';
 								if ( $coupon_dynamic_expiration == 'on' && $show_exp == 'yes' ) {
@@ -132,7 +138,14 @@
 									$html .='</span>';						
 								}
 							} elseif ($coupon_action == 'print') {
-								$html .= '<a class="coupon_sidebar_img" href="' .get_permalink().  '"><img itemprop="image" src="'.$coupon_main_upload.'" /></a>';
+								$html .= '<a class="coupon_sidebar_img" href="' .get_permalink().  '">';
+								if(has_post_thumbnail()) {                    
+    									$image_src = wp_get_attachment_image_src( get_post_thumbnail_id(),'full' );
+    									$html .='<img itemprop="image" alt="'.get_post_field('post_excerpt', get_post_thumbnail_id(get_the_ID())).'" id="image-slide" src="' . $image_src[0]  . '" style="height:auto; width:100%; margin:0; display:block;" />';
+    								}else{
+    									$html .='<img id="image-slide" itemprop="image" src="' . plugins_url('clipit-coupons/lib/inc/images/default-image.png') . '" style="max-width:480px; height:auto; width:100%; margin:0; display:block;" />';
+    								}								
+								$html .= '</a>';
 								$html .='<div style="display:none" itemprop="itemOffered">'.get_the_title().'</div>';
 								$html .= '<div style="display:none" itemprop="validFrom">' .get_the_date('m/d/Y'). '</div>';
 								if ( $coupon_dynamic_expiration == 'on' && $show_exp == 'yes' ) {
@@ -147,7 +160,14 @@
 							}					
 						} else {
 							if ($coupon_action == 'url') {
-								$html .= '<a class="coupon_main_img" href="'.$coupon_destination_url.'"><img itemprop="image" src="'.$coupon_main_upload.'" /></a>';
+								$html .= '<a class="coupon_main_img" href="'.$coupon_destination_url.'">';
+								if(has_post_thumbnail()) {                    
+    									$image_src = wp_get_attachment_image_src( get_post_thumbnail_id(),'full' );
+    									$html .='<img itemprop="image" alt="'.get_post_field('post_excerpt', get_post_thumbnail_id(get_the_ID())).'" id="image-slide" src="' . $image_src[0]  . '" style="height:auto; width:100%; margin:0; display:block;" />';
+    								}else{
+    									$html .='<img id="image-slide" itemprop="image" src="' . plugins_url('clipit-coupons/lib/inc/images/default-image.png') . '" style="max-width:480px; height:auto; width:100%; margin:0; display:block;" />';
+    								}								
+								$html .= '</a>';
 								$html .='<div style="display:none" itemprop="itemOffered">'.get_the_title().'</div>';
 								$html .= '<div style="display:none" itemprop="validFrom">' .get_the_date('m/d/Y'). '</div>';
 								if ( $coupon_dynamic_expiration == 'on' && $show_exp == 'yes' ) {
@@ -160,7 +180,14 @@
 									$html .='</span>';						
 								}								
 							} elseif ($coupon_action == 'print') {
-								$html .= '<a class="coupon_main_img" href="' .get_permalink().  '"><img itemprop="image" src="'.$coupon_main_upload.'" /></a>';
+								$html .= '<a class="coupon_main_img" href="' .get_permalink().  '">';
+    								if(has_post_thumbnail()) {                    
+    									$image_src = wp_get_attachment_image_src( get_post_thumbnail_id(),'full' );
+    									$html .='<img itemprop="image" alt="'.get_post_field('post_excerpt', get_post_thumbnail_id(get_the_ID())).'" id="image-slide" src="' . $image_src[0]  . '" style="height:auto; width:100%; margin:0; display:block;" />';
+    								}else{
+    									$html .='<img id="image-slide" itemprop="image" src="' . plugins_url('clipit-coupons/lib/inc/images/default-image.png') . '" style="max-width:480px; height:auto; width:100%; margin:0; display:block;" />';
+    								}								
+								$html .= '</a>';
 								$html .='<div style="display:none" itemprop="itemOffered">'.get_the_title().'</div>';
 								$html .= '<div style="display:none" itemprop="validFrom">' .get_the_date('m/d/Y'). '</div>';
 								if ( $coupon_dynamic_expiration == 'on' && $show_exp == 'yes' ) {

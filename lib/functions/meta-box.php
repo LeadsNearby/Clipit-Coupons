@@ -12,6 +12,12 @@ function clipit_meta_box(){
 	add_meta_box("coupon_qrcode", "Coupon QR Code", "coupon_qrcode", "coupon", "side", "default");
 }
 
+add_action('do_meta_boxes', 'coupon_image_box');
+function coupon_image_box() {
+	remove_meta_box( 'postimagediv', 'coupon', 'side' );
+	add_meta_box('postimagediv', __('Coupon Image'), 'post_thumbnail_meta_box', 'coupon', 'normal', 'high');
+}
+
 function coupon_options( $post ) {
 	$values = get_post_custom( $post->ID );
 	$coupon_feature = (isset( $values['coupon_feature'] ) ? esc_attr( $values['coupon_feature'][0] ) : '');
@@ -27,21 +33,18 @@ function coupon_options( $post ) {
 	$coupon_type = (isset( $values['coupon_type'] ) ? esc_attr( $values['coupon_type'][0] ) : '');
 	$coupon_social_like = (isset( $values['coupon_social_like'] ) ? esc_attr( $values['coupon_social_like'][0] ) : '');
 	$coupon_like = (isset( $values['coupon_like'] ) ? esc_attr( $values['coupon_like'][0] ) : '');
-	$coupon_main_upload = (isset( $values['coupon_main_upload'] ) ? esc_attr( $values['coupon_main_upload'][0] ) : '');
 	$coupon_promo_code = (isset( $values['coupon_promo_code'] ) ? esc_attr( $values['coupon_promo_code'][0] ) : '');
 	$coupon_name  = (isset( $values['coupon_name'] ) ? esc_attr( $values['coupon_name'][0] ) : '');
 	$coupon_fineprint = (isset( $values['coupon_fineprint'] ) ? esc_attr( $values['coupon_fineprint'][0] ) : '');
 	$coupon_promo_text = (isset( $values['coupon_promo_text'] ) ? esc_attr( $values['coupon_promo_text'][0] ) : '');
 	$coupon_button_text = (isset( $values['coupon_button_text'] ) ? esc_attr( $values['coupon_button_text'][0] ) : '');
 	$coupon_css_class = (isset( $values['coupon_css_class'] ) ? esc_attr( $values['coupon_css_class'][0] ) : '');
-	$coupon_css_id = (isset( $values['coupon_css_id'] ) ? esc_attr( $values['coupon_css_id'][0] ) : '');
 	wp_nonce_field( 'my_meta_box_nonce', 'meta_box_nonce' );
     ?>
 
 	<div class="tab">
 	  <div class="tablinks" onclick="openOption(event, 'Actions')" id="defaultOpen">Actions</div>
 	  <div class="tablinks" onclick="openOption(event, 'Options')">Options</div>
-	  <div class="tablinks" onclick="openOption(event, 'Uploads')">Uploads</div>
 	  <div class="tablinks" onclick="openOption(event, 'Fine')">Fine Print & Promo</div>
 	  <div class="tablinks" onclick="openOption(event, 'Styles')">Styles</div>
 	</div>
@@ -134,16 +137,6 @@ function coupon_options( $post ) {
 	    <input class="coupon_name" type="text" size="" name="coupon_name" value="<?php echo esc_html($coupon_name); ?>" /> 
 	  </p> 
 	</div>
-
-	<div id="Uploads" class="tabcontent">
-	  <h3>Coupon Uploads</h3>
-	  <p class="upload"><label>Main Coupon Image (If uploading an image):</label><br />
-	    <input class="upload_image" type="text" size="150" name="coupon_main_upload" value="<?php echo esc_html($coupon_main_upload); ?>" /> 
-	    <span class="wp-media-buttons"><a title="Add Media" data-editor="coupon_main_upload" class="button upload_coupon_button add_media" href="#"><span class="wp-media-buttons-icon"></span> Add Media</a></span>
-	    <div class="clear"></div>
-	  </p>
-	</div>
-
 	<div id="Fine" class="tabcontent">
 	  <h3>Fine Print and Promotions</h3>
 	  <p>
@@ -179,10 +172,6 @@ function coupon_options( $post ) {
 	  <p><label>CSS Class</label><br />
 	    <em>Enter in your custom CSS class. This will add a custom class to the coupon</em><br />
 	    <input class="coupon_css_class" type="text" size="" name="coupon_css_class" value="<?php echo esc_html($coupon_css_class); ?>" /> 
-	  </p>
-	  <p><label>CSS ID</label><br />
-	    <em>Enter in your custom CSS ID. This will add a custom ID to the coupon</em><br />
-	    <input class="coupon_css_id" type="text" size="" name="coupon_css_id" value="<?php echo esc_html($coupon_css_id); ?>" /> 
 	  </p>
 	</div>
 	<div class="clear"></div>
@@ -308,9 +297,27 @@ function coupon_preview( $post )
 				<div class="col-1-1">
 					<strong style="display: block;">Main Coupon Image</strong><br />
 					<?php if ($coupon_action == 'url') { ?>
-						<a href="<?php echo( $coupon_destination_url ); ?>"><img class="coup_upload" src="<?php echo( $coupon_main_upload ); ?>" /></a>
+						<a href="<?php echo( $coupon_destination_url ); ?>">
+						<?php	
+						// Default, blog-size thumbnail
+						if(has_post_thumbnail()) {                    
+							$image_src = wp_get_attachment_image_src( get_post_thumbnail_id(),'full' );
+							 echo '<img class="main-upload" id="image-slide" itemprop="image" src="' . $image_src[0]  . '" style="max-width:480px; height:auto; width:100%; margin:0 auto 20px; display:block;" />';
+						}else {
+							echo'<img class="main-upload" id="image-slide" itemprop="image" src="' . plugins_url('clipit-coupons/lib/inc/images/default-image.png') . '" style="max-width:480px; height:auto; width:100%; margin:0 auto 20px; display:block;" />';
+						}?>	
+						</a>
 					<?php } elseif ($coupon_action == 'print') { ?>
-						<a href="javascript:void(0)"><img class="coup_upload" src="<?php echo( $coupon_main_upload ); ?>" /></a>
+						<a href="javascript:void(0)">
+						<?php	
+						// Default, blog-size thumbnail
+						if(has_post_thumbnail()) {                    
+							$image_src = wp_get_attachment_image_src( get_post_thumbnail_id(),'full' );
+							 echo '<img class="main-upload" id="image-slide" itemprop="image" src="' . $image_src[0]  . '" style="height:auto; width:100%; margin:0 auto 20px; display:block;" />';
+						}else {
+							echo'<img class="main-upload" id="image-slide" itemprop="image" src="' . plugins_url('clipit-coupons/lib/inc/images/default-image.png') . '" style="max-width:480px; height:auto; width:100%; margin:0 auto 20px; display:block;" />';
+						}?>	
+						</a>
 					<?php } ?>
 				</div>
 				<div class="clear"></div>
@@ -478,9 +485,6 @@ function cd_meta_box_save( $post_id )
 	if( isset( $_POST['coupon_type'] ) )
 		update_post_meta( $post_id, 'coupon_type', esc_attr( $_POST['coupon_type'] ) );
 
-	if( isset( $_POST['coupon_main_upload'] ) )
-		update_post_meta( $post_id, 'coupon_main_upload', esc_attr( $_POST['coupon_main_upload'] ) );
-
 	if( isset( $_POST['coupon_action'] ) )
 		update_post_meta( $post_id, 'coupon_action', esc_attr( $_POST['coupon_action'] ) );
 
@@ -507,9 +511,6 @@ function cd_meta_box_save( $post_id )
 		
 	if( isset( $_POST['coupon_css_class'] ) )
 		update_post_meta( $post_id, 'coupon_css_class', $_POST['coupon_css_class'] );
-
-	if( isset( $_POST['coupon_css_id'] ) )
-		update_post_meta( $post_id, 'coupon_css_id', $_POST['coupon_css_id'] );		
 
 	if( isset( $_POST['coupon_promo_text'] ) )
 		update_post_meta( $post_id, 'coupon_promo_text', wp_kses( $_POST['coupon_promo_text'], $allowed ) );
