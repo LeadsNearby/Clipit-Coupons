@@ -110,9 +110,9 @@ get_header(); ?>
 
 							if(has_post_thumbnail()) {                    
 								$image_src = wp_get_attachment_image_src( get_post_thumbnail_id(),'full' );
-								 echo '<img id="image-slide" itemprop="image" src="' . $image_src[0]  . '" style="height:auto; width:100%; margin:0 auto 20px; display:block;" />';
+								 echo '<img title="'.the_title().'" alt="'.the_content().'" id="image-slide" itemprop="image" src="' . $image_src[0]  . '" style="height:auto; width:100%; margin:0 auto 20px; display:block;" />';
 							}else {
-								echo'<img id="image-slide" itemprop="image" src="' . plugins_url('clipit-coupons/lib/inc/images/default-image.png') . '" style="height:auto; width:100%; margin:0 auto 20px; display:block;" />';
+								echo'<img title="'.the_title().'" alt="'.the_content().'" id="image-slide" itemprop="image" src="' . plugins_url('clipit-coupons/lib/inc/images/default-image.png') . '" style="height:auto; width:100%; margin:0 auto 20px; display:block;" />';
 							} 
 							
 						} elseif ($coupon_type == 'Build') { ?>
@@ -154,9 +154,9 @@ get_header(); ?>
 									// Default, blog-size thumbnail
 									if(has_post_thumbnail()) {                    
 										$image_src = wp_get_attachment_image_src( get_post_thumbnail_id(),'full' );
-										 echo '<img class="main-upload" id="image-slide" itemprop="image" src="' . $image_src[0]  . '" style="height:auto; width:100%; margin:0 auto 20px; display:block;" />';
+										 echo '<img title="'.the_title().'" alt="'.the_content().'" class="main-upload" id="image-slide" itemprop="image" src="' . $image_src[0]  . '" style="height:auto; width:100%; margin:0 auto 20px; display:block;" />';
 									} else {
-										echo'<img class="main-upload" id="image-slide" itemprop="image" src="' . plugins_url('clipit-coupons/lib/inc/images/default-image.png') . '"height:auto; width:100%; margin:0 auto 20px; display:block;" />';
+										echo'<img title="'.the_title().'" alt="'.the_content().'" class="main-upload" id="image-slide" itemprop="image" src="' . plugins_url('clipit-coupons/lib/inc/images/default-image.png') . '"height:auto; width:100%; margin:0 auto 20px; display:block;" />';
 									}?>	
 								</a>
 								<?php } elseif ($coupon_action == 'print') { 
@@ -164,9 +164,9 @@ get_header(); ?>
 									// Default, blog-size thumbnail
 									if(has_post_thumbnail()) {                    
 										$image_src = wp_get_attachment_image_src( get_post_thumbnail_id(),'full' );
-										 echo '<img class="main-upload" id="image-slide" itemprop="image" src="' . $image_src[0]  . '" style="height:auto; width:100%; margin:0 auto 20px; display:block;" />';
+										 echo '<img title="'.the_title().'" alt="'.the_content().'" class="main-upload" id="image-slide" itemprop="image" src="' . $image_src[0]  . '" style="height:auto; width:100%; margin:0 auto 20px; display:block;" />';
 									} else {
-										echo'<img class="main-upload" id="image-slide" itemprop="image" src="' . plugins_url('clipit-coupons/lib/inc/images/default-image.png') . '"height:auto; width:100%; margin:0 auto 20px; display:block;" />';
+										echo'<img title="'.the_title().'" alt="'.the_content().'" class="main-upload" id="image-slide" itemprop="image" src="' . plugins_url('clipit-coupons/lib/inc/images/default-image.png') . '"height:auto; width:100%; margin:0 auto 20px; display:block;" />';
 									} 
 								}
 							} elseif ($coupon_type == 'Build') { ?>
@@ -179,9 +179,9 @@ get_header(); ?>
 									// Default, blog-size thumbnail
 									if(has_post_thumbnail()) {                    
 										$image_src = wp_get_attachment_image_src( get_post_thumbnail_id(),'full' );
-										 echo '<img id="image-slide" itemprop="image" src="' . $image_src[0]  . '" style="height:auto; width:100%; margin:0 auto 20px; display:block;" />';
+										 echo '<img title="'.the_title().'" alt="'.the_content().'" id="image-slide" itemprop="image" src="' . $image_src[0]  . '" style="height:auto; width:100%; margin:0 auto 20px; display:block;" />';
 									}else {
-										echo'<img id="image-slide" itemprop="image" src="' . plugins_url('clipit-coupons/lib/inc/images/default-image.png') . '" style="height:auto; width:100%; margin:0 auto 20px; display:block;" />';
+										echo'<img title="'.the_title().'" alt="'.the_content().'" id="image-slide" itemprop="image" src="' . plugins_url('clipit-coupons/lib/inc/images/default-image.png') . '" style="height:auto; width:100%; margin:0 auto 20px; display:block;" />';
 									}?>								
 								</div>						
 							</div>
@@ -299,9 +299,9 @@ get_header(); ?>
 															// Default, blog-size thumbnail
 															if(has_post_thumbnail()) {                    
 																$image_src = wp_get_attachment_image_src( get_post_thumbnail_id(),'full' );
-																 echo '<img id="image-slide" itemprop="image" src="' . $image_src[0]  . '" style="max-width:200px; height:auto; width:100%; margin:0; display:block;" />';
+																 echo '<img title="'.the_title().'" alt="'.the_content().'" id="image-slide" itemprop="image" src="' . $image_src[0]  . '" style="max-width:200px; height:auto; width:100%; margin:0; display:block;" />';
 															}else {
-																echo'<img id="image-slide" itemprop="image" src="' . plugins_url('clipit-coupons/lib/inc/images/default-image.png') . '" style="max-width:200px; height:auto; width:100%; margin:0; display:block;" />';
+																echo'<img title="'.the_title().'" alt="'.the_content().'" id="image-slide" itemprop="image" src="' . plugins_url('clipit-coupons/lib/inc/images/default-image.png') . '" style="max-width:200px; height:auto; width:100%; margin:0; display:block;" />';
 															}?>								
 														</div>
 														<div class="col-2-3 last single-coup-content" style="float:left; width:66%;">
@@ -589,11 +589,11 @@ get_header(); ?>
 
 			?>
 					<li class="col-1-4">
-						<a href="<?php the_permalink() ?>" title="<?php the_title() ?>" rel="bookmark">
+						<a href="<?php the_permalink() ?>" title="<?php the_title() ?>" alt="<?php the_title() ?>" rel="bookmark">
 							<article>
 								<?php if(has_post_thumbnail()) {                    
 									$image_src = wp_get_attachment_image_src( get_post_thumbnail_id(),'full' );
-									 echo '<img id="image-slide" itemprop="image" src="' . $image_src[0]  . '" style="width:100%; margin:0 auto; display:block;" />';
+									 echo '<img title="'.the_title().'" alt="'.the_content().'" id="image-slide" itemprop="image" src="' . $image_src[0]  . '" style="width:100%; margin:0 auto; display:block;" />';
 								}else {
 									echo'<img id="image-slide" itemprop="image" src="' . plugins_url('clipit-coupons/lib/inc/images/default-image.png') . '" style="height:auto; width:100%; margin:0 auto 20px; display:block;" />';
 								} ?>
@@ -658,9 +658,9 @@ get_header(); ?>
 								<article>
 									<?php if(has_post_thumbnail()) {                    
 										$image_src = wp_get_attachment_image_src( get_post_thumbnail_id(),'full' );
-										 echo '<img id="image-slide" itemprop="image" src="' . $image_src[0]  . '" style="width:100%; margin:0 auto; display:block;" />';
+										 echo '<img title="'.the_title().'" alt="'.the_content().'" id="image-slide" itemprop="image" src="' . $image_src[0]  . '" style="width:100%; margin:0 auto; display:block;" />';
 									}else {
-										echo'<img id="image-slide" itemprop="image" src="' . plugins_url('clipit-coupons/lib/inc/images/default-image.png') . '" style="height:auto; width:100%; margin:0 auto 20px; display:block;" />';
+										echo'<img title="'.the_title().'" alt="'.the_content().'" id="image-slide" itemprop="image" src="' . plugins_url('clipit-coupons/lib/inc/images/default-image.png') . '" style="height:auto; width:100%; margin:0 auto 20px; display:block;" />';
 									} ?>
 						<div class="recent-container">
 						<h1 class="entry-title"><?php the_title(); ?></h1>
