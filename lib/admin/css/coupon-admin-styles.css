@@ -706,12 +706,12 @@
     color: #fff;
     transition: all 0.3s ease-in-out 0s;
 }
-/*******************************	Google Web Fonts*******************************/
+/*******************************    Google Web Fonts*******************************/
 
 @import url(http://fonts.googleapis.com/css?family=Economica:400,700);
 @import url(http://fonts.googleapis.com/css?family=Fjalla+One);
 @import url(http://fonts.googleapis.com/css?family=Rancho);
-/*******************************	jQuery UI Tab Styles*******************************/
+/*******************************    jQuery UI Tab Styles*******************************/
 
 .admin-logo {
     display: block;
@@ -792,7 +792,7 @@
 .ui-accordion .ui-accordion-content {
     height: auto !important;
 }
-/*******************************	Admin Tab Icon Styles*******************************/
+/*******************************    Admin Tab Icon Styles*******************************/
 
 .icon {
     float: left;
@@ -878,7 +878,7 @@
     padding: 5px;
     position: absolute;
 }
-/*******************************	Input / Textarea Styles*******************************/
+/*******************************    Input / Textarea Styles*******************************/
 
 .jpgadmin input[type="radio"] {
     display: none;
@@ -1038,13 +1038,13 @@ textarea#coupon_fineprint {
 .wp-media-buttons .button {
     margin-top: 10px;
 }
-/*******************************	Header Option Styles*******************************/
+/*******************************    Header Option Styles*******************************/
 
 .loadit {
     border: 2px solid #FFFFFF;
     max-width: 474px;
 }
-/******************************	Admin Widget Area----------------------------------------------- */
+/****************************** Admin Widget Area----------------------------------------------- */
 
 .jpgadmin select {
     height: 2.5em;
@@ -1072,17 +1072,17 @@ textarea#coupon_fineprint {
 }
 /* =Email table Styles----------------------------------------------- */
 #clipit-email-list {
-	background-color:#FFFFFF;
-	border-collapse:collapse;border-width:1px;
-	border-color:#cccccc;
-	border-style:solid;
-	color:#333333;
-	margin-top:20px;
-	width:90%;	
+    background-color:#FFFFFF;
+    border-collapse:collapse;border-width:1px;
+    border-color:#cccccc;
+    border-style:solid;
+    color:#333333;
+    margin-top:20px;
+    width:90%;  
 }
 
 #clipit-email-list td, #clipit-email-list th {
-	padding:10px;
+    padding:10px;
 }
 
 #clipit-email-list th {
