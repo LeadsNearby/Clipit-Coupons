@@ -105,7 +105,6 @@ get_header(); ?>
 				<div class="post" id="post-<?php the_ID(); ?>">	
 					<!-- To be displayed on print only -->
 					<div class="page-body pg-promotions print-trigger printstyles">
-						<div class="logo"><img src="<?php echo get_option('clipit_customer_logo'); ?>" /></div>
 						<?php if ($coupon_type == 'Upload') {
 
 							if(has_post_thumbnail()) {                    
@@ -116,21 +115,29 @@ get_header(); ?>
 							} 
 							
 						} elseif ($coupon_type == 'Build') { ?>
-						<ul class="print-coupons">
-							<li class="">
-								<div class="coupon-title"><?php the_title(); ?></div>
-								<div class="coupon-details"><?php the_content(); ?></div>
-								<div class="coupon-disclaimer">
-								<?php if ($coupon_dynamic_expiration == 'on') { ?>
-									<div itemprop="validThrough">Exp: <?php echo date('m/d/Y', $plusdate); ?></div>
-								<?php } elseif ($coupon_dynamic_expiration == 'on' && $coupon_dynamic_expiration_plus_days == '+0 day') { ?>
-									<div itemprop="validThrough">Expires Today!</div>
-								<?php } else {?>
-									<div itemprop="validThrough">Exp: <?php echo( $coupon_expiration ); ?></div>
-								<?php } ?>	
-								</div>
-							</li>
-						</ul>
+						<div class="print-coupons">
+							<?php
+								if(class_exists('Avada')) {
+									$logo_url = Avada()->settings->get('logo', 'url');
+								} else {
+									$logo_url = get_option('clipit_customer_logo');
+								}
+							?>
+							<?php if($logo_url) { ?>
+							<div class="logo"><img src="<?php echo $logo_url; ?>" /></div>
+							<?php } ?>
+							<div class="coupon-title"><?php the_title(); ?></div>
+							<div class="coupon-details"><?php the_content(); ?></div>
+							<div class="coupon-disclaimer">
+							<?php if ($coupon_dynamic_expiration == 'on') { ?>
+								<div itemprop="validThrough">Exp: <?php echo date('m/d/Y', $plusdate); ?></div>
+							<?php } elseif ($coupon_dynamic_expiration == 'on' && $coupon_dynamic_expiration_plus_days == '+0 day') { ?>
+								<div itemprop="validThrough">Expires Today!</div>
+							<?php } else {?>
+								<div itemprop="validThrough">Exp: <?php echo( $coupon_expiration ); ?></div>
+							<?php } ?>	
+							</div>
+						</div>
 						<?php } ?>
 						<?php if (get_post_meta($post->ID, 'coupon_fineprint', true)) { ?>
 						<h3>Fine Print</h3>

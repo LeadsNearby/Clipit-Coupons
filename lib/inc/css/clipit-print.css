@@ -8,6 +8,7 @@
 }
 .pg-promotions .logo img {
     border: 0 none;
+    max-width: 350px;
 }
 .pg-promotions .coupons {
     padding: 30px 0;
