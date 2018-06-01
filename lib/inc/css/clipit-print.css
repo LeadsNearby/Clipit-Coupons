@@ -22,6 +22,7 @@
     margin-bottom: 40px;
     padding: 30px;
     text-align: center;
+	list-style-type: none;
 }
 .pg-promotions .coupon-title {
     color: #13296f;
@@ -43,6 +44,8 @@
     text-align: right;
 }
 #main{padding:none;}
+#wrapper > *:not(#main),
+#shiftnav-toggle-main,
 #slidingbar-area,
 #reviews,
 #clipit .grid,
@@ -55,5 +58,7 @@
 .bypassme,
 .map,
 .fusion-footer,
-footer
+.fusion-header-wrapper,
+footer,
+header
 {display:none !important;}
