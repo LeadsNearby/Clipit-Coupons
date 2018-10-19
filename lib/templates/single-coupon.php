@@ -22,9 +22,6 @@ get_header(); ?>
 		$coupon_value = get_post_meta($post->ID, 'coupon_value', true);
 		$coupon_fineprint = get_post_meta($post->ID, 'coupon_fineprint', true);
 		$coupon_promo_text = get_post_meta($post->ID, 'coupon_promo_text', true);
-		$coupon_how_to = get_post_meta($post->ID, 'coupon_how_to', true);
-		$coupon_rules = get_post_meta($post->ID, 'coupon_rules', true);
-		$coupon_shorts = get_post_meta($post->ID, 'coupon_shorts', true);
 		$coupon_social = get_post_meta($post->ID, 'coupon_social', true);
 		$coupon_css_id = get_post_meta($post->ID, 'coupon_css_id', true);
 		$coupon_css_class = get_post_meta($post->ID, 'coupon_css_class', true);
@@ -45,15 +42,6 @@ get_header(); ?>
 		}
 		$secondsbetween = strtotime($expirestring)-time();
 			if ( $secondsbetween > 0 ) {
-
-		//Limits Views Only to non Admin Users
-		add_action('plugins_loaded', 'coupon_user');
-		function coupon_user() {
-			// We want to run some code specifically for users who can manage options
-			if (!current_user_can('manage_options')) {
-			   setCouponViews(get_the_ID());
-			}
-		}
 	
 		//Convert to date
 		$datestr = get_post_custom_values('coupon_expiration');
@@ -76,32 +64,7 @@ get_header(); ?>
 			});			
 		});		
 		</script>
-		<?php
-
-        //Calculate Discount
-		$coupon_total = $coupon_value - $coupon_savings;
-
-		// Randon Serial Number
-		function sernum()
-		{
-			$template   = 'XX99-XX99-99XX-99XX-XXXX-99XX';
-			$k = strlen($template);
-			$sernum = '';
-			for ($i=0; $i<$k; $i++)
-			{
-				switch($template[$i])
-				{
-					case 'X': $sernum .= chr(rand(65,90)); break;
-					case '9': $sernum .= rand(0,9); break;
-					case '-': $sernum .= '-';  break; 
-				}
-			}
-			return $sernum;
-		}
-		
-		$plusdate = strtotime($coupon_dynamic_expiration_plus_days);
-		
-		?>		
+		<?php $plusdate = strtotime($coupon_dynamic_expiration_plus_days); ?>		
 				<div class="post" id="post-<?php the_ID(); ?>">	
 					<!-- To be displayed on print only -->
 					<div class="page-body pg-promotions print-trigger printstyles">
@@ -261,12 +224,6 @@ get_header(); ?>
 									</div>
 									<?php } ?>
 								<?php } ?>
-								<?php if ($coupon_views == 'on') { ?>
-								<div class="col-1-3 no-margin">
-									<span class="icons" id="views-icon"></span>
-									<div class="icons-small"><?php echo getCoupontViews(get_the_ID()); ?></div>
-								</div>
-								<?php } ?>
 								<div class="col-1-3 no-margin">
 								<span class="icons" id="pin-icon"></span>
 								<div class="icons-small" itemprop="validFrom">Posted: <?php the_date('m/d/Y'); ?></div>
@@ -341,34 +298,6 @@ get_header(); ?>
 											</div><!-- #promo-code -->												
 											</div><!-- Action buttons -->									
 									<?php } ?>
-									<div class="deal-discount">
-										<table>
-											<tbody>
-												<tr>
-													<?php if (get_post_meta($post->ID, 'coupon_value', true)) { ?>
-													<th>Value</th>
-													<?php } ?>
-													<?php if (get_post_meta($post->ID, 'coupon_savings', true)) { ?>
-													<th>Discount</th>
-													<?php } ?>
-													<?php if (get_post_meta($post->ID, 'coupon_value', true) &&  get_post_meta($post->ID, 'coupon_savings', true)) { ?>
-													<th>You Save</th>
-													<?php } ?>
-												</tr>
-												<tr id="discount-data">
-												<?php if (get_post_meta($post->ID, 'coupon_value', true)) { ?>
-													<td id="discount-value">$<?php echo( $coupon_value ); ?></td>
-												<?php } ?>
-												<?php if (get_post_meta($post->ID, 'coupon_savings', true)) { ?>	
-													<td id="discount-percent">$<?php echo( $coupon_savings ); ?></td>
-												<?php } ?>
-												<?php if (get_post_meta($post->ID, 'coupon_value', true) &&  get_post_meta($post->ID, 'coupon_savings', true)) { ?>	
-													<td id="discount-you-save">$<?php echo( $coupon_total ); ?></td>
-												<?php } ?>	
-												</tr>
-											</tbody>
-										</table>
-									</div><!-- .deal-discount -->
 									<?php if ($coupon_display_expiration == 'on' && $coupon_dynamic_expiration == 'off') { ?>
 										<div class="expirydate" style="line-height: 20px; padding: 5px 0 20px;">
 											<h3>Limited Time Only!</h3>
@@ -390,84 +319,6 @@ get_header(); ?>
 											<div class="clear"></div>
 										</div><!-- .expirydate-coupon --> 
 										<?php } ?>
-								<?php if ($coupon_social == 'on') { ?>
-								<div class="social-icons" style="margin-top:20px">
-									<h3 class="no-padding">Share this Coupon!</h3>
-									<ul id="social-tabs">
-										<li>
-											<a class="social-coupons coupon-facebook popup" title="Facebook It" href="http://www.facebook.com/sharer.php?s=100&amp;p[url]=<?php echo get_permalink(); ?>&amp;p[images][0]=<?php $image_src[0] ?>&amp;p[title]=<?php the_title(); ?>&amp;p[summary]=<?php echo strip_tags( $social_content ); ?>"></a>
-										</li>
-										<li>
-											<a class="social-coupons coupon-twitter popup" title="Tweet It" href="http://twitter.com/share?text=<?php the_title(); ?>&amp;url=<?php echo get_permalink(); ?>"></a>
-										</li>
-										<li>
-											<a class="social-coupons coupon-google popup" title="Google It" href="https://plus.google.com/share?url=<?php echo get_permalink(); ?>"></a>
-										</li>
-										<li>
-											<a class="social-coupons coupon-linkedin popup" title="Add to LinkedIn" href="http://www.linkedin.com/shareArticle?mini=true&amp;url=<?php echo get_permalink(); ?>&amp;title=<?php the_title(); ?>&amp;summary=<?php echo strip_tags( $social_content ); ?>&amp;source=<?php get_bloginfo('name'); ?>"></a>
-										</li>
-										<li>
-											<a class="social-coupons coupon-pinterest popup" title="Pin It!" href="https://pinterest.com/pin/create/button/?url=<?php echo get_permalink(); ?>&media=<?php $image_src[0] ?>&description=<?php echo strip_tags( $social_content ); ?>"></a>
-										</li>
-										<li>
-											<a class="social-coupons coupon-stumbleupon popup" title="Add to Stumbleupon" href="http://www.stumbleupon.com/submit?url=<?php echo get_permalink(); ?>&title=<?php the_title(); ?>"></a>
-										</li>
-										<li>
-											<a class="social-coupons coupon-reddit popup" title="Add to Reddit" href="http://reddit.com/submit?url=<?php echo get_permalink(); ?>&title=<?php the_title(); ?>"></a>
-										</li>
-										<li>
-											<a class="social-coupons coupon-digg popup" title="Digg It" href="http://digg.com/submit?url=<?php echo get_permalink(); ?>&title=<?php the_title; ?>"></a>
-										</li>
-										<li>
-											<a class="social-coupons coupon-email popup" title="Email A Friend" href="mailto:?subject=<?php bloginfo('name'); ?>: <?php the_title(); ?>&amp;body=Check out this coupon I just downloaded: <?php the_permalink() ?>"></a>
-										</li>
-										<div class="clear"></div>
-									</ul>
-									<div class="clear"></div>
-								</div>
-								<?php } ?>
-							<div class="howto addinfo bypassme">
-							<span class="icons" id="howto-icon"></span>
-							<h3>How To Use</h3>
-							<div class="clear"></div>
-							<?php
-								if ( get_post_meta($post->ID, 'coupon_how_to', true) ) {
-									// Get the variable from the database as a string
-									$how_to = get_post_meta($post->ID, 'coupon_how_to', true );
-									// Break the string up by using the line breaks (carriage returns)
-									$how_to = explode( "\n", $how_to );
-									// Start the unordered list tag
-									echo '<ol>';
-									// Loop through each ingredient since it's now an array thanks to the explode() function
-									foreach( $how_to as $how_tos ) {
-										// Add the list item open and close tag around each array element
-										echo '<li>' . $how_tos . '</li>';
-									}
-									// Once the loop finishes, close out the unordered list tag
-									echo '</ol>';
-								} else {?>
-									<p>Please call your service provider for more details.</p>
-								<?php }
-							?>
-							<?php if (get_post_meta($post->ID, 'coupon_shorts', true)) { ?>
-							<h3 class="bypassme contactus" data-html2canvas-ignore>Contact Us</h3>						
-							<div class="bypassme shorts" data-html2canvas-ignore>
-								<?php echo apply_filters('the_content', get_post_meta($post->ID, 'coupon_shorts', true)); ?>
-							</div>
-							<?php } ?>
-							</div>
-							<div class="fine addinfo bypassme">
-								<span class="icons" id="fine-icon"></span>
-								<h3>The Fine Print</h3>
-								<div class="clear"></div>
-								<?php if (get_post_meta($post->ID, 'coupon_fineprint', true)) { ?>
-								<p><?php echo wpautop( $coupon_fineprint ); ?></p>
-								<?php }elseif (get_option('clipit_fineprint_default') <> ""){
-									echo wpautop(stripslashes(get_option('clipit_fineprint_default')));
-								}else { ?>
-								<p>Please call your service provider for more details.</p>
-								<?php } ?>
-							</div>
 							<div class="last rules addinfo">
 							    <?php if (get_post_meta($post->ID, 'coupon_rules', true) || get_option('clipit_rules_default') <> "") { ?>
 								<span class="icons bypassme" id="rules-icon"></span>
@@ -480,10 +331,7 @@ get_header(); ?>
 								}else { ?>
 								<p>Please call your service provider for more details.</p>
 								<?php } ?>
-								<?php } ?>
-								<div class="rand bypassme"><!-- Serial Number -->
-									<?php echo '<pre><span>Serial Number: </span>' .sernum();?>				
-								</div><!-- End Serial Number -->								
+								<?php } ?>							
 							</div>
 						</div><!-- .col-1-1 -->
 						</div><!-- .left-border -->
