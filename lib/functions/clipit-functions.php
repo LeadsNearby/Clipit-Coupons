@@ -147,51 +147,6 @@ function register_daily_post_delete_event() {
 		}
 		else if ($_POST['submitted']);		
 	}//End clipit_email
-	
-	//Reviews
-	function clipit_star_rating() {
-		
-		$data_id = get_the_ID();
-		
-		$totalstarvalue = (int)get_post_meta( $data_id, 'totalstarvalue', true );
-		if(empty($totalstarvalue)) $totalstarvalue = 0;
-
-		$totalstarcount = (int)get_post_meta( $data_id, 'totalstarcount', true );
-		if(empty($totalstarcount)) $totalstarcount = 1;
-		
-		$rate = $totalstarvalue/$totalstarcount;
-		
-		if($rate>5)
-			{
-				$rate = 5;
-			}
-			
-		$rate = number_format($rate, 2);
-		$rate_int = ceil($rate);
-			
-		$html = '';
-		$html .= '<div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating" class="clipit-star-rating star-rating'.get_the_ID().' flat" data_id="'.get_the_ID().'" currentrate="'.$rate.'"><div style="display:none;" itemprop="itemReviewed">'.get_the_title().'</div>';
-		
-		$i= 1;
-		while($i<=5)
-			{
-				if($i <= $rate_int)
-					{
-						$html .= '<div class="star_'.$i.' ratings_stars ratings_over review_link" starvalue="'.$i.'" ></div>';
-					}
-				else
-					{
-						$html .= '<div class="star_'.$i.' ratings_stars review_link" starvalue="'.$i.'" ></div>';
-					}	
-				$i++;
-			}		
-		$html .= '<div class="total_votes">Rated <span itemprop="ratingValue">'.$rate.'</span> out of 5 stars based on <span itemprop="ratingCount">'.$totalstarcount.'</span> customer reviews</div>';	
-		$html .= '<div class="clear"></div>'; // clear 
-		$html .= '</div>'; // end 
-		
-		return $html;
-		
-	}
 
 	//ClipIt Widget
 	function clipit_widgets_init() {
@@ -304,51 +259,12 @@ function register_daily_post_delete_event() {
 	}  
 	add_action( 'edited_locations', 'save_taxonomy_custom_meta', 10, 2 );  
 	add_action( 'create_locations', 'save_taxonomy_custom_meta', 10, 2 );
-
-	//Counts Button Clicks on Coupons
-	if ( is_admin() ) add_action( 'wp_ajax_nopriv_link_click_counter', 'link_click_counter' );
-	function link_click_counter() {
-
-		if ( isset( $_POST['nonce'] ) &&  isset( $_POST['post_id'] ) && wp_verify_nonce( $_POST['nonce'], 'link_click_counter_' . $_POST['post_id'] ) ) {
-			$count = get_post_meta( $_POST['post_id'], 'link_click_counter', true );
-			update_post_meta( $_POST['post_id'], 'link_click_counter', ( $count === '' ? 1 : $count + 1 ) );
-		}
-		exit();
-	}
-
-	add_action( 'wp_head', 'coupon_link_click_head' );
-	function coupon_link_click_head() {
-		global $post;
-
-		if( isset( $post->ID ) ) {
-	?>
-		<script type="text/javascript" >
-		jQuery(function ($) {
-			var ajax_options = {
-				action: 'link_click_counter',
-				nonce: '<?php echo wp_create_nonce( 'link_click_counter_' . $post->ID ); ?>',
-				ajaxurl: '<?php echo admin_url( 'admin-ajax.php' ); ?>',
-				post_id: '<?php echo $post->ID; ?>'
-			};
-
-			$( '.countable_link' ).on( 'click', function() {
-				var self = $( this );
-				$.post( ajax_options.ajaxurl, ajax_options, function() {
-				
-				});
-			});
-		});
-		</script>
-	<?php
-		}
-	}
 	
 	add_action( 'wp_head', 'coupon_custom_styles' );
 	function coupon_custom_styles() {
 		global $post;
 
-		if( isset( $post->ID ) ) {
-	?>
+		if( isset( $post->ID ) ) { ?>
 		<style><?php
 		# Custom Top Border Color	
 		$clipit_border_color=get_option('clipit_border_color');
@@ -868,79 +784,4 @@ function register_daily_post_delete_event() {
 
         <?php
     }
-	
-	/**
-	 * Register the required plugins for this theme.
-	 *
-	 * In this example, we register two plugins - one included with the TGMPA library
-	 * and one from the .org repo.
-	 *
-	 * The variable passed to tgmpa_register_plugins() should be an array of plugin
-	 * arrays.
-	 *
-	 * This function is hooked into tgmpa_init, which is fired within the
-	 * TGM_Plugin_Activation class constructor.
-	 */
-	add_action( 'tgmpa_register', 'clipit_register_required_plugins' );	 
-	function clipit_register_required_plugins() {
-
-		/**
-		 * Array of plugin arrays. Required keys are name and slug.
-		 * If the source is NOT from the .org repo, then source is also required.
-		 */
-		$plugins = array(
-			// This is an example of how to include a plugin from the WordPress Plugin Repository.
-			array(
-				'name'      => 'Post Types Order',
-				'slug'      => 'post-types-order',
-				'required'  => false,
-			),			
-			array(
-				'name'      => 'Really Simple CSV Importer',
-				'slug'      => 'really-simple-csv-importer',
-				'required'  => false,
-			),
-
-		);
-
-		/**
-		 * Array of configuration settings. Amend each line as needed.
-		 * If you want the default strings to be available under your own theme domain,
-		 * leave the strings uncommented.
-		 * Some of the strings are added into a sprintf, so see the comments at the
-		 * end of each line for what each argument will be.
-		 */
-		$config = array(
-			'default_path' => '',                      // Default absolute path to pre-packaged plugins.
-			'menu'         => 'tgmpa-install-plugins', // Menu slug.
-			'has_notices'  => true,                    // Show admin notices or not.
-			'dismissable'  => true,                    // If false, a user cannot dismiss the nag message.
-			'dismiss_msg'  => '',                      // If 'dismissable' is false, this message will be output at top of nag.
-			'is_automatic' => false,                   // Automatically activate plugins after installation or not.
-			'message'      => '',                      // Message to output right before the plugins table.
-			'strings'      => array(
-				'page_title'                      => __( 'Install Required Plugins', 'tgmpa' ),
-				'menu_title'                      => __( 'Install Plugins', 'tgmpa' ),
-				'installing'                      => __( 'Installing Plugin: %s', 'tgmpa' ), // %s = plugin name.
-				'oops'                            => __( 'Something went wrong with the plugin API.', 'tgmpa' ),
-				'notice_can_install_required'     => _n_noop( 'ClipIt requires the following plugin: %1$s.', 'ClipIt requires the following plugins: %1$s.' ), // %1$s = plugin name(s).
-				'notice_can_install_recommended'  => _n_noop( 'ClipIt recommends the following plugin: %1$s.', 'ClipIt recommends the following plugins: %1$s.' ), // %1$s = plugin name(s).
-				'notice_cannot_install'           => _n_noop( 'Sorry, but you do not have the correct permissions to install the %s plugin. Contact the administrator of this site for help on getting the plugin installed.', 'Sorry, but you do not have the correct permissions to install the %s plugins. Contact the administrator of this site for help on getting the plugins installed.' ), // %1$s = plugin name(s).
-				'notice_can_activate_required'    => _n_noop( 'The following required plugin is currently inactive: %1$s.', 'The following required plugins are currently inactive: %1$s.' ), // %1$s = plugin name(s).
-				'notice_can_activate_recommended' => _n_noop( 'The following recommended plugin is currently inactive: %1$s.', 'The following recommended plugins are currently inactive: %1$s.' ), // %1$s = plugin name(s).
-				'notice_cannot_activate'          => _n_noop( 'Sorry, but you do not have the correct permissions to activate the %s plugin. Contact the administrator of this site for help on getting the plugin activated.', 'Sorry, but you do not have the correct permissions to activate the %s plugins. Contact the administrator of this site for help on getting the plugins activated.' ), // %1$s = plugin name(s).
-				'notice_ask_to_update'            => _n_noop( 'The following plugin needs to be updated to its latest version to ensure maximum compatibility with this theme: %1$s.', 'The following plugins need to be updated to their latest version to ensure maximum compatibility with this theme: %1$s.' ), // %1$s = plugin name(s).
-				'notice_cannot_update'            => _n_noop( 'Sorry, but you do not have the correct permissions to update the %s plugin. Contact the administrator of this site for help on getting the plugin updated.', 'Sorry, but you do not have the correct permissions to update the %s plugins. Contact the administrator of this site for help on getting the plugins updated.' ), // %1$s = plugin name(s).
-				'install_link'                    => _n_noop( 'Begin installing plugin', 'Begin installing plugins' ),
-				'activate_link'                   => _n_noop( 'Begin activating plugin', 'Begin activating plugins' ),
-				'return'                          => __( 'Return to Required Plugins Installer', 'tgmpa' ),
-				'plugin_activated'                => __( 'Plugin activated successfully.', 'tgmpa' ),
-				'complete'                        => __( 'All plugins installed and activated successfully. %s', 'tgmpa' ), // %s = dashboard link.
-				'nag_type'                        => 'updated' // Determines admin notice type - can only be 'updated', 'update-nag' or 'error'.
-			)
-		);
-
-		tgmpa( $plugins, $config );
-
-	}
 ?>
