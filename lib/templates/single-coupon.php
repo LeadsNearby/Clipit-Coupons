@@ -468,13 +468,6 @@ get_header(); ?>
 								<p>Please call your service provider for more details.</p>
 								<?php } ?>
 							</div>
-							<div class="qrcode addinfo bypassme">
-								<span class="icons" id="qrcode-icon"></span>
-								<h3>Mobile QR Code</h3>
-								<div class="clear"></div>
-								<p>To pull up this coupon scan the code below using your favorite mobile device.</p>
-								<img src="https://chart.googleapis.com/chart?cht=qr&amp;chs=225x225&amp;chl=<?php echo get_permalink( $post->ID ); ?>" width="225" height="225" itemprop="url"/>
-							</div>
 							<div class="last rules addinfo">
 							    <?php if (get_post_meta($post->ID, 'coupon_rules', true) || get_option('clipit_rules_default') <> "") { ?>
 								<span class="icons bypassme" id="rules-icon"></span>
