@@ -17,7 +17,6 @@ define('ClipIt_INCLUDES', ClipIt_LIB . '/inc');
 define('ClipIt_SHORTCODES', ClipIt_LIB . '/shortcodes');
 define('ClipIt_FUNCTIONS', ClipIt_LIB . '/functions');
 define('ClipIt_TEMPLATES', ClipIt_LIB . '/templates');
-define('ClipIt_INSTALLER', ClipIt_LIB . '/installer');
 define('ClipIt_EMAIL', ClipIt_LIB . '/email');
 
 // Load Admin Scripts and Css

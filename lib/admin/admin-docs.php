@@ -213,7 +213,6 @@ function coupons_doc() {global $title;?>
 				<li><strong>coupon_promo_text</strong>: (string) Enter any additional promotional text</li>
 				<li><strong>coupon_how_to</strong>: (string) Enter any how to information</li>
 				<li><strong>coupon_rules</strong>: (string) Enter the coupon rules</li>
-				<li><strong>coupon_shorts</strong>: (string) Insert any form shortcode here.</li>
 			</ul>
 			<p>Once you have filled in the csv file with your coupons. You will need to import the file. Below are a few instructions on how to do that.</p>
 			<ol>
