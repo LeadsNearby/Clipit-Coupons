@@ -1,34 +1,34 @@
 *:before,
 *:after {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 /** Grid **/
 
-#clipit [class*="col-"] {
-    padding-right: 0;
+#clipit [class*='col-'] {
+  padding-right: 0;
 }
 #clipit .grid {
-    margin: 0 auto;
-    max-width: 1080px;
-    width: 100%;
+  margin: 0 auto;
+  max-width: 1080px;
+  width: 100%;
 }
 #clipit .col-1-1 {
-    width: 100%;
+  width: 100%;
 }
 #clipit .col-3-4 {
-    width: 74%;
+  width: 74%;
 }
 #clipit .col-2-3 {
-    width: 62.6666%;
+  width: 62.6666%;
 }
 #clipit .col-1-2 {
-    width: 48%;
+  width: 48%;
 }
 #clipit .col-1-3 {
-    width: 31.6666%;
+  width: 31.6666%;
 }
 #clipit .col-1-4 {
-    width: 23%;
+  width: 23%;
 }
 #clipit .col-1-2,
 #clipit .col-1-3,
@@ -36,276 +36,235 @@
 #clipit .col-3-4,
 #clipit .col-1-4,
 #clipit .col-1-8 {
-    float: left;
-    margin-bottom: 20px;
-    margin: 0 1%;
-    position: relative;
+  float: left;
+  margin-bottom: 20px;
+  margin: 0 1%;
+  position: relative;
 }
 #clipit {
-	font-size:14px;
-	line-height:110%;
+  font-size: 14px;
+  line-height: 110%;
 }
 #clipit .last {
-    clear: right;
-    margin-right: 0 !important;
+  clear: right;
+  margin-right: 0 !important;
 }
 .clear {
-    clear: both;
-    display: block;
-    font-size: 0;
-    height: 0;
-    line-height: 0;
-    overflow: hidden;
-    width: 100%;
+  clear: both;
+  display: block;
+  font-size: 0;
+  height: 0;
+  line-height: 0;
+  overflow: hidden;
+  width: 100%;
 }
 .no-margin {
-    margin: 0 !important;
+  margin: 0 !important;
 }
 .no-padding {
-	padding:0 !important;
+  padding: 0 !important;
 }
 .left-border h3 {
-	font-size: 17px; 
-	font-weight: normal;
-	margin-bottom:15px;
-} 
+  font-size: 17px;
+  font-weight: normal;
+  margin-bottom: 15px;
+}
 .printstyles {
-	display:none !important;
-}
-/* Star Rating */
-.clipit-star-rating.flat{
-box-sizing: border-box;
-}
-.clipit-star-rating.flat .ratings_stars {
-  background: url("../images/star.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
-  cursor: pointer;
-  display: inline-block;
-  float: left;
-  height: 30px;
-  text-align: center;
-  width: 30px;
-}
-.clipit-star-rating.flat .ratings_over {
-  background: url("../images/star-hover.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
-  cursor: pointer;
-  display: inline-block;
-  float: left;
-  height: 30px;
-  text-align: center;
-  width: 30px;
-}
-.clipit-star-rating.flat .total_votes {
-    background: rgb(221, 221, 221) none repeat scroll 0 0;
-    border-radius: 4px;
-    cursor: pointer;
-    display: inline-block;
-    float: none;
-    font-size: 12px;
-    height: 30px;
-    line-height: 29px;
-    margin: 10px 0 0;
-    padding: 0 5px;
-    text-align: left;
-    vertical-align: middle;
-    width: auto;
-}
-.single-coupon .clipit-star-rating {
-    margin-top: 12px;
-}
-.clipit-star-rating.flat .loading {
-  background: url("images/loading.gif") no-repeat scroll 12px 7px rgb(221, 221, 221);
+  display: none !important;
 }
 /* Locations Taxonomy */
 
 #clipit .post {
-    margin: 0 0 20px;
+  margin: 0 0 20px;
 }
 #clipit.col-3-4 {
-    float: left;
-    width: 70%;
+  float: left;
+  width: 70%;
 }
 .clipit-widget-area {
-    float: right;
-    width: 26.0417%;
+  float: right;
+  width: 26.0417%;
 }
 /* Single / Shortcode */
 
 #clipit {
-    background: none repeat scroll 0 0 #fff;
+  background: none repeat scroll 0 0 #fff;
 }
 #clipit article {
-    margin: 0 0 5%;
+  margin: 0 0 5%;
 }
 .single-coupon #clipit {
-    background: none repeat scroll 0 0 #fff;
-    border: medium none;
-    margin-top: 20px;
+  background: none repeat scroll 0 0 #fff;
+  border: medium none;
+  margin-top: 20px;
 }
 #clipit hr {
-    background-color: #ddd;
-    border: 0 none;
-    height: 1px;
-    margin: 10px 0 17px;
+  background-color: #ddd;
+  border: 0 none;
+  height: 1px;
+  margin: 10px 0 17px;
 }
 .single-coup-container {
-    background-color: #fff;
-    border-bottom: 1px solid #e1e1e1;
-    border-left: 2px dashed #e1e1e1;
-    border-radius: 4px 4px 0 0;
-    border-right: 2px dashed #e1e1e1;
-    border-style: dashed;
-    border-top: 2px dashed #e1e1e1;
-    color: #727272;
-    display: block;
-    line-height: 1.42857;
-    padding: 10px;
-    position: relative;
-    transition: all 0.2s ease-in-out 0s;
+  background-color: #fff;
+  border-bottom: 1px solid #e1e1e1;
+  border-left: 2px dashed #e1e1e1;
+  border-radius: 4px 4px 0 0;
+  border-right: 2px dashed #e1e1e1;
+  border-style: dashed;
+  border-top: 2px dashed #e1e1e1;
+  color: #727272;
+  display: block;
+  line-height: 1.42857;
+  padding: 10px;
+  position: relative;
+  transition: all 0.2s ease-in-out 0s;
 }
 .single-coup-img {
-    margin-bottom: 10px !important;
+  margin-bottom: 10px !important;
 }
 .coupon-container {
-    padding-bottom: 0;
+  padding-bottom: 0;
 }
 .coupon-highlight {
-    background-color: #f7f7f9;
-    border-bottom: 2px dashed #e1e1e1;
-    border-left: 2px dashed #e1e1e1;
-    border-radius: 0 0 4px 4px;
-    border-right: 2px dashed #e1e1e1;
-    margin-bottom: 0;
-    padding: 9px 14px;
+  background-color: #f7f7f9;
+  border-bottom: 2px dashed #e1e1e1;
+  border-left: 2px dashed #e1e1e1;
+  border-radius: 0 0 4px 4px;
+  border-right: 2px dashed #e1e1e1;
+  margin-bottom: 0;
+  padding: 9px 14px;
 }
 .coupon-highlight > .col-3-4 {
-    margin-bottom: 0px !important;
+  margin-bottom: 0px !important;
 }
 .ldc-ul_cont {
-    margin: 10px 0 0 !important;
+  margin: 10px 0 0 !important;
 }
 .single-coup-img {
-    margin-bottom: 30px;
-    position: relative;
+  margin-bottom: 30px;
+  position: relative;
 }
 .single-coup-content {
-    font-size: 14px;
-    line-height: 20px;
-    width: 95%;
+  font-size: 14px;
+  line-height: 20px;
+  width: 95%;
 }
 .single-coupon .coupon-title {
-	font-size:2rem;
+  font-size: 2rem;
 }
 .single-coupon-title,
 .coupon-title {
-    font-size: 1.4rem;
-    margin-bottom: 20px;
-    line-height: 110%;
-    text-align: left;
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  line-height: 110%;
+  text-align: left;
 }
 .expirydate-coupon {
-    border-top: 1px solid #d8d8d8;
-    font-size: 16px;
-    line-height: 25px;
-    padding: 20px 0;
+  border-top: 1px solid #d8d8d8;
+  font-size: 16px;
+  line-height: 25px;
+  padding: 20px 0;
 }
 .deal-discount {
-    clear: both;
-    margin-bottom: 15px;
-    width: 225px;
+  clear: both;
+  margin-bottom: 15px;
+  width: 225px;
 }
 .single-coupon .deal-discount {
-    width: 100%;
+  width: 100%;
 }
 .deal-discount table {
-    border:none;
-    width: 100%;
+  border: none;
+  width: 100%;
 }
 .deal-discount th {
-    color: #888;
-    border:none;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 18px;
-    margin-bottom: 5px;
-    padding: 0 0 5px;
-    text-align: center;
-    text-transform: uppercase;
-    width: 33%;
+  color: #888;
+  border: none;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  margin-bottom: 5px;
+  padding: 0 0 5px;
+  text-align: center;
+  text-transform: uppercase;
+  width: 33%;
 }
 .deal-discount td {
-    border:none;
-    font-size: 17px;
-    font-weight: 600;
-    padding: 0 5px 0 0;
-    text-align: center;
+  border: none;
+  font-size: 17px;
+  font-weight: 600;
+  padding: 0 5px 0 0;
+  text-align: center;
 }
-.wlt_shortcodes_expiry_date_text, .wlt_shortcodes_expiry_date, .wlt_shortcodes_dynamic_date {
-    background: transparent url("../images/clock-orange.png") no-repeat scroll 0 3px;
-    color: #e35205;
-    font-size: 19px !important;
-    font-weight: bold !important;
-    height: 25px;
-    padding: 2px 0 2px 28px;
+.wlt_shortcodes_expiry_date_text,
+.wlt_shortcodes_expiry_date,
+.wlt_shortcodes_dynamic_date {
+  background: transparent url('../images/clock-orange.png') no-repeat scroll 0 3px;
+  color: #e35205;
+  font-size: 19px !important;
+  font-weight: bold !important;
+  height: 25px;
+  padding: 2px 0 2px 28px;
 }
 .single-coup-content .description {
-    font-style: normal;
-    text-align: left;
+  font-style: normal;
+  text-align: left;
 }
 .main-upload {
-    max-width: 100%;
-    width: 100%;
+  max-width: 100%;
+  width: 100%;
 }
 .reveal,
 .single-coupon .couponbutton a,
 .single-coupon .clicktoreveal a {
-    background-color: #0074a2;
-    border-radius: 50px;
-    color: #fff !important;
-    cursor: pointer;
-    display: block;
-    font-size: 24px;
-    font-weight: bold;
-    letter-spacing: 1px;
-    margin-bottom: 15px;
-    min-width: 100px;
-    padding: 24px 0;
-    text-align: center;
-    text-decoration: none;
+  background-color: #0074a2;
+  border-radius: 50px;
+  color: #fff !important;
+  cursor: pointer;
+  display: block;
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+  min-width: 100px;
+  padding: 24px 0;
+  text-align: center;
+  text-decoration: none;
 }
 .clicktoreveal .code {
-    color: #fff;
-    font-size: 18px;
-    font-weight: bold;
-    padding: 12px 0;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 12px 0;
 }
 .reveal .code {
-    color: #ff9900;
-    display: block;
-    font-size: 18px;
-    font-weight: bold;
-    padding: 10px 0;
-    text-align: center;
+  color: #ff9900;
+  display: block;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px 0;
+  text-align: center;
 }
 .featured-banner {
-    background: url("../images/featured-banner.png") no-repeat scroll right top transparent;
-    display: block;
-    height: 144px;
-    left: -1px;
-    position: absolute;
-    top: -1px;
-    width: 159px;
-    z-index: 1;
+  background: url('../images/featured-banner.png') no-repeat scroll right top transparent;
+  display: block;
+  height: 144px;
+  left: -1px;
+  position: absolute;
+  top: -1px;
+  width: 159px;
+  z-index: 1;
 }
 .single-fineprint,
 .fineprint {
-    font-size: 12px;
-    text-align: left;
+  font-size: 12px;
+  text-align: left;
 }
 .fineprint p {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 .coupon-container.col-1-2 .hightlight .col-1-4 {
-    width: 48% !important;
+  width: 48% !important;
 }
 .coupon-container.col-1-3 .col-1-4,
 .coupon-container.col-1-3 .col-1-2,
@@ -317,531 +276,531 @@ box-sizing: border-box;
 .coupon-container.col-1-4 .col-1-3,
 .coupon-container.col-1-4 .col-2-3,
 .coupon-container.col-1-4 .col-3-4 {
-    clear: both;
-    width: 100% !important;
-    float: none !important;
+  clear: both;
+  width: 100% !important;
+  float: none !important;
 }
-.coupon-container.col-1-2:nth-child(2n+1),
-.coupon-container.col-1-3:nth-child(3n+1),
-.coupon-container.col-1-4:nth-child(4n+1) {
-    clear: left;
+.coupon-container.col-1-2:nth-child(2n + 1),
+.coupon-container.col-1-3:nth-child(3n + 1),
+.coupon-container.col-1-4:nth-child(4n + 1) {
+  clear: left;
 }
 .coupon_main_img {
-    text-align: left;
+  text-align: left;
 }
 .coup_upload {
-    width: 100%;
+  width: 100%;
 }
 .addinfo {
-    border-top: 1px solid #d8d8d8;
-    font-size: 14px;
-    line-height: 20px;
-    padding: 20px 0;
+  border-top: 1px solid #d8d8d8;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 20px 0;
 }
 .addinfo p {
-    line-height: 18px;
-    margin-bottom: 5px;
+  line-height: 18px;
+  margin-bottom: 5px;
 }
 .addinfo h3 {
-	clear:none;
-    line-height: 110%;
-    margin: 0 0 15px;
-    padding: 7px 0 8px 40px;
-    text-align: left;
+  clear: none;
+  line-height: 110%;
+  margin: 0 0 15px;
+  padding: 7px 0 8px 40px;
+  text-align: left;
 }
 .howto ol {
-    list-style: decimal outside none;
-    margin-left: 15px;
-    padding: 0;
+  list-style: decimal outside none;
+  margin-left: 15px;
+  padding: 0;
 }
 .icons {
-    border-radius: 30px;
-    display: block;
-    float: left;
-    height: 32px;
-    margin-right: 5px;
-    width: 32px;
+  border-radius: 30px;
+  display: block;
+  float: left;
+  height: 32px;
+  margin-right: 5px;
+  width: 32px;
 }
 .icons-small {
-    padding: 9px 0;
+  padding: 9px 0;
 }
 #clipit pre {
-    border: medium none;
-    font-size: 1rem;
-    line-height: 110%;
-    margin: 0;
-    max-width: 100%;
-    overflow: auto;
-    padding: 15px 0;
-    white-space: initial;
-    word-wrap: normal;
+  border: medium none;
+  font-size: 1rem;
+  line-height: 110%;
+  margin: 0;
+  max-width: 100%;
+  overflow: auto;
+  padding: 15px 0;
+  white-space: initial;
+  word-wrap: normal;
 }
 /* Comment Styles */
 .single-coupon .avatar {
-    height:31px;
-	margin: 0;
-    width: 26px;
+  height: 31px;
+  margin: 0;
+  width: 26px;
 }
 .single-coupon .commentlist .the-comment .comment-text {
-    margin-left: 40px;
+  margin-left: 40px;
 }
-.single-coupon .comments-area article header cite, 
-.single-coupon .comments-area article header time{
-	margin-left:3rem;
+.single-coupon .comments-area article header cite,
+.single-coupon .comments-area article header time {
+  margin-left: 3rem;
 }
 .single-coupon .comments-area article header {
-	margin:0 0 1rem;
+  margin: 0 0 1rem;
 }
 /* Icons */
 .single-coupon #howto-icon {
-    background: url("../images/info-icon.png") no-repeat scroll 0 0 transparent;
+  background: url('../images/info-icon.png') no-repeat scroll 0 0 transparent;
 }
 .single-coupon #fine-icon {
-    background: url("../images/mag-icon.png") no-repeat scroll 0 0 transparent;
+  background: url('../images/mag-icon.png') no-repeat scroll 0 0 transparent;
 }
 .single-coupon #rules-icon {
-    background: url("../images/chk-icon.png") no-repeat scroll 0 0 transparent;
+  background: url('../images/chk-icon.png') no-repeat scroll 0 0 transparent;
 }
 .single-coupon #redeem-icon {
-    background: url("../images/redeem-icon.png") no-repeat scroll 0 0 transparent !important;
+  background: url('../images/redeem-icon.png') no-repeat scroll 0 0 transparent !important;
 }
 .single-coupon #contactus-icon {
-    background: url("../images/contact-icon.png") no-repeat scroll 0 0 transparent !important;
+  background: url('../images/contact-icon.png') no-repeat scroll 0 0 transparent !important;
 }
 .single-coupon #qrcode-icon {
-    background: url("../images/mobile-icon.png") no-repeat scroll 0 0 transparent !important;
+  background: url('../images/mobile-icon.png') no-repeat scroll 0 0 transparent !important;
 }
 .single-coupon #social-icon {
-    background: url("../images/share-icon.png") no-repeat scroll 0 0 transparent !important;
-    font-size: 17px;
-    font-weight: normal;
-    padding: 7px 0 7px 25px;
-    text-align: left;
+  background: url('../images/share-icon.png') no-repeat scroll 0 0 transparent !important;
+  font-size: 17px;
+  font-weight: normal;
+  padding: 7px 0 7px 25px;
+  text-align: left;
 }
 .single-coupon #views-icon {
-    background: url("../images/views-icon.png") no-repeat scroll 0 0 transparent;
+  background: url('../images/views-icon.png') no-repeat scroll 0 0 transparent;
 }
 .single-coupon #commentbubble-icon {
-    background: url("../images/cloud-icon.png") no-repeat scroll 0 0 transparent;
+  background: url('../images/cloud-icon.png') no-repeat scroll 0 0 transparent;
 }
 .single-coupon #expiration-icon {
-    background: url("../images/exp-icon.png") no-repeat scroll 0 0 transparent;
+  background: url('../images/exp-icon.png') no-repeat scroll 0 0 transparent;
 }
 .single-coupon #pin-icon {
-    background: url("../images/pin-icon.png") no-repeat scroll 0 0 transparent;
+  background: url('../images/pin-icon.png') no-repeat scroll 0 0 transparent;
 }
 .expiration {
-    background: url("../images/exp-icon-sm.png") no-repeat scroll 0 12px transparent;
-    padding: 7px 5px 7px 25px;
-    text-align: left;
+  background: url('../images/exp-icon-sm.png') no-repeat scroll 0 12px transparent;
+  padding: 7px 5px 7px 25px;
+  text-align: left;
 }
 .views {
-    background: url("../images/chk-icon-sm.png") no-repeat scroll 0 10px transparent;
-    padding: 7px 5px 7px 25px;
-    text-align: left;
+  background: url('../images/chk-icon-sm.png') no-repeat scroll 0 10px transparent;
+  padding: 7px 5px 7px 25px;
+  text-align: left;
 }
 .commentbubble {
-    background: url("../images/cloud-icon-sm.png") no-repeat scroll 0 10px transparent;
-    padding: 7px 5px 7px 25px;
-    text-align: left;
+  background: url('../images/cloud-icon-sm.png') no-repeat scroll 0 10px transparent;
+  padding: 7px 5px 7px 25px;
+  text-align: left;
 }
 .shorts button,
 .shorts input,
 .shorts textarea,
 .shorts select {
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    font-family: inherit;
-    margin-bottom: 5px;
-    padding: 2%;
-    width: 96%;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-family: inherit;
+  margin-bottom: 5px;
+  padding: 2%;
+  width: 96%;
 }
 .shorts select {
-    width: 100% !important;
+  width: 100% !important;
 }
 #min-info {
-	font-size:0.85rem;
+  font-size: 0.85rem;
 }
 #comments {
-    display: none;
+  display: none;
 }
 .single-coupon #comments {
-	display:block;
+  display: block;
 }
 /* Related Coupons */
 .single-coupon #related article {
-    background: #f2f2f2 none repeat scroll 0 0;
+  background: #f2f2f2 none repeat scroll 0 0;
 }
 .single-coupon #recent {
-    font-weight: inherit;
-    line-height: 110%;
+  font-weight: inherit;
+  line-height: 110%;
 }
 .single-coupon .group {
-    list-style: outside none none;
-    padding: 0;
+  list-style: outside none none;
+  padding: 0;
 }
 .single-coupon .group article img {
-    max-height: 140px !important;
-    overflow: hidden;
-    text-align: center;
+  max-height: 140px !important;
+  overflow: hidden;
+  text-align: center;
 }
 .single-coupon .group article .recent-container {
-    padding:15px 15px;
+  padding: 15px 15px;
 }
 .single-coupon .group article h1 {
-    font-size:18px;
-    font-weight:inherit;
-    line-height:110%;
-    margin-bottom: 0.67em;
-    margin-top: 0;
+  font-size: 18px;
+  font-weight: inherit;
+  line-height: 110%;
+  margin-bottom: 0.67em;
+  margin-top: 0;
 }
 .single-coupon .group .expiry-date {
-    background: transparent url("../images/clock-orange.png") no-repeat scroll 0 3px;
-    margin-top: 0.64em; 
-    padding: 4px 0 4px 28px;
+  background: transparent url('../images/clock-orange.png') no-repeat scroll 0 3px;
+  margin-top: 0.64em;
+  padding: 4px 0 4px 28px;
 }
 .cui-price {
-    margin-top:10px;
-    text-align: right;
+  margin-top: 10px;
+  text-align: right;
 }
 .cui-price-original {
-    font-size: 14px;
-    text-decoration: line-through;
+  font-size: 14px;
+  text-decoration: line-through;
 }
 .cui-price-discount {
-    color: #53a318;
+  color: #53a318;
 }
 /* Social */
 
 .fb-like {
-    overflow: hidden !important;
+  overflow: hidden !important;
 }
 #social-tabs {
-    list-style: outside none none;
-    padding: 0;
+  list-style: outside none none;
+  padding: 0;
 }
 #social-tabs li {
-    float: left;
-    margin-bottom: 5px;
-    margin-right: 5px;
+  float: left;
+  margin-bottom: 5px;
+  margin-right: 5px;
 }
 #social-tabs li .popup {
-    bottom: 0;
-    color: #d1d1d2;
-    display: block;
-    font-size: 11px;
-    left: 0;
-    line-height: 15px;
-    position: relative;
+  bottom: 0;
+  color: #d1d1d2;
+  display: block;
+  font-size: 11px;
+  left: 0;
+  line-height: 15px;
+  position: relative;
 }
 .social-coupons {
-    background-image: url("../images/social-coupons-32px.png");
-    border-radius: 30px;
-    display: block;
-    height: 32px;
-    width: 32px;
+  background-image: url('../images/social-coupons-32px.png');
+  border-radius: 30px;
+  display: block;
+  height: 32px;
+  width: 32px;
 }
 .social-coupons:hover {
-    transition: all 0.3s ease-in-out 0s;
+  transition: all 0.3s ease-in-out 0s;
 }
 .coupon-facebook {
-    background-position: 0 0;
+  background-position: 0 0;
 }
 .coupon-facebook:hover {
-    background-position: 0 -32px;
+  background-position: 0 -32px;
 }
 .coupon-linkedin {
-    background-position: -32px 0;
+  background-position: -32px 0;
 }
 .coupon-linkedin:hover {
-    background-position: -32px -32px;
+  background-position: -32px -32px;
 }
 .coupon-twitter {
-    background-position: -64px 0;
+  background-position: -64px 0;
 }
 .coupon-twitter:hover {
-    background-position: -64px -32px;
+  background-position: -64px -32px;
 }
 .coupon-google {
-    background-position: -96px 0;
+  background-position: -96px 0;
 }
 .coupon-google:hover {
-    background-position: -96px -32px;
+  background-position: -96px -32px;
 }
 .coupon-pinterest {
-    background-position: -128px 0;
+  background-position: -128px 0;
 }
 .coupon-pinterest:hover {
-    background-position: -128px -32px;
+  background-position: -128px -32px;
 }
 .coupon-stumbleupon {
-    background-position: -160px 0;
+  background-position: -160px 0;
 }
 .coupon-stumbleupon:hover {
-    background-position: -160px -32px;
+  background-position: -160px -32px;
 }
 .coupon-reddit {
-    background-position: -192px 0;
+  background-position: -192px 0;
 }
 .coupon-reddit:hover {
-    background-position: -192px -32px;
+  background-position: -192px -32px;
 }
 .coupon-digg {
-    background-position: -224px 0;
+  background-position: -224px 0;
 }
 .coupon-digg:hover {
-    background-position: -224px -32px;
+  background-position: -224px -32px;
 }
 .coupon-email {
-    background-position: -256px 0;
+  background-position: -256px 0;
 }
 .coupon-email:hover {
-    background-position: -256px -32px;
+  background-position: -256px -32px;
 }
 /* Comments Single */
 
 .single .comments-area {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 /* Thumbs */
 
 .thumbs-rating-container {
-    padding: 8px 0 !important;
+  padding: 8px 0 !important;
 }
 .thumbs-rating-container .thumbs-rating-up,
 .thumbs-rating-container .thumbs-rating-down {
-    color: white;
-    margin: 0 0 0.75em;
-    padding: 0.7em 0.27em !important;
+  color: white;
+  margin: 0 0 0.75em;
+  padding: 0.7em 0.27em !important;
 }
 .thumbs-rating-container span {
-    cursor: pointer;
-    font-size: 11px;
+  cursor: pointer;
+  font-size: 11px;
 }
 /* Shortcode */
 
 .clipshort ol.comment-list {
-    background: none repeat scroll 0 0 #f7f7f9;
-    border: 1px solid #ddd;
-    display: none;
-    list-style: none outside none;
-    margin-top: 15px;
-    padding: 10px;
+  background: none repeat scroll 0 0 #f7f7f9;
+  border: 1px solid #ddd;
+  display: none;
+  list-style: none outside none;
+  margin-top: 15px;
+  padding: 10px;
 }
 .clipshort .comment-list li {
-    background: none repeat scroll 0 0 #fff;
-    border: 1px solid #ccc;
-    margin: 10px;
-    padding: 10px;
+  background: none repeat scroll 0 0 #fff;
+  border: 1px solid #ccc;
+  margin: 10px;
+  padding: 10px;
 }
 .clipshort .comment-list li p {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 .clipshort .commentbubble {
-    cursor: pointer;
+  cursor: pointer;
 }
 .clipshort .commentbubble:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 /* EMail to Claim */
 
 .error {
-    padding: 5px 9px;
-    border: 1px solid red;
-    color: red;
-    border-radius: 3px;
-    margin: 10px 0 15px;
+  padding: 5px 9px;
+  border: 1px solid red;
+  color: red;
+  border-radius: 3px;
+  margin: 10px 0 15px;
 }
 .success {
-    border: 1px solid green;
-    border-radius: 3px;
-    color: green;
-    margin: 10px 0 15px;
-    padding: 5px 9px;
+  border: 1px solid green;
+  border-radius: 3px;
+  color: green;
+  margin: 10px 0 15px;
+  padding: 5px 9px;
 }
 form#email-claim span {
-    display: inline-block;
-    padding: 8px;
+  display: inline-block;
+  padding: 8px;
 }
 #email-claim > label {
-    display: block;
-    width: 100%;
+  display: block;
+  width: 100%;
 }
 #email-claim button,
 #email-claim input {
-    line-height: normal;
+  line-height: normal;
 }
 #email-claim button,
 #email-claim input,
 #email-claim textarea {
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    font-family: inherit;
-    margin-bottom: 5px;
-    padding: 1%;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-family: inherit;
+  margin-bottom: 5px;
+  padding: 1%;
 }
 #email-claim input,
 #email-claim textarea {
-    width: 98%
+  width: 98%;
 }
-#email-claim input[type="submit"] {
-    background: #cdeb8e;
-    background: -moz-linear-gradient(top, #cdeb8e 0%, #a5c956 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #cdeb8e), color-stop(100%, #a5c956));
-    background: -webkit-linear-gradient(top, #cdeb8e 0%, #a5c956 100%);
-    background: -o-linear-gradient(top, #cdeb8e 0%, #a5c956 100%);
-    background: -ms-linear-gradient(top, #cdeb8e 0%, #a5c956 100%);
-    background: linear-gradient(to bottom, #cdeb8e 0%, #a5c956 100%);
-    border: 1px solid #8aaf39;
-    color: #073f00;
-    font-size: 15px;
-    font-weight: 700;
-    margin: 20px auto;
-    padding: 12px;
-    text-transform: capitalize;
+#email-claim input[type='submit'] {
+  background: #cdeb8e;
+  background: -moz-linear-gradient(top, #cdeb8e 0%, #a5c956 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #cdeb8e), color-stop(100%, #a5c956));
+  background: -webkit-linear-gradient(top, #cdeb8e 0%, #a5c956 100%);
+  background: -o-linear-gradient(top, #cdeb8e 0%, #a5c956 100%);
+  background: -ms-linear-gradient(top, #cdeb8e 0%, #a5c956 100%);
+  background: linear-gradient(to bottom, #cdeb8e 0%, #a5c956 100%);
+  border: 1px solid #8aaf39;
+  color: #073f00;
+  font-size: 15px;
+  font-weight: 700;
+  margin: 20px auto;
+  padding: 12px;
+  text-transform: capitalize;
 }
 .ui-dialog {
-    padding: 0 !important;
+  padding: 0 !important;
 }
 .ui-dialog .ui-dialog-titlebar {
-    background-color: #1492c7;
-    background-image: none;
-    border-radius: 0;
-    color: #fff;
-    font-size: 18px;
-    padding: 0.75em !important;
-    position: relative;
-    text-align: center;
+  background-color: #1492c7;
+  background-image: none;
+  border-radius: 0;
+  color: #fff;
+  font-size: 18px;
+  padding: 0.75em !important;
+  position: relative;
+  text-align: center;
 }
 #email-coupon-message {
-    padding: 40px 60px;
+  padding: 40px 60px;
 }
 /* ClipIt Two Styles */
 
 .single-coup-container,
 .coupon-highlight {
-    border-radius: 0;
+  border-radius: 0;
 }
 .featured-banner {
-    background: url("../images/featured-banner-two.png") no-repeat scroll right top transparent;
-    display: block;
-    height: 44px;
-    left: -14px;
-    position: absolute;
-    top: 25px;
-    width: 140px;
-    z-index: 1;
+  background: url('../images/featured-banner-two.png') no-repeat scroll right top transparent;
+  display: block;
+  height: 44px;
+  left: -14px;
+  position: absolute;
+  top: 25px;
+  width: 140px;
+  z-index: 1;
 }
 .single-coup-img {
-    height: auto;
-    max-height: 400px;
-    margin-bottom: 30px;
-    overflow: hidden;
-    padding: 1% !important;
-    position: relative;
+  height: auto;
+  max-height: 400px;
+  margin-bottom: 30px;
+  overflow: hidden;
+  padding: 1% !important;
+  position: relative;
 }
 .expirydate-coupon .expirydate-date {
-    padding: 0 0 0 6px;
+  padding: 0 0 0 6px;
 }
 .expirydate-coupon .expirydate-text,
 .expirydate-coupon .expirydate-date {
-    box-sizing: border-box;
-    display: block;
+  box-sizing: border-box;
+  display: block;
 }
 .expirydate-coupon div {
-    float: left;
-    margin: 5px 0;
-    position: relative;
+  float: left;
+  margin: 5px 0;
+  position: relative;
 }
 .single-coupon .expirydate-text,
 .single-coupon .expirydate-date {
-    background: none;
-    border: none;
+  background: none;
+  border: none;
 }
 .single-coup-content .description {
-    clear: both;
-    font-style: normal;
-    text-align: left;
+  clear: both;
+  font-style: normal;
+  text-align: left;
 }
 .coupon-highlight {
-    padding: 0;
+  padding: 0;
 }
 span.div {
-    border-right: 1px solid #ebecf0;
-    color: #ababab;
-    display: inline-block;
-    font-size: 14px;
-    padding: 9px 15px;
+  border-right: 1px solid #ebecf0;
+  color: #ababab;
+  display: inline-block;
+  font-size: 14px;
+  padding: 9px 15px;
 }
 .action-buttons {
-    float: right !important;
-    margin: 0 !important;
+  float: right !important;
+  margin: 0 !important;
 }
 .couponbutton a,
 .reveal,
 .clicktoreveal a {
-    background-color: #0074a2;
-    border: 0 none;
-    border-radius: 0;
-    box-shadow: none;
-    color: #fff;
-    cursor: pointer;
-    display: block;
-    font-size: 18px;
-    font-weight: bold;
-    height: auto;
-    letter-spacing: 1px;
-    line-height: 30px;
-    min-width: 100px;
-    padding: 10px;
-    text-align: center;
-    text-decoration: none;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.7);
-    transition: all 0.3s ease-in-out 0s;
+  background-color: #0074a2;
+  border: 0 none;
+  border-radius: 0;
+  box-shadow: none;
+  color: #fff;
+  cursor: pointer;
+  display: block;
+  font-size: 18px;
+  font-weight: bold;
+  height: auto;
+  letter-spacing: 1px;
+  line-height: 30px;
+  min-width: 100px;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.7);
+  transition: all 0.3s ease-in-out 0s;
 }
 /* Pop Up */
 
 .popup-code,
 .popup-expirydate {
-    float: left;
-    width: 50%;
+  float: left;
+  width: 50%;
 }
 .popup-code {
-    background: none repeat scroll 0 0 #0074a2;
-    border: 1px solid #0074a2;
-    color: #fff;
-    font-size: 18px;
-    font-weight: bold;
-    padding: 2%;
-    transition: all 0.3s ease-in-out 0s;
+  background: none repeat scroll 0 0 #0074a2;
+  border: 1px solid #0074a2;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 2%;
+  transition: all 0.3s ease-in-out 0s;
 }
 .popup-expirydate {
-    background: none repeat scroll 0 0 #eeeeee;
-    border: 1px solid #ccc;
-    font-size: 16px;
-    padding: 2%;
+  background: none repeat scroll 0 0 #eeeeee;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  padding: 2%;
 }
 .exptext {
-    color: #fcc348;
+  color: #fcc348;
 }
 #TB_ajaxContent p.promo-text {
-    text-align: center;
-    font-size: 17px;
+  text-align: center;
+  font-size: 17px;
 }
 #TB_ajaxContent p.promo-text.entryinfo {
-    background: none repeat scroll 0 0 #f9fafc;
-    border-bottom: 1px solid #eee;
-    margin: 0 0 30px;
-    padding: 30px 0;
+  background: none repeat scroll 0 0 #f9fafc;
+  border-bottom: 1px solid #eee;
+  margin: 0 0 30px;
+  padding: 30px 0;
 }
 .couponbutton a:hover,
 .clicktoreveal a:hover,
 .popup-code:hover {
-    background-color: #eee;
-    color: #de0945 !important;
+  background-color: #eee;
+  color: #de0945 !important;
 }
 .popup-code:hover {
-    border: 1px solid #eee;
+  border: 1px solid #eee;
 }
 /* Side Widget Styles */
 
@@ -853,70 +812,70 @@ span.div {
 .sidewidget .couponbutton a,
 .sidewidget .likes-container,
 .sidewidget .views-container {
-    clear: both;
-    width: 100% !important;
-    float: none;
+  clear: both;
+  width: 100% !important;
+  float: none;
 }
 .sidewidget .single-coup-img {
-    width: 98% !important;
+  width: 98% !important;
 }
 .sidewidget .couponbutton a {
-    margin-top: 5px;
-    padding: 10px 5px;
+  margin-top: 5px;
+  padding: 10px 5px;
 }
 .sidewidget .coupon-title,
 .sidewidget .description,
 .sidewidget .expiration {
-    font-size: 1.25rem;
+  font-size: 1.25rem;
 }
 .sidewidget .description,
 .sidewidget .expiration {
-    font-size: .9rem;
+  font-size: 0.9rem;
 }
 .sidewidget .thumbs-rating-container .thumbs-rating-up,
 .sidewidget .thumbs-rating-container .thumbs-rating-down {
-    font-size: 12px;
-    padding: 0.5em 0.1em !important;
+  font-size: 12px;
+  padding: 0.5em 0.1em !important;
 }
 
 .sidewidget span.div {
-    border-right: medium none !important;
+  border-right: medium none !important;
 }
 .sidewidget .views,
 .sidewidget .commentbubble {
-    display: block;
+  display: block;
 }
 /* Thick Box Styles */
 
 #TB_overlay {
-    background: url("../images/ui-bg_flat_0_aaaaaa_40x100.png") repeat scroll 50% 50% #aaaaaa !important;
-    opacity: 0.3 !important;
+  background: url('../images/ui-bg_flat_0_aaaaaa_40x100.png') repeat scroll 50% 50% #aaaaaa !important;
+  opacity: 0.3 !important;
 }
 @media only screen and (max-width: 480px) {
-    #clipit .col-1-2,
-    #clipit .col-1-3,
-    #clipit .col-2-3,
-    #clipit .col-3-4,
-    #clipit .col-1-4,
-    #clipit .col-1-8,
-    .views,
-    .commentbubble,
-    #clipit.col-3-4,
-    .clipit-widget-area {
-        float: none;
-        margin: 0 auto;
-        width: 100%
-    }
-    .views,
-    .commentbubble {
-        display: block;
-    }
-    .expirydate-coupon {
-        display: none;
-    }
-    span.div {
-        border-right: medium none;
-        display: block;
-        font-size: 15px;
-    }
+  #clipit .col-1-2,
+  #clipit .col-1-3,
+  #clipit .col-2-3,
+  #clipit .col-3-4,
+  #clipit .col-1-4,
+  #clipit .col-1-8,
+  .views,
+  .commentbubble,
+  #clipit.col-3-4,
+  .clipit-widget-area {
+    float: none;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .views,
+  .commentbubble {
+    display: block;
+  }
+  .expirydate-coupon {
+    display: none;
+  }
+  span.div {
+    border-right: medium none;
+    display: block;
+    font-size: 15px;
+  }
 }
