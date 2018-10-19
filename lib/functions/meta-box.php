@@ -9,7 +9,6 @@ function clipit_meta_box(){
 	add_meta_box("coupon_how", "How To Use", "coupon_how", "coupon", "side", "default");
 	add_meta_box("coupon_rules", "The Rules", "coupon_rules", "coupon", "side", "default");
 	add_meta_box("coupon_shorts", "Contact Form Shortcode", "coupon_shorts", "coupon", "side", "default");
-	add_meta_box("coupon_qrcode", "Coupon QR Code", "coupon_qrcode", "coupon", "side", "default");
 }
 
 add_action('do_meta_boxes', 'coupon_image_box');

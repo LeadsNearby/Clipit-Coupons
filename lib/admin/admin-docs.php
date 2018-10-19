@@ -169,9 +169,6 @@ function coupons_doc() {global $title;?>
 			</div>
 			<div class="alignright example step-ten"></div>
 			<div class="clear"></div>
-			<div class="alignleft"><strong>Step 11</strong> - Coupon QR Code.
-				<p>Once you save your newly created coupon a QR will be created and stored in this area. It will also appear on the single-coupon page.</p>
-			</div>
 			<div class="alignright example step-eleven"></div>
 			<div class="clear"></div>
 			<div class="alignleft"><strong>Step 12</strong> - Scheduling Your Coupons.
@@ -389,7 +386,6 @@ function coupons_doc() {global $title;?>
 			<strong>Pre-Release Pre-Release Version 8.0</strong>
 				<ul class="bullets">
 					<li><strong>CSV Coupon Upload</strong> - You can now upload your coupons using a .csv file. We have provided a pre-defined and pre-filled .csv file that you can use to build your coupons.</li>
-					<li><strong>QR Code Generator</strong> - Once you have created your coupon and published it, you will now also get a auto generated QR Code that points directly to the coupon. This QR Code will appear below the fine print in the single coupon page. This QR Code will also appear on the sidebar below the Contact Form Shortcode box in the Coupon Creation panel.</li>
 					<li><strong>Stats Widget Dashboard</strong> - Now user can go to the WordPress Dashboard and enable two dashboard widgets for ClipIt Coupons.</li>
 						<ul class="sub">
 							<li><strong>Recent ClipIt Coupons</strong> - This lets you know the last 5 Coupons that have been created.</li>
