@@ -66,5 +66,8 @@ require_once ClipIt_ADMIN . '/admin-functions.php';
 // Load Admin Emails
 require_once ClipIt_ADMIN . '/admin-emails.php';
 
-require_once ClipIt_MAIN . 'lib/updater/github-updater.php';
-new GitHubPluginUpdater(__FILE__, 'LeadsNearby', 'Clipit-Coupons');
+add_action('admin_init', function () {
+    if (class_exists('\lnb\core\GitHubPluginUpdater')) {
+        new \lnb\core\GitHubPluginUpdater(__FILE__, 'Clipit-Coupons');
+    }
+}, 99);
