@@ -60,39 +60,38 @@ if ($query->have_posts()) {
         $dynamic_expirary_date = date('m/d/Y', $plusdate);
 
         //Sets Expiration
-        $expirationtime = get_post_custom_values('coupon_expiration');
+        $expirationtime = get_post_custom_values('coupon_expiration', true);
         if (is_array($expirationtime)) {
             $expirestring = implode($expirationtime);
         }
         $secondsbetween = strtotime($expirestring) - time();
-        if ($secondsbetween > 0) {
-            ?>
-																					<div class="post <?php echo ($coupon_css_class); ?>" id="post-<?php the_ID();?> <?php echo ($coupon_css_id); ?>">
-																						<div class="grid">
-																							<?php if ($coupon_type == 'Upload') {?>
-																								<div id="clipit-style-one" class="col-1-1 border-container">
-																								<?php if ($coupon_action == 'url') {?>
-																									<a href="<?php echo ($coupon_destination_url); ?>">
-																										<?php
+        if (date('F d, Y') >= $expirationtime) {?>
+			<div class="post <?php echo ($coupon_css_class); ?>" id="post-<?php the_ID();?> <?php echo ($coupon_css_id); ?>">
+				<div class="grid">
+					<?php if ($coupon_type == 'Upload') {?>
+						<div id="clipit-style-one" class="col-1-1 border-container">
+						<?php if ($coupon_action == 'url') {?>
+							<a href="<?php echo ($coupon_destination_url); ?>">
+								<?php
     // Default, blog-size thumbnail
-                if (has_post_thumbnail()) {
-                    $image_src = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full');
-                    echo '<img title="' . get_the_title() . '" alt="' . get_the_content() . '" class="main-upload" id="image-slide" itemprop="image" src="' . $image_src[0] . '" style="height:auto; width:100%; margin:0; display:block;" />';
-                } else {
-                    echo '<img title="' . get_the_title() . '" alt="' . get_the_content() . '" class="main-upload" id="image-slide" itemprop="image" src="' . plugins_url('clipit-coupons/lib/inc/images/default-image.png') . '" style="height:auto; width:100%; margin:0; display:block;" />';
-                }?>
-																									</a>
-																								<?php } elseif ($coupon_action == 'print') {?>
-									<div class="countable_link">
-										<a href="<?php the_permalink();?>">
-											<?php
-// Default, blog-size thumbnail
             if (has_post_thumbnail()) {
                 $image_src = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full');
                 echo '<img title="' . get_the_title() . '" alt="' . get_the_content() . '" class="main-upload" id="image-slide" itemprop="image" src="' . $image_src[0] . '" style="height:auto; width:100%; margin:0; display:block;" />';
             } else {
                 echo '<img title="' . get_the_title() . '" alt="' . get_the_content() . '" class="main-upload" id="image-slide" itemprop="image" src="' . plugins_url('clipit-coupons/lib/inc/images/default-image.png') . '" style="height:auto; width:100%; margin:0; display:block;" />';
             }?>
+																													</a>
+																												<?php } elseif ($coupon_action == 'print') {?>
+									<div class="countable_link">
+										<a href="<?php the_permalink();?>">
+											<?php
+// Default, blog-size thumbnail
+        if (has_post_thumbnail()) {
+            $image_src = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full');
+            echo '<img title="' . get_the_title() . '" alt="' . get_the_content() . '" class="main-upload" id="image-slide" itemprop="image" src="' . $image_src[0] . '" style="height:auto; width:100%; margin:0; display:block;" />';
+        } else {
+            echo '<img title="' . get_the_title() . '" alt="' . get_the_content() . '" class="main-upload" id="image-slide" itemprop="image" src="' . plugins_url('clipit-coupons/lib/inc/images/default-image.png') . '" style="height:auto; width:100%; margin:0; display:block;" />';
+        }?>
 										</a>
 									</div>
 							<?php }?>
@@ -106,12 +105,12 @@ if ($query->have_posts()) {
 									<div class="col-1-3 single-coup-img">
 										<?php
 // Default, blog-size thumbnail
-            if (has_post_thumbnail()) {
-                $image_src = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full');
-                echo '<img title="' . get_the_title() . '" alt="' . get_the_content() . '" id="image-slide" itemprop="image" src="' . $image_src[0] . '" style="height:auto; width:100%; margin:0; display:block;" />';
-            } else {
-                echo '<img title="' . get_the_title() . '" alt="' . get_the_content() . '" id="image-slide" itemprop="image" src="' . plugins_url('clipit-coupons/lib/inc/images/default-image.png') . '" style="height:auto; width:100%; margin:0; display:block;" />';
-            }?>
+        if (has_post_thumbnail()) {
+            $image_src = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full');
+            echo '<img title="' . get_the_title() . '" alt="' . get_the_content() . '" id="image-slide" itemprop="image" src="' . $image_src[0] . '" style="height:auto; width:100%; margin:0; display:block;" />';
+        } else {
+            echo '<img title="' . get_the_title() . '" alt="' . get_the_content() . '" id="image-slide" itemprop="image" src="' . plugins_url('clipit-coupons/lib/inc/images/default-image.png') . '" style="height:auto; width:100%; margin:0; display:block;" />';
+        }?>
 									</div><!-- .col-1-3 .single-coup-img -->
 									<div class="col-2-3 last single-coup-content">
 										<div class="coupon-title" itemprop="itemOffered">
@@ -124,9 +123,9 @@ if ($query->have_posts()) {
         								<hr />
         								<div class="single-fineprint"><?php echo wpautop($coupon_fineprint, true); ?></div>
         								<?php } elseif (get_option('clipit_fineprint_default') != "") {
-                echo '<hr />';
-                echo '<div class="fineprint">' . wpautop(stripslashes(get_option('clipit_fineprint_default', true))) . '</div>';
-            } else {?>
+            echo '<hr />';
+            echo '<div class="fineprint">' . wpautop(stripslashes(get_option('clipit_fineprint_default', true))) . '</div>';
+        } else {?>
         								<hr />
         								<div class="single-fineprint">Please call your service provider for more details.</div>
         								<?php }?>
@@ -178,12 +177,12 @@ if ($query->have_posts()) {
 														<div class="col-1-3 single-coup-img">
 															<?php
 // Default, blog-size thumbnail
-                if (has_post_thumbnail()) {
-                    $image_src = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full');
-                    echo '<img title="' . get_the_title() . '" alt="' . get_the_content() . '" id="image-slide" itemprop="image" src="' . $image_src[0] . '" style="max-width:200px; height:auto; width:100%; margin:0; display:block;" />';
-                } else {
-                    echo '<img title="' . get_the_title() . '" alt="' . get_the_content() . '" id="image-slide" itemprop="image" src="' . plugins_url('clipit-coupons/lib/inc/images/default-image.png') . '" style="max-width:200px; height:auto; width:100%; margin:0; display:block;" />';
-                }?>
+            if (has_post_thumbnail()) {
+                $image_src = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full');
+                echo '<img title="' . get_the_title() . '" alt="' . get_the_content() . '" id="image-slide" itemprop="image" src="' . $image_src[0] . '" style="max-width:200px; height:auto; width:100%; margin:0; display:block;" />';
+            } else {
+                echo '<img title="' . get_the_title() . '" alt="' . get_the_content() . '" id="image-slide" itemprop="image" src="' . plugins_url('clipit-coupons/lib/inc/images/default-image.png') . '" style="max-width:200px; height:auto; width:100%; margin:0; display:block;" />';
+            }?>
 														</div><!-- Copy .col-1-3 -->
 														<div class="col-2-3 last single-coup-content">
 															<div class="coupon-title" itemprop="itemOffered"><?php the_title();?></div>
