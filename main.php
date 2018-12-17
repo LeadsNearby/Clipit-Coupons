@@ -43,7 +43,6 @@ require_once ClipIt_TEMPLATES . '/template-functions.php';
 
 // Load Theme Functions
 require_once ClipIt_FUNCTIONS . '/clipit-functions.php';
-require_once ClipIt_FUNCTIONS . '/star-rating-functions.php';
 
 // Load Custom Shortcodes
 require_once ClipIt_SHORTCODES . '/clipit-shortcode.php';

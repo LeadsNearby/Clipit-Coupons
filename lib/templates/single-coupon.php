@@ -389,11 +389,7 @@ get_header(); ?>
 											</div>
 											<div class="clear"></div>
 										</div><!-- .expirydate-coupon --> 
-										<?php } ?>
-									<div id="reviews" class="addinfo">
-										<h3 class="no-padding">Rate this Coupon:</h3> 
-										<div><?php echo do_shortcode( '[star_rating themes="flat" id="'.get_the_ID().'"]' ); ?></div>
-									</div>	
+										<?php } ?>	
 								<?php if ($coupon_social == 'on') { ?>
 								<div class="social-icons" style="margin-top:20px">
 									<h3 class="no-padding">Share this Coupon!</h3>

@@ -23,8 +23,5 @@ function clipit_plugin_scripts() {
         wp_enqueue_style('clipit-print-styles');
         //wp_register_style('clipit-print-preview', plugins_url('css/clipit-preview.css',__FILE__), array(), '', 'print');
         //wp_enqueue_style('clipit-print-preview');
-        //Rating
-        wp_enqueue_script('star_rating_js', plugins_url('js/star-rating-scripts.js', __FILE__), array(), null, true);
-        wp_localize_script('star_rating_js', 'star_rating_ajax', array('star_rating_ajaxurl' => admin_url('admin-ajax.php')));
     }
 }

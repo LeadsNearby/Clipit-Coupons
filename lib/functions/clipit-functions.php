@@ -147,51 +147,6 @@ function register_daily_post_delete_event() {
 		}
 		else if ($_POST['submitted']);		
 	}//End clipit_email
-	
-	//Reviews
-	function clipit_star_rating() {
-		
-		$data_id = get_the_ID();
-		
-		$totalstarvalue = (int)get_post_meta( $data_id, 'totalstarvalue', true );
-		if(empty($totalstarvalue)) $totalstarvalue = 0;
-
-		$totalstarcount = (int)get_post_meta( $data_id, 'totalstarcount', true );
-		if(empty($totalstarcount)) $totalstarcount = 1;
-		
-		$rate = $totalstarvalue/$totalstarcount;
-		
-		if($rate>5)
-			{
-				$rate = 5;
-			}
-			
-		$rate = number_format($rate, 2);
-		$rate_int = ceil($rate);
-			
-		$html = '';
-		$html .= '<div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating" class="clipit-star-rating star-rating'.get_the_ID().' flat" data_id="'.get_the_ID().'" currentrate="'.$rate.'"><div style="display:none;" itemprop="itemReviewed">'.get_the_title().'</div>';
-		
-		$i= 1;
-		while($i<=5)
-			{
-				if($i <= $rate_int)
-					{
-						$html .= '<div class="star_'.$i.' ratings_stars ratings_over review_link" starvalue="'.$i.'" ></div>';
-					}
-				else
-					{
-						$html .= '<div class="star_'.$i.' ratings_stars review_link" starvalue="'.$i.'" ></div>';
-					}	
-				$i++;
-			}		
-		$html .= '<div class="total_votes">Rated <span itemprop="ratingValue">'.$rate.'</span> out of 5 stars based on <span itemprop="ratingCount">'.$totalstarcount.'</span> customer reviews</div>';	
-		$html .= '<div class="clear"></div>'; // clear 
-		$html .= '</div>'; // end 
-		
-		return $html;
-		
-	}
 
 	//ClipIt Widget
 	function clipit_widgets_init() {
@@ -491,25 +446,6 @@ function register_daily_post_delete_event() {
 		
 	<?php } 
 	}
-
-        //Review Shortcode
-	if ( ! defined('ABSPATH')) exit; // if direct access 
-	function star_rating_display($atts) {
-		$atts = shortcode_atts(
-			array(
-				'id' => "", //author id
-				'themes' => "flat", //author id				
-				), $atts);
-			$post_id = $atts['id'];
-			$themes = $atts['themes'];
-			$html = '';
-			if($themes== "flat")
-				{
-					$html.= clipit_star_rating();
-				}
-			return $html;
-		}	
-	add_shortcode('star_rating', 'star_rating_display');
 	
 	//Set Email as text/html
 	function wps_set_content_type(){
