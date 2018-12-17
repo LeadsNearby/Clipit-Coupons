@@ -21,7 +21,7 @@ define('ClipIt_INSTALLER', ClipIt_LIB . '/installer');
 define('ClipIt_EMAIL', ClipIt_LIB . '/email');
 
 // Include the TGM_Plugin_Activation class.
-require_once ClipIt_INSTALLER . '/class-tgm-plugin-activation.php';
+// require_once ClipIt_INSTALLER . '/class-tgm-plugin-activation.php';
 
 // Load Admin Scripts and Css
 require_once ClipIt_ADMIN . '/admin-scripts.php';
