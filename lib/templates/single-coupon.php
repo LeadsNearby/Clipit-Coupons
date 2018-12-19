@@ -31,11 +31,7 @@ get_header(); ?>
 		$social_content = get_the_content();
 		
 		//Calls email function
-		clipit_email();
-		
-		//Starts the loop
-		$mypost = array( 'post_type' => 'coupon', );
-		$loop = new WP_Query( $mypost );		
+		// clipit_email();
 
 		if (have_posts()) : while (have_posts()) : the_post();
 		//Sets Expiration
