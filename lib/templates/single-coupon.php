@@ -60,23 +60,6 @@ get_header(); ?>
 		
 		$plusdate = strtotime($coupon_dynamic_expiration_plus_days);
 		$dynamic_expirary_date = date('m/d/Y', $plusdate);
-		?>
-		<script>
-	    jQuery(function () {
-			var expireDate = new Date("<?php echo $coupon_expiration ?>");
-			jQuery('.wlt_shortcodes_expiry_date').countdown({
-				until: expireDate,
-				compact: true,
-			});
-			
-			var dynamicexpireDate = new Date("<?php echo $dynamic_expirary_date ?>");
-			jQuery('.wlt_shortcodes_dynamic_date').countdown({
-				until: dynamicexpireDate,
-				compact: true,
-			});			
-		});		
-		</script>
-		<?php
 
         //Calculate Discount
 		$coupon_total = $coupon_value - $coupon_savings;
@@ -468,13 +451,6 @@ get_header(); ?>
 								<p>Please call your service provider for more details.</p>
 								<?php } ?>
 							</div>
-							<div class="qrcode addinfo bypassme">
-								<span class="icons" id="qrcode-icon"></span>
-								<h3>Mobile QR Code</h3>
-								<div class="clear"></div>
-								<p>To pull up this coupon scan the code below using your favorite mobile device.</p>
-								<img src="https://chart.googleapis.com/chart?cht=qr&amp;chs=225x225&amp;chl=<?php echo get_permalink( $post->ID ); ?>" width="225" height="225" itemprop="url"/>
-							</div>
 							<div class="last rules addinfo">
 							    <?php if (get_post_meta($post->ID, 'coupon_rules', true) || get_option('clipit_rules_default') <> "") { ?>
 								<span class="icons bypassme" id="rules-icon"></span>
@@ -487,10 +463,7 @@ get_header(); ?>
 								}else { ?>
 								<p>Please call your service provider for more details.</p>
 								<?php } ?>
-								<?php } ?>
-								<div class="rand bypassme"><!-- Serial Number -->
-									<?php echo '<pre><span>Serial Number: </span>' .sernum();?>				
-								</div><!-- End Serial Number -->								
+								<?php } ?>						
 							</div>
 						</div><!-- .col-1-1 -->
 						</div><!-- .left-border -->

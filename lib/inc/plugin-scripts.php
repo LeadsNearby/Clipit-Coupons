@@ -11,8 +11,8 @@ function clipit_plugin_scripts() {
         wp_enqueue_script('coupon-commons');
         wp_register_script('g-plusone', 'https://apis.google.com/js/platform.js', array(), null, true);
         wp_enqueue_script('g-plusone');
-        wp_register_script('countdown', plugins_url('js/countdown.js', __FILE__), array(), null, true);
-        wp_enqueue_script('countdown');
+        // wp_register_script('countdown', plugins_url('js/countdown.js', __FILE__), array(), null, true);
+        // wp_enqueue_script('countdown');
         //wp_register_script('jquery.print-preview', plugins_url('js/jquery.print-preview.js',__FILE__));
         //wp_enqueue_script('jquery.print-preview');
         wp_register_style('clipit-styles', plugins_url('css/clipit-styles.css', __FILE__));
