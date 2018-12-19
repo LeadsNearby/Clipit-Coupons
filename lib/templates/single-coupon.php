@@ -530,7 +530,7 @@ get_header(); ?>
 			
 			<!-- Related posts block -->
                         <hr />
-			<h1 class="bypassme" id="recent">Customers Also Viewed</h1>
+			<h1 class="bypassme" id="recent">Related Coupons</h1>
 			<div id="related" class="group grid bypassme">
 			<ul class="group">			
 			<?php
