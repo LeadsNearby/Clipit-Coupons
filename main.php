@@ -56,9 +56,6 @@ require_once ClipIt_ADMIN . '/admin-docs.php';
 // Load Admin Settings
 require_once ClipIt_ADMIN . '/admin-settings.php';
 
-// Load Activate Settings
-require_once ClipIt_ADMIN . '/admin-activate.php';
-
 // Load Admin Functions
 require_once ClipIt_ADMIN . '/admin-functions.php';
 
