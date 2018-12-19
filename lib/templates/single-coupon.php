@@ -33,7 +33,39 @@ get_header(); ?>
 		//Calls email function
 		// clipit_email();
 
+		$unix_coupon_expiration = strtotime($coupon_expiration . ' 11:59 pm');
+
+		if(class_exists('Avada')) {
+			$logo_url = Avada()->settings->get('logo', 'url');
+			$button_bg = Avada()->settings->get('button_gradient_top_color');
+			$button_accent = Avada()->settings->get('button_accent_color');
+		}
+
 		if (have_posts()) : while (have_posts()) : the_post();
+			if($unix_coupon_expiration < current_time('timestamp')) {
+				echo '<h3>Sorry, the coupon expired on '.$coupon_expiration.', but our customers also viewed the following coupons.</h3>';
+			} else {
+				ob_start(); ?>
+				<div class="lnbCoupons">
+					<div class="lnbCoupon lnbCoupon--singlePage" style="--button-bg: <?php echo $button_bg; ?>; --button-accent: <?php echo $button_accent; ?>">
+						<div class="lnbCoupon__content">
+							<h2 class="lnbCoupon__title"><?php the_title(); ?></h2>
+							<span class="lnbCoupon__description"><?php the_content() ;?></span>
+							<span class="lnbCoupon__expiration">Expires: <?php echo $coupon_expiration; ?></span>
+							<!-- <span class="lnbCoupon__finePrint"><?php /*echo $coupon_fineprint;*/ ?></span> -->
+							<span class="lnbCoupon__finePrint">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nisi leo, vulputate et aliquam vitae, viverra nec erat. Maecenas scelerisque purus nisi, a vestibulum eros bibendum a.</span>
+							<span class="lnbCoupon__image">
+								<img src="<?php echo $logo_url; ?>" />
+							</span>
+						</div>
+						<div class="lnbCoupon__actions">
+							<a href="javascript:window.print()" class="lnbCoupon__button">Print Coupon</a>
+						</div>
+					</div>
+				</div>
+				<?php echo ob_get_clean();
+			}
+
 		//Sets Expiration
 		$expirationtime = get_post_custom_values('coupon_expiration');
 			if (is_array($expirationtime)) {
@@ -41,15 +73,6 @@ get_header(); ?>
 		}
 		$secondsbetween = strtotime($expirestring)-time();
 			if ( $secondsbetween > 0 ) {
-
-		//Limits Views Only to non Admin Users
-		add_action('plugins_loaded', 'coupon_user');
-		function coupon_user() {
-			// We want to run some code specifically for users who can manage options
-			if (!current_user_can('manage_options')) {
-			   setCouponViews(get_the_ID());
-			}
-		}
 	
 		//Convert to date
 		$datestr = get_post_custom_values('coupon_expiration');
@@ -58,6 +81,7 @@ get_header(); ?>
 		$dynamic_expirary_date = date('m/d/Y', $plusdate);
 
         //Calculate Discount
+<<<<<<< HEAD
 				
 		$coupon_total = null;
 
@@ -82,6 +106,9 @@ get_header(); ?>
 			}
 			return $sernum;
 		}
+=======
+		$coupon_total = $coupon_value - $coupon_savings;
+>>>>>>> Single coup template mods
 		
 		$plusdate = strtotime($coupon_dynamic_expiration_plus_days);
 		
