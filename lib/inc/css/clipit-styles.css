@@ -20,7 +20,7 @@
   align-items: center;
   max-width: 500px;
   padding: 1rem;
-  border: 3px dashed #666;
+  border: 3px dashed #ccc;
 }
 
 @media screen and (min-width: 640px) {

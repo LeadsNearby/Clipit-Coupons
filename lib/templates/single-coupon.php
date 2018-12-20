@@ -42,6 +42,7 @@ get_header(); ?>
 		}
 
 		if (have_posts()) : while (have_posts()) : the_post();
+		if(get_option('clipit_beta_coupon_display', true) == 'on') {
 			if($unix_coupon_expiration < current_time('timestamp')) {
 				echo '<h3>Sorry, the coupon expired on '.$coupon_expiration.', but our customers also viewed the following coupons.</h3>';
 			} else {
@@ -65,6 +66,9 @@ get_header(); ?>
 				</div>
 				<?php echo ob_get_clean();
 			}
+		} else {
+			
+		}
 
 		//Sets Expiration
 		$expirationtime = get_post_custom_values('coupon_expiration');
@@ -125,7 +129,7 @@ get_header(); ?>
 								echo'<img title="'.the_title().'" alt="'.the_content().'" id="image-slide" itemprop="image" src="' . plugins_url('clipit-coupons/lib/inc/images/default-image.png') . '" style="height:auto; width:100%; margin:0 auto 20px; display:block;" />';
 							} 
 							
-						} elseif ($coupon_type == 'Build') { ?>
+						} elseif ($coupon_type == 'Build' && get_option('clipit_beta_coupon_display', true) !== 'on') { ?>
 						<div class="print-coupons">
 							<?php
 								if(class_exists('Avada')) {
@@ -162,7 +166,7 @@ get_header(); ?>
 						<?php } ?>						
 					</div>
 					<!-- End print only -->				
-					<div class="grid">
+					<div class="grid" <?php if(get_option('clipit_beta_coupon_display', true) == 'on') { echo 'style="display: none"';} ?>>
 						<div class="single-coupon-title" itemprop="itemOffered"><?php echo( $coupon_title ); ?></div> 
 						<div class="right-border col-2-3">
 						<?php if ($coupon_type == 'Upload') { ?>

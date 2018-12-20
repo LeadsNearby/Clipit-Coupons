@@ -9,6 +9,7 @@ function clipit_settings_page ()
 	if ( count($_POST) > 0 && isset($_POST['clipit_settings']) )
 	{
 		$options = array (
+			'beta_coupon_display',
 			'customer_logo',
 			'email_claim_address',
 			'expired_coupon_text',
