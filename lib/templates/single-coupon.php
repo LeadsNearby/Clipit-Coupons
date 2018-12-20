@@ -47,7 +47,7 @@ get_header(); ?>
 			} else {
 				ob_start(); ?>
 				<div class="lnbCoupons">
-					<div class="lnbCoupon lnbCoupon--singlePage" style="--button-bg: <?php echo $button_bg; ?>; --button-accent: <?php echo $button_accent; ?>">
+					<article class="lnbCoupon lnbCoupon--singlePage" style="--button-bg: <?php echo $button_bg; ?>; --button-accent: <?php echo $button_accent; ?>">
 						<div class="lnbCoupon__content">
 							<h2 class="lnbCoupon__title"><?php the_title(); ?></h2>
 							<span class="lnbCoupon__description"><?php the_content() ;?></span>
@@ -61,7 +61,7 @@ get_header(); ?>
 						<div class="lnbCoupon__actions">
 							<a href="javascript:window.print()" class="lnbCoupon__button">Print Coupon</a>
 						</div>
-					</div>
+					</article>
 				</div>
 				<?php echo ob_get_clean();
 			}
@@ -628,11 +628,10 @@ get_header(); ?>
 				<?php if (get_option('clipit_expired_coupon_text') <> ""){ 
 					echo wpautop(stripslashes(get_option('clipit_expired_coupon_text')));
 				}else { ?>
-					<p>Sorry, the <?php echo( $coupon_title ); ?> coupon expired on <?php echo( $coupon_expiration ); ?>, but our customers also viewed the following coupons.</p>
 					
 					<!-- Related posts block -->
-					<hr />
 					<div id="related" class="group grid bypassme">
+					<hr />
 					<ul class="group">			
 					<?php
 					// You might need to use wp_reset_query(); 

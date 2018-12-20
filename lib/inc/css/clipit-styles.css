@@ -2,10 +2,12 @@
 .lnbCoupons {
   display: grid;
   justify-content: center;
+  /* width: 100%; */
 }
 
 .lnbCoupon {
   display: grid;
+  grid-template-columns: 1fr;
   grid-gap: 2rem;
   justify-content: center;
   align-items: center;
@@ -13,13 +15,23 @@
 
 .lnbCoupon__content {
   display: grid;
-  grid-gap: 0 1rem;
-  grid-template-columns: 2fr 1fr;
+  grid-gap: 1rem;
+  grid-template-columns: 1fr;
   align-items: center;
-  width: 500px;
-  max-width: 100%;
+  max-width: 500px;
   padding: 1rem;
   border: 3px dashed #666;
+}
+
+@media screen and (min-width: 640px) {
+  .lnbCoupon__content {
+    grid-gap: 1rem;
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+.lnbCoupon__content p {
+  margin: 0;
 }
 
 .lnbCoupon__title,
@@ -39,6 +51,10 @@
 .lnbCoupon__expiration,
 .lnbCoupon__finePrint {
   display: block;
+}
+
+.lnbCoupon__finePrint {
+  font-style: italic;
 }
 
 .lnbCoupon__actions {
