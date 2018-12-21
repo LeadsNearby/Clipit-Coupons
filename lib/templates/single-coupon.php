@@ -20,7 +20,7 @@ get_header(); ?>
 		$coupon_name = get_post_meta($post->ID, 'coupon_name', true);
 		$coupon_savings = get_post_meta($post->ID, 'coupon_savings', true);
 		$coupon_value = get_post_meta($post->ID, 'coupon_value', true);
-		$coupon_fineprint = get_post_meta($post->ID, 'coupon_fineprint', true);
+		$coupon_fineprint = get_post_meta($post->ID, 'coupon_fineprint', true) ? get_post_meta($post->ID, 'coupon_fineprint', true) : get_option('clipit_fineprint_default', true);
 		$coupon_promo_text = get_post_meta($post->ID, 'coupon_promo_text', true);
 		$coupon_how_to = get_post_meta($post->ID, 'coupon_how_to', true);
 		$coupon_rules = get_post_meta($post->ID, 'coupon_rules', true);
@@ -43,18 +43,18 @@ get_header(); ?>
 
 		if (have_posts()) : while (have_posts()) : the_post();
 		if(get_option('clipit_beta_coupon_display', true) == 'on') {
-			if($unix_coupon_expiration < current_time('timestamp')) {
+			if(!empty($coupon_expiration) and $unix_coupon_expiration < current_time('timestamp')) {
 				echo '<h3>Sorry, the coupon expired on '.$coupon_expiration.', but our customers also viewed the following coupons.</h3>';
 			} else {
 				ob_start(); ?>
 				<div class="lnbCoupons">
 					<article class="lnbCoupon lnbCoupon--singlePage" style="--button-bg: <?php echo $button_bg; ?>; --button-accent: <?php echo $button_accent; ?>">
+						<span class="lnbCoupon__icon"><i class="far fa-cut"></i></span>
 						<div class="lnbCoupon__content">
 							<h2 class="lnbCoupon__title"><?php the_title(); ?></h2>
 							<span class="lnbCoupon__description"><?php the_content() ;?></span>
-							<span class="lnbCoupon__expiration">Expires: <?php echo $coupon_expiration; ?></span>
-							<!-- <span class="lnbCoupon__finePrint"><?php /*echo $coupon_fineprint;*/ ?></span> -->
-							<span class="lnbCoupon__finePrint">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nisi leo, vulputate et aliquam vitae, viverra nec erat. Maecenas scelerisque purus nisi, a vestibulum eros bibendum a.</span>
+							<span class="lnbCoupon__expiration"><?php echo $coupon_expiration ? 'Expires:' . $coupon_expiration : 'Limited time offer.'; ?></span>
+							<span class="lnbCoupon__finePrint"><?php echo $coupon_fineprint; ?></span>
 							<span class="lnbCoupon__image">
 								<img src="<?php echo $logo_url; ?>" />
 							</span>

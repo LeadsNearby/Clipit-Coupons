@@ -6,11 +6,20 @@
 }
 
 .lnbCoupon {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 2rem;
   justify-content: center;
   align-items: center;
+}
+
+.lnbCoupon__icon {
+  position: absolute;
+  top: -0.45em;
+  font-size: 1.5em;
+  left: 1rem;
+  color: #ccc;
 }
 
 .lnbCoupon__content {
