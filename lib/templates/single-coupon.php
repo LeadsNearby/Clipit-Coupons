@@ -47,8 +47,8 @@ get_header(); ?>
 				echo '<h3>Sorry, the coupon expired on '.$coupon_expiration.', but our customers also viewed the following coupons.</h3>';
 			} else {
 				ob_start(); ?>
-				<div class="lnbCoupons">
-					<article class="lnbCoupon lnbCoupon--singlePage" style="--button-bg: <?php echo $button_bg; ?>; --button-accent: <?php echo $button_accent; ?>">
+				<div class="lnbCoupons lnbCoupons--singlePage">
+					<article class="lnbCoupon" style="--button-bg: <?php echo $button_bg; ?>; --button-accent: <?php echo $button_accent; ?>">
 						<span class="lnbCoupon__icon"><i class="far fa-cut"></i></span>
 						<div class="lnbCoupon__content">
 							<h2 class="lnbCoupon__title"><?php the_title(); ?></h2>

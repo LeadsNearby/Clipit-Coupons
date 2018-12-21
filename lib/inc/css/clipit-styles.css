@@ -1,89 +1,3 @@
-/* New Styles */
-.lnbCoupons {
-  display: grid;
-  justify-content: center;
-  /* width: 100%; */
-}
-
-.lnbCoupon {
-  position: relative;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 2rem;
-  justify-content: center;
-  align-items: center;
-}
-
-.lnbCoupon__icon {
-  position: absolute;
-  top: -0.45em;
-  font-size: 1.5em;
-  left: 1rem;
-  color: #ccc;
-}
-
-.lnbCoupon__content {
-  display: grid;
-  grid-gap: 1rem;
-  grid-template-columns: 1fr;
-  align-items: center;
-  max-width: 500px;
-  padding: 1rem;
-  border: 3px dashed #ccc;
-}
-
-@media screen and (min-width: 640px) {
-  .lnbCoupon__content {
-    grid-gap: 1rem;
-    grid-template-columns: 2fr 1fr;
-  }
-}
-
-.lnbCoupon__content p {
-  margin: 0;
-}
-
-.lnbCoupon__title,
-.lnbCoupon__description,
-.lnbCoupon__expiration {
-  grid-column: 1 / -1;
-}
-
-.lnbCoupon__title {
-  margin-bottom: 0;
-}
-
-.lnbCoupon__image {
-  text-align: center;
-}
-
-.lnbCoupon__expiration,
-.lnbCoupon__finePrint {
-  display: block;
-}
-
-.lnbCoupon__finePrint {
-  font-style: italic;
-}
-
-.lnbCoupon__actions {
-  text-align: center;
-}
-
-.lnbCoupon__button {
-  display: inline-block;
-  background-color: var(--button-bg);
-  color: var(--button-accent);
-  padding: 1rem 2rem;
-  transition: opacity 0.25s;
-  text-transform: uppercase;
-}
-
-.lnbCoupon__button:hover {
-  opacity: 0.8;
-  color: var(--button-accent);
-}
-
 *:before,
 *:after {
   box-sizing: border-box;
@@ -1007,4 +921,97 @@ span.div {
     display: block;
     font-size: 15px;
   }
+}
+
+/* New Styles */
+.lnbCoupons {
+  display: grid;
+  justify-content: center;
+  /* width: 100%; */
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.lnbCoupons--singlePage {
+  grid-template-columns: 1fr;
+}
+
+.lnbCoupon {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  max-width: 500px;
+  margin: 0 auto !important;
+}
+
+.lnbCoupon__icon {
+  position: absolute;
+  top: -0.45em;
+  font-size: 1.5em;
+  left: 1rem;
+  color: #ccc;
+}
+
+.lnbCoupon__content {
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: 1fr;
+  align-items: center;
+  max-width: 500px;
+  padding: 1rem;
+  border: 3px dashed #ccc;
+}
+
+@media screen and (min-width: 640px) {
+  .lnbCoupon__content {
+    grid-gap: 1rem;
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+.lnbCoupon__content p {
+  margin: 0;
+}
+
+.lnbCoupon__title,
+.lnbCoupon__description,
+.lnbCoupon__expiration {
+  grid-column: 1 / -1;
+}
+
+.lnbCoupon__title {
+  margin-bottom: 0;
+}
+
+.lnbCoupon__image {
+  text-align: center;
+}
+
+.lnbCoupon__expiration,
+.lnbCoupon__finePrint {
+  display: block;
+}
+
+.lnbCoupon__finePrint {
+  font-style: italic;
+}
+
+.lnbCoupon__actions {
+  text-align: center;
+}
+
+.lnbCoupon__button {
+  display: inline-block;
+  background-color: var(--button-bg);
+  color: var(--button-accent);
+  padding: 1rem 2rem;
+  transition: opacity 0.25s;
+  text-transform: uppercase;
+}
+
+.lnbCoupon__button:hover {
+  opacity: 0.8;
+  color: var(--button-accent);
 }
