@@ -23,9 +23,15 @@ $query = new WP_Query($args);
 
 if ($query->have_posts()) {
 
+	if(class_exists('Avada')) {
+		$logo_url = Avada()->settings->get('logo', 'url');
+		$button_bg = Avada()->settings->get('button_gradient_top_color');
+		$button_accent = Avada()->settings->get('button_accent_color');
+	}
+
     if (is_active_sidebar('clipit-locations-sidebar')) {
         $fw = true;
-    }?>
+    } ?>
 
 	<div id="clipit" class="coupons<?php echo $fw ? 'col-3-4' : '' ?>" itemscope itemtype ="http://schema.org/Offer">
 
@@ -57,7 +63,28 @@ if ($query->have_posts()) {
         $coupon_css_id = get_post_meta($post->ID, 'coupon_css_id', true);
         $coupon_css_class = get_post_meta($post->ID, 'coupon_css_class', true);
         $plusdate = strtotime($coupon_dynamic_expiration_plus_days);
-        $dynamic_expirary_date = date('m/d/Y', $plusdate);
+		$dynamic_expirary_date = date('m/d/Y', $plusdate);
+		
+		if (get_option('clipit_beta_coupon_display', true) == 'on') {
+			ob_start();?>
+				<div class="lnbCoupons" itemscope itemtype ="http://schema.org/Offer">
+					<article class="lnbCoupon" style="--button-bg: <?php echo $button_bg; ?>; --button-accent: <?php echo $button_accent; ?>">
+						<span class="lnbCoupon__icon"><i class="far fa-cut"></i></span>
+						<div class="lnbCoupon__content">
+							<h2 class="lnbCoupon__title"><?php the_title();?></h2>
+							<span class="lnbCoupon__description"><?php the_content();?></span>
+							<span class="lnbCoupon__expiration"><?php echo $coupon_expiration ? 'Expires:' . $coupon_expiration : 'Limited time offer.'; ?></span>
+							<span class="lnbCoupon__finePrint"><?php echo $coupon_fineprint; ?></span>
+							<span class="lnbCoupon__image">
+								<img src="<?php echo $logo_url; ?>" />
+							</span>
+						<div class="lnbCoupon__actions">
+							<a href="javascript:window.print()" class="lnbCoupon__button">Print Coupon</a>
+						</div>
+					</article>
+				</div>
+			<?php echo ob_get_clean();
+		}
 
         //Sets Expiration
         $expirationtime = get_post_custom_values('coupon_expiration', true);
@@ -66,13 +93,13 @@ if ($query->have_posts()) {
         }
         $secondsbetween = strtotime($expirestring) - time();
         if (date('F d, Y') >= $expirationtime) {?>
-			<div class="post <?php echo ($coupon_css_class); ?>" id="post-<?php the_ID();?> <?php echo ($coupon_css_id); ?>">
-				<div class="grid">
-					<?php if ($coupon_type == 'Upload') {?>
-						<div id="clipit-style-one" class="col-1-1 border-container">
-						<?php if ($coupon_action == 'url') {?>
-							<a href="<?php echo ($coupon_destination_url); ?>">
-								<?php
+									<div class="post <?php echo ($coupon_css_class); ?>" id="post-<?php the_ID();?> <?php echo ($coupon_css_id); ?>">
+										<div class="grid">
+											<?php if ($coupon_type == 'Upload') {?>
+												<div id="clipit-style-one" class="col-1-1 border-container">
+												<?php if ($coupon_action == 'url') {?>
+													<a href="<?php echo ($coupon_destination_url); ?>">
+														<?php
     // Default, blog-size thumbnail
             if (has_post_thumbnail()) {
                 $image_src = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full');
@@ -80,8 +107,8 @@ if ($query->have_posts()) {
             } else {
                 echo '<img title="' . get_the_title() . '" alt="' . get_the_content() . '" class="main-upload" id="image-slide" itemprop="image" src="' . plugins_url('clipit-coupons/lib/inc/images/default-image.png') . '" style="height:auto; width:100%; margin:0; display:block;" />';
             }?>
-																													</a>
-																												<?php } elseif ($coupon_action == 'print') {?>
+																																			</a>
+																																		<?php } elseif ($coupon_action == 'print') {?>
 									<div class="countable_link">
 										<a href="<?php the_permalink();?>">
 											<?php
