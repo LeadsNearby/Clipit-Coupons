@@ -83,8 +83,6 @@ get_header(); ?>
 		$dynamic_expirary_date = date('m/d/Y', $plusdate);
 
         //Calculate Discount
-<<<<<<< HEAD
-				
 		$coupon_total = null;
 
 		if (is_int($coupon_value) && is_int($coupon_savings)) {
@@ -108,9 +106,6 @@ get_header(); ?>
 			}
 			return $sernum;
 		}
-=======
-		$coupon_total = $coupon_value - $coupon_savings;
->>>>>>> Single coup template mods
 		
 		$plusdate = strtotime($coupon_dynamic_expiration_plus_days);
 		
