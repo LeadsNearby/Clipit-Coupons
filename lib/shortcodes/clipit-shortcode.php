@@ -40,7 +40,6 @@ function shortcode_clipit_coupons($atts) {
     }
 
     $html = '';
-    wp_reset_query();
     $html .= '<div id="clipit" class="coupons grid clipshort clipit_shortcode ' . $class . '">';
     $html .= '<div itemtype="http://schema.org/Offer" itemscope="">';
 
@@ -73,7 +72,21 @@ function shortcode_clipit_coupons($atts) {
 
     // The Query
     $custom_posts = new WP_Query($args);
-    if ($custom_posts->have_posts()): while ($custom_posts->have_posts()): $custom_posts->the_post();
+    if ($custom_posts->have_posts()):
+
+        if (get_option('clipit_beta_coupon_display', true) == 'on') {
+            ob_start();
+            echo '<div class="lnbCoupons" itemscope itemtype ="http://schema.org/Offer">';
+        }
+
+        if(class_exists('Avada')) {
+            $logo_url = Avada()->settings->get('logo', 'url');
+            $button_bg = Avada()->settings->get('button_gradient_top_color');
+            $button_accent = Avada()->settings->get('button_accent_color');
+        }
+
+        while ($custom_posts->have_posts()): $custom_posts->the_post();
+
             $coupon_promo_code = get_post_meta($post->ID, 'coupon_promo_code', true);
             $coupon_action = get_post_meta($post->ID, 'coupon_action', true);
             $coupon_type = get_post_meta($post->ID, 'coupon_type', true);
@@ -96,12 +109,23 @@ function shortcode_clipit_coupons($atts) {
             $dynamic_expirary_date = date('m/d/Y', $plusdate);
 
             //Sets Expiration
-            $expirationtime = get_post_custom_values('coupon_expiration');
+            $expirationtime = get_post_custom_values('coupon_expiration', $post->ID);
             if (is_array($expirationtime)) {
-                $expirestring = implode($expirationtime);
+                $expirationtime = implode($expirationtime);
             }
 
-            $secondsbetween = strtotime($expirestring) - time();
+            if (get_option('clipit_beta_coupon_display', true) == 'on' && strtotime($expirationtime . ' + 1 day') >= time()) {
+                $to_be_deprecated = array(
+                    'coupon_expiration' => $coupon_expiration,
+                    'button_bg' => $button_bg,
+                    'logo_url' => $logo_url,
+                    'coupon_fineprint' => $coupon_fineprint,
+                    'button_accent' => $button_accent
+                );
+                echo clipit_render_single_coupon($post, 'multi', $to_be_deprecated);
+            }
+
+            $secondsbetween = strtotime($expirationtime) - time();
             if ($secondsbetween > 0) {
 
                 //Limits Views Only to non Admin Users
@@ -358,11 +382,20 @@ function shortcode_clipit_coupons($atts) {
         }
         $html .= '</article>';
     }
-    endwhile;endif;
+    endwhile;
+    if (get_option('clipit_beta_coupon_display', true) == 'on') {
+        echo '</div>';
+        $new_html = ob_get_clean();
+    }
+    endif;
 
     wp_reset_postdata();
     $html .= '</div>';
     $html .= '</div>';
-    return $html;
+    if (get_option('clipit_beta_coupon_display', true) == 'on') {
+        return $new_html;
+    } else {
+        return $html;
+    }
 }
 ?>
