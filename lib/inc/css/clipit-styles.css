@@ -42,6 +42,7 @@
   position: relative;
 }
 #clipit {
+  width: 100%;
   font-size: 14px;
   line-height: 110%;
 }
@@ -927,8 +928,10 @@ span.div {
 .lnbCoupons {
   display: grid;
   justify-content: center;
-  /* width: 100%; */
-  grid-template-columns: 1fr 1fr 1fr;
+  width: 100%;
+  grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+  grid-gap: 2rem;
+  font-size: 16px;
 }
 
 .lnbCoupons--singlePage {
@@ -940,8 +943,8 @@ span.div {
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 2rem;
-  justify-content: center;
-  align-items: center;
+  /* justify-content: center;
+  align-items: center; */
   width: 100%;
   max-width: 500px;
   margin: 0 auto !important;
@@ -950,9 +953,10 @@ span.div {
 .lnbCoupon__icon {
   position: absolute;
   top: -0.45em;
-  font-size: 1.5em;
+  font-size: 26px;
   left: 1rem;
   color: #ccc;
+  line-height: 1;
 }
 
 .lnbCoupon__content {

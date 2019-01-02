@@ -8,15 +8,7 @@ get_header();
 
 $args = array(
     'post_type' => 'coupon',
-    'meta_key' => 'coupon_expiration',
-    'order' => 'ASC',
-    'meta_query' => array(
-        array(
-            'key' => 'coupon_expiration',
-            'value' => date('F d, Y'),
-            'compare' => '>=',
-        ),
-    ),
+    'order' => 'ASC'
 );
 
 $query = new WP_Query($args);
@@ -30,12 +22,17 @@ if ($query->have_posts()) {
 	}
 
     if (is_active_sidebar('clipit-locations-sidebar')) {
-        $fw = true;
-    } ?>
+		$fw = true;
+		$sb = ' col-3-4';
+    }
 
-	<div id="clipit" class="coupons<?php echo $fw ? 'col-3-4' : '' ?>" itemscope itemtype ="http://schema.org/Offer">
+	if (get_option('clipit_beta_coupon_display', true) == 'on') {
+		echo '<div class="lnbCoupons" itemscope itemtype ="http://schema.org/Offer">';
+	} else {
+		echo '<div id="clipit" class="coupons'.$sb.'" itemscope itemtype ="http://schema.org/Offer">';
+	}
 
-    <?php while ($query->have_posts()): $query->the_post();
+	while ($query->have_posts()): $query->the_post();
 
         $coupon_promo_code = get_post_meta($post->ID, 'coupon_promo_code', true);
         $coupon_action = get_post_meta($post->ID, 'coupon_action', true);
@@ -52,7 +49,7 @@ if ($query->have_posts()) {
         $coupon_name = get_post_meta($post->ID, 'coupon_name', true);
         $coupon_savings = get_post_meta($post->ID, 'coupon_savings', true);
         $coupon_value = get_post_meta($post->ID, 'coupon_value', true);
-        $coupon_fineprint = get_post_meta($post->ID, 'coupon_fineprint', true);
+        $coupon_fineprint = get_post_meta($post->ID, 'coupon_fineprint', true) ? get_post_meta($post->ID, 'coupon_fineprint', true) : get_option('clipit_fineprint_default', true);
         $coupon_promo_text = get_post_meta($post->ID, 'coupon_promo_text', true);
         $coupon_button_text = get_post_meta($post->ID, 'coupon_button_text', true);
         $coupon_how_to = get_post_meta($post->ID, 'coupon_how_to', true);
@@ -64,43 +61,32 @@ if ($query->have_posts()) {
         $coupon_css_class = get_post_meta($post->ID, 'coupon_css_class', true);
         $plusdate = strtotime($coupon_dynamic_expiration_plus_days);
 		$dynamic_expirary_date = date('m/d/Y', $plusdate);
-		
-		if (get_option('clipit_beta_coupon_display', true) == 'on') {
-			ob_start();?>
-				<div class="lnbCoupons" itemscope itemtype ="http://schema.org/Offer">
-					<article class="lnbCoupon" style="--button-bg: <?php echo $button_bg; ?>; --button-accent: <?php echo $button_accent; ?>">
-						<span class="lnbCoupon__icon"><i class="far fa-cut"></i></span>
-						<div class="lnbCoupon__content">
-							<h2 class="lnbCoupon__title"><?php the_title();?></h2>
-							<span class="lnbCoupon__description"><?php the_content();?></span>
-							<span class="lnbCoupon__expiration"><?php echo $coupon_expiration ? 'Expires:' . $coupon_expiration : 'Limited time offer.'; ?></span>
-							<span class="lnbCoupon__finePrint"><?php echo $coupon_fineprint; ?></span>
-							<span class="lnbCoupon__image">
-								<img src="<?php echo $logo_url; ?>" />
-							</span>
-						<div class="lnbCoupon__actions">
-							<a href="javascript:window.print()" class="lnbCoupon__button">Print Coupon</a>
-						</div>
-					</article>
-				</div>
-			<?php echo ob_get_clean();
-		}
 
-        //Sets Expiration
-        $expirationtime = get_post_custom_values('coupon_expiration', true);
+		//Sets Expiration
+        $expirationtime = get_post_meta($post->ID, 'coupon_expiration', true);
         if (is_array($expirationtime)) {
-            $expirestring = implode($expirationtime);
+            $expirationtime = implode($expirationtime);
         }
-        $secondsbetween = strtotime($expirestring) - time();
-        if (date('F d, Y') >= $expirationtime) {?>
-									<div class="post <?php echo ($coupon_css_class); ?>" id="post-<?php the_ID();?> <?php echo ($coupon_css_id); ?>">
-										<div class="grid">
-											<?php if ($coupon_type == 'Upload') {?>
-												<div id="clipit-style-one" class="col-1-1 border-container">
-												<?php if ($coupon_action == 'url') {?>
-													<a href="<?php echo ($coupon_destination_url); ?>">
-														<?php
-    // Default, blog-size thumbnail
+		
+		if (get_option('clipit_beta_coupon_display', true) == 'on' && strtotime($expirationtime . ' + 1 day') >= time()) {
+			$to_be_deprecated = array(
+				'coupon_expiration' => $coupon_expiration,
+				'button_bg' => $button_bg,
+				'logo_url' => $logo_url,
+				'coupon_fineprint' => $coupon_fineprint,
+				'button_accent' => $button_accent
+			);
+			echo clipit_render_single_coupon($post, 'multi', $to_be_deprecated);
+		}
+        if (strtotime($expirationtime . ' + 1 day') >= time() && get_option('clipit_beta_coupon_display', true) !== 'on') {?>
+		<div class="post <?php echo ($coupon_css_class); ?>" id="post-<?php the_ID();?> <?php echo ($coupon_css_id); ?>">
+			<div class="grid">
+				<?php if ($coupon_type == 'Upload') {?>
+					<div id="clipit-style-one" class="col-1-1 border-container">
+					<?php if ($coupon_action == 'url') {?>
+						<a href="<?php echo ($coupon_destination_url); ?>">
+							<?php
+// Default, blog-size thumbnail
             if (has_post_thumbnail()) {
                 $image_src = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full');
                 echo '<img title="' . get_the_title() . '" alt="' . get_the_content() . '" class="main-upload" id="image-slide" itemprop="image" src="' . $image_src[0] . '" style="height:auto; width:100%; margin:0; display:block;" />';
