@@ -58,7 +58,12 @@ get_header(); ?>
 		$dynamic_expirary_date = date('m/d/Y', $plusdate);
 
         //Calculate Discount
-		$coupon_total = $coupon_value - $coupon_savings;
+				
+		$coupon_total = null;
+
+		if (is_int($coupon_value) && is_int($coupon_savings)) {
+			$coupon_total = $coupon_value - $coupon_savings;
+		}
 
 		// Randon Serial Number
 		function sernum()
