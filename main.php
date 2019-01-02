@@ -67,3 +67,5 @@ add_action('admin_init', function () {
         new \lnb\core\GitHubPluginUpdater(__FILE__, 'Clipit-Coupons');
     }
 }, 99);
+
+require_once ClipIt_TEMPLATES . '/single-coupon-template.php';

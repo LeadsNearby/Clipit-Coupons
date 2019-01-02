@@ -20,7 +20,7 @@ get_header(); ?>
 		$coupon_name = get_post_meta($post->ID, 'coupon_name', true);
 		$coupon_savings = get_post_meta($post->ID, 'coupon_savings', true);
 		$coupon_value = get_post_meta($post->ID, 'coupon_value', true);
-		$coupon_fineprint = get_post_meta($post->ID, 'coupon_fineprint', true);
+		$coupon_fineprint = get_post_meta($post->ID, 'coupon_fineprint', true) ? get_post_meta($post->ID, 'coupon_fineprint', true) : get_option('clipit_fineprint_default', true);
 		$coupon_promo_text = get_post_meta($post->ID, 'coupon_promo_text', true);
 		$coupon_how_to = get_post_meta($post->ID, 'coupon_how_to', true);
 		$coupon_rules = get_post_meta($post->ID, 'coupon_rules', true);
@@ -33,7 +33,41 @@ get_header(); ?>
 		//Calls email function
 		// clipit_email();
 
+		$unix_coupon_expiration = strtotime($coupon_expiration . ' 11:59 pm');
+
+		if(class_exists('Avada')) {
+			$logo_url = Avada()->settings->get('logo', 'url');
+			$button_bg = Avada()->settings->get('button_gradient_top_color');
+			$button_accent = Avada()->settings->get('button_accent_color');
+		}
+
 		if (have_posts()) : while (have_posts()) : the_post();
+			if(get_option('clipit_beta_coupon_display', true) == 'on') {
+				if(!empty($coupon_expiration) and $unix_coupon_expiration < current_time('timestamp')) {
+					echo '<h3>Sorry, the coupon expired on '.$coupon_expiration.', but our customers also viewed the following coupons.</h3>';
+				} else {
+					ob_start(); ?>
+					<div class="lnbCoupons lnbCoupons--singlePage">
+						<article class="lnbCoupon" style="--button-bg: <?php echo $button_bg; ?>; --button-accent: <?php echo $button_accent; ?>">
+							<span class="lnbCoupon__icon"><i class="far fa-cut"></i></span>
+							<div class="lnbCoupon__content">
+								<h2 class="lnbCoupon__title"><?php the_title(); ?></h2>
+								<span class="lnbCoupon__description"><?php the_content() ;?></span>
+								<span class="lnbCoupon__expiration"><?php echo $coupon_expiration ? 'Expires:' . $coupon_expiration : 'Limited time offer.'; ?></span>
+								<span class="lnbCoupon__finePrint"><?php echo $coupon_fineprint; ?></span>
+								<span class="lnbCoupon__image">
+									<img src="<?php echo $logo_url; ?>" />
+								</span>
+							</div>
+							<div class="lnbCoupon__actions">
+								<a href="javascript:window.print()" class="lnbCoupon__button">Print Coupon</a>
+							</div>
+						</article>
+					</div>
+					<?php echo ob_get_clean();
+				}
+			}
+
 		//Sets Expiration
 		$expirationtime = get_post_custom_values('coupon_expiration');
 			if (is_array($expirationtime)) {
@@ -41,15 +75,6 @@ get_header(); ?>
 		}
 		$secondsbetween = strtotime($expirestring)-time();
 			if ( $secondsbetween > 0 ) {
-
-		//Limits Views Only to non Admin Users
-		add_action('plugins_loaded', 'coupon_user');
-		function coupon_user() {
-			// We want to run some code specifically for users who can manage options
-			if (!current_user_can('manage_options')) {
-			   setCouponViews(get_the_ID());
-			}
-		}
 	
 		//Convert to date
 		$datestr = get_post_custom_values('coupon_expiration');
@@ -58,7 +83,6 @@ get_header(); ?>
 		$dynamic_expirary_date = date('m/d/Y', $plusdate);
 
         //Calculate Discount
-				
 		$coupon_total = null;
 
 		if (is_int($coupon_value) && is_int($coupon_savings)) {
@@ -98,7 +122,7 @@ get_header(); ?>
 								echo'<img title="'.the_title().'" alt="'.the_content().'" id="image-slide" itemprop="image" src="' . plugins_url('clipit-coupons/lib/inc/images/default-image.png') . '" style="height:auto; width:100%; margin:0 auto 20px; display:block;" />';
 							} 
 							
-						} elseif ($coupon_type == 'Build') { ?>
+						} elseif ($coupon_type == 'Build' && get_option('clipit_beta_coupon_display', true) !== 'on') { ?>
 						<div class="print-coupons">
 							<?php
 								if(class_exists('Avada')) {
@@ -135,7 +159,7 @@ get_header(); ?>
 						<?php } ?>						
 					</div>
 					<!-- End print only -->				
-					<div class="grid">
+					<div class="grid" <?php if(get_option('clipit_beta_coupon_display', true) == 'on') { echo 'style="display: none"';} ?>>
 						<div class="single-coupon-title" itemprop="itemOffered"><?php echo( $coupon_title ); ?></div> 
 						<div class="right-border col-2-3">
 						<?php if ($coupon_type == 'Upload') { ?>
@@ -601,11 +625,10 @@ get_header(); ?>
 				<?php if (get_option('clipit_expired_coupon_text') <> ""){ 
 					echo wpautop(stripslashes(get_option('clipit_expired_coupon_text')));
 				}else { ?>
-					<p>Sorry, the <?php echo( $coupon_title ); ?> coupon expired on <?php echo( $coupon_expiration ); ?>, but our customers also viewed the following coupons.</p>
 					
 					<!-- Related posts block -->
-					<hr />
 					<div id="related" class="group grid bypassme">
+					<hr />
 					<ul class="group">			
 					<?php
 					// You might need to use wp_reset_query(); 

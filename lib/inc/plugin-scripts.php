@@ -1,6 +1,6 @@
 <?php
 // ClipIt Scripts and Style
-add_action('wp_enqueue_scripts', 'clipit_plugin_scripts');
+add_action('wp_enqueue_scripts', 'clipit_plugin_scripts', 99);
 function clipit_plugin_scripts() {
     if (!is_admin()) {
         wp_enqueue_script('jquery');

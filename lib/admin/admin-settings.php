@@ -88,6 +88,12 @@ $image_library_url = add_query_arg( array( 'context' => 'jpg-default-image', 'TB
 				</tr>
 				<tr>
 					<td>
+						<label for="beta_coupon_display"><?php esc_html_e('Use Beta Coupon Layout'); ?></label><br />					
+						<input type="checkbox" name="beta_coupon_display" id="beta_coupon_display" class="col-input text-style" style="font-size:11px;" <?php if(get_option('clipit_beta_coupon_display', true) == 'on') { echo 'checked' ;} ?> />
+					</td>
+				</tr>
+				<tr>
+					<td>
 						<label for="expired_coupon_text"><?php esc_html_e('Expired Coupon Text'); ?></label><br />
 						<em><?php esc_html_e('Expired Coupon Texr. You can use HTML for links etc.'); ?></em><br/>					
 						<textarea name="expired_coupon_text" id="expired_coupon_text" class="col-input text-style" rows="10" cols="70" style="font-size:11px;"><?php echo stripslashes(get_option('clipit_expired_coupon_text')); ?></textarea>
