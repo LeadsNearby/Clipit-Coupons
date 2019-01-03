@@ -76,7 +76,12 @@ function shortcode_clipit_coupons($atts) {
 
         if (get_option('clipit_beta_coupon_display', true) == 'on') {
             ob_start();
-            echo '<div class="lnbCoupons" itemscope itemtype ="http://schema.org/Offer">';
+
+            if(count($custom_posts->posts) < 2) {
+                $single = ' lnbCoupons--singlePage';
+            }
+
+            echo '<div class="lnbCoupons'.$single.'" itemscope itemtype ="http://schema.org/Offer">';
         }
 
         if(class_exists('Avada')) {
@@ -100,7 +105,7 @@ function shortcode_clipit_coupons($atts) {
             $coupon_name = get_post_meta($post->ID, 'coupon_name', true);
             $coupon_savings = get_post_meta($post->ID, 'coupon_savings', true);
             $coupon_value = get_post_meta($post->ID, 'coupon_value', true);
-            $coupon_fineprint = get_post_meta($post->ID, 'coupon_fineprint', true);
+            $coupon_fineprint = get_post_meta($post->ID, 'coupon_fineprint', true) ? get_post_meta($post->ID, 'coupon_fineprint', true) : get_option('clipit_fineprint_default', true);
             $coupon_promo_text = get_post_meta($post->ID, 'coupon_promo_text', true);
             $coupon_button_text = get_post_meta($post->ID, 'coupon_button_text', true);
             $coupon_css_id = get_post_meta($post->ID, 'coupon_css_id', true);
