@@ -73,3 +73,7 @@ footer,
 header {
   display: none !important;
 }
+
+.lnbCoupon__image img {
+  max-width: 250px;
+}

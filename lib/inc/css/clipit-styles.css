@@ -948,6 +948,8 @@ span.div {
   width: 100%;
   max-width: 500px;
   margin: 0 auto !important;
+  --button-bg: #004983;
+  --button-accent: #fff;
 }
 
 .lnbCoupon__icon {
@@ -1003,10 +1005,16 @@ span.div {
 
 .lnbCoupon__finePrint {
   font-style: italic;
+  font-size: 0.8em;
+  line-height: 1.45;
 }
 
 .lnbCoupon__actions {
   text-align: center;
+}
+
+.lnbCoupon__actions--multi {
+  grid-column: 1 / -1;
 }
 
 .lnbCoupon__button {
@@ -1021,4 +1029,12 @@ span.div {
 .lnbCoupon__button:hover {
   opacity: 0.8;
   color: var(--button-accent);
+}
+
+.lnbCoupon__button--smaller {
+  padding: 0.75rem 2rem;
+}
+
+.lnbCoupon__button--fullwidth {
+  width: 100%;
 }
