@@ -38,8 +38,7 @@ function shortcode_clipit_coupons($atts) {
     } elseif ($columns == 4) {
         $columns_words = 'col-1-4';
     }
-
-    wp_enqueue_style('clipit-styles');
+    
     wp_enqueue_style('clipit-print-styles');
     wp_enqueue_script('jquery-ui-tooltip');
     wp_enqueue_script('jquery-ui-dialog');
