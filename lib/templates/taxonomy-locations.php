@@ -3,6 +3,14 @@
 Template Name: Coupons Taxonomy
  */
 get_header();
+wp_enqueue_style('clipit-styles');
+wp_enqueue_style('clipit-print-styles');
+wp_enqueue_script('jquery-ui-tooltip');
+wp_enqueue_script('jquery-ui-dialog');
+wp_enqueue_script('jquery-ui-tabs');
+wp_enqueue_script('coupon-commons');
+wp_enqueue_script('g-plusone');
+wp_enqueue_script('countdown');
 //Starts the loop
 // global $wp_query;
 
@@ -78,6 +86,9 @@ if ($query->have_posts()) {
 			);
 			echo clipit_render_single_coupon($post, 'multi', $to_be_deprecated);
 		}
+
+		wp_enqueue_style('jquery-ui-styles');
+
         if (strtotime($expirationtime . ' + 1 day') >= time() && get_option('clipit_beta_coupon_display', true) !== 'on') {?>
 		<div class="post <?php echo ($coupon_css_class); ?>" id="post-<?php the_ID();?> <?php echo ($coupon_css_id); ?>">
 			<div class="grid">

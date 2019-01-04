@@ -38,6 +38,14 @@ function shortcode_clipit_coupons($atts) {
     } elseif ($columns == 4) {
         $columns_words = 'col-1-4';
     }
+    
+    wp_enqueue_style('clipit-print-styles');
+    wp_enqueue_script('jquery-ui-tooltip');
+    wp_enqueue_script('jquery-ui-dialog');
+    wp_enqueue_script('jquery-ui-tabs');
+    wp_enqueue_script('coupon-commons');
+    wp_enqueue_script('g-plusone');
+    wp_enqueue_script('countdown');
 
     $html = '';
     $html .= '<div id="clipit" class="coupons grid clipshort clipit_shortcode ' . $class . '">';
@@ -129,6 +137,8 @@ function shortcode_clipit_coupons($atts) {
                 );
                 echo clipit_render_single_coupon($post, 'multi', $to_be_deprecated);
             }
+
+            wp_enqueue_style('jquery-ui-styles');
 
             $secondsbetween = strtotime($expirationtime) - time();
             if ($secondsbetween > 0) {

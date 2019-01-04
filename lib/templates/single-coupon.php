@@ -2,7 +2,16 @@
 	/*
 	Template Name: Coupons Single
 	*/
-get_header(); ?>	
+get_header();
+wp_enqueue_style('clipit-styles');
+wp_enqueue_style('clipit-print-styles');
+wp_enqueue_script('jquery-ui-tooltip');
+wp_enqueue_script('jquery-ui-dialog');
+wp_enqueue_script('jquery-ui-tabs');
+wp_enqueue_script('coupon-commons');
+wp_enqueue_script('g-plusone');
+wp_enqueue_script('countdown');
+?>
 	<div id="clipit" class="coupons coupons-single" itemscope itemtype ="http://schema.org/Offer">
 		<?php
 		$coupon_promo_code = get_post_meta($post->ID, 'coupon_promo_code', true);
@@ -67,6 +76,8 @@ get_header(); ?>
 					<?php echo ob_get_clean();
 				}
 			}
+
+		wp_enqueue_style('jquery-ui-styles');
 
 		//Sets Expiration
 		$expirationtime = get_post_custom_values('coupon_expiration');
