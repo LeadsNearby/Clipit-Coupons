@@ -3,7 +3,7 @@
 function clipit_render_single_coupon($post, $display = 'single', $to_be_deprecated) {
     extract($to_be_deprecated);
     ob_start();?>
-    <article class="lnbCoupon" data-coupon-id="<?php echo $post->ID; ?>" style="--button-bg: <?php echo $button_bg; ?>; --button-accent: <?php echo $button_accent; ?>">
+    <article class="lnbCoupon" data-coupon-id="<?php echo $post->ID; ?>">
         <span class="lnbCoupon__icon"><i class="far fa-cut"></i></span>
         <div class="lnbCoupon__content">
             <span class="lnbCoupon__title"><?php the_title();?></span>

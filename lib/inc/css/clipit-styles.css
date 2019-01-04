@@ -932,6 +932,8 @@ span.div {
   grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
   grid-gap: 2rem;
   font-size: 16px;
+  --button-bg: #004983;
+  --button-accent: #fff;
 }
 
 .lnbCoupons--singlePage {
@@ -948,8 +950,6 @@ span.div {
   width: 100%;
   max-width: 500px;
   margin: 0 auto !important;
-  --button-bg: #004983;
-  --button-accent: #fff;
 }
 
 .lnbCoupon__icon {
@@ -969,6 +969,7 @@ span.div {
   max-width: 500px;
   padding: 1rem;
   border: 3px dashed #ccc;
+  background-color: #fff;
 }
 
 @media screen and (min-width: 640px) {

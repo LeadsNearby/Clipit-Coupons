@@ -50,14 +50,23 @@ wp_enqueue_script('countdown');
 			$button_accent = Avada()->settings->get('button_accent_color');
 		}
 
+		$styles = array();
+		if($button_bg !== '#a0ce4e') {
+			$styles[] = '--button-bg: '.$button_bg.';';
+		}
+
+		if($button_accent !== '#ffffff') {
+			$styles[] = '--button-accent: '.$button_accent.';';
+		}
+
 		if (have_posts()) : while (have_posts()) : the_post();
 			if(get_option('clipit_beta_coupon_display', true) == 'on') {
 				if(!empty($coupon_expiration) and $unix_coupon_expiration < current_time('timestamp')) {
 					echo '<h3>Sorry, the coupon expired on '.$coupon_expiration.', but our customers also viewed the following coupons.</h3>';
 				} else {
 					ob_start(); ?>
-					<div class="lnbCoupons lnbCoupons--singlePage">
-						<article class="lnbCoupon" style="--button-bg: <?php echo $button_bg; ?>; --button-accent: <?php echo $button_accent; ?>">
+					<div class="lnbCoupons lnbCoupons--singlePage" style="<?php echo implode($styles); ?>">
+						<article class="lnbCoupon">
 							<span class="lnbCoupon__icon"><i class="far fa-cut"></i></span>
 							<div class="lnbCoupon__content">
 								<h2 class="lnbCoupon__title"><?php the_title(); ?></h2>
