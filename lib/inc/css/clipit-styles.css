@@ -921,6 +921,7 @@ span.div {
 
 .lnbCoupon__content p {
   margin: 0;
+  line-height: 1.5;
 }
 
 .lnbCoupon__title,
