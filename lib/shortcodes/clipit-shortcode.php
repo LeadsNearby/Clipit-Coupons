@@ -142,7 +142,9 @@ function shortcode_clipit_coupons($atts) {
                     'button_bg' => $button_bg,
                     'logo_url' => $logo_url,
                     'coupon_fineprint' => $coupon_fineprint,
-                    'button_accent' => $button_accent
+                    'button_accent' => $button_accent,
+                    'coupon_dynamic_expiration' => $coupon_dynamic_expiration,
+                    'coupon_dynamic_expiration_plus_days' => $coupon_dynamic_expiration_plus_days
                 );
                 echo clipit_render_single_coupon($post, 'multi', $to_be_deprecated);
             }

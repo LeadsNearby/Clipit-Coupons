@@ -74,7 +74,6 @@
   display: none !important;
 }
 /* Locations Taxonomy */
-
 #clipit .post {
   margin: 0 0 20px;
 }
@@ -87,7 +86,6 @@
   width: 26.0417%;
 }
 /* Single / Shortcode */
-
 #clipit {
   background: none repeat scroll 0 0 #fff;
 }
@@ -944,6 +942,19 @@ span.div {
 .lnbCoupon__expiration,
 .lnbCoupon__finePrint {
   display: block;
+}
+
+.lnbCoupon__expiration--limited {
+  color: #f43127;
+  font-weight: bold;
+}
+
+.lnbCoupon__expirationSub {
+  display: block;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 0.8em;
+  color: #666;
 }
 
 .lnbCoupon__finePrint {
