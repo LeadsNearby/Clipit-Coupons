@@ -38,7 +38,7 @@ function shortcode_clipit_coupons($atts) {
     } elseif ($columns == 4) {
         $columns_words = 'col-1-4';
     }
-    
+
     wp_enqueue_style('clipit-print-styles');
     wp_enqueue_script('jquery-ui-tooltip');
     wp_enqueue_script('jquery-ui-dialog');
@@ -89,13 +89,22 @@ function shortcode_clipit_coupons($atts) {
                 $single = ' lnbCoupons--singlePage';
             }
 
-            echo '<div class="lnbCoupons'.$single.'" itemscope itemtype ="http://schema.org/Offer">';
-        }
+            if(class_exists('Avada')) {
+                $logo_url = Avada()->settings->get('logo', 'url');
+                $button_bg = Avada()->settings->get('button_gradient_top_color');
+                $button_accent = Avada()->settings->get('button_accent_color');
+            }
 
-        if(class_exists('Avada')) {
-            $logo_url = Avada()->settings->get('logo', 'url');
-            $button_bg = Avada()->settings->get('button_gradient_top_color');
-            $button_accent = Avada()->settings->get('button_accent_color');
+            $styles = array();
+            if($button_bg !== '#a0ce4e') {
+                $styles[] = '--button-bg: '.$button_bg.';';
+            }
+
+            if($button_accent !== '#ffffff') {
+                $styles[] = '--button-accent: '.$button_accent.';';
+            }
+
+            echo '<div class="lnbCoupons'.$single.'" itemscope itemtype ="http://schema.org/Offer" style="'.implode($styles).'">';
         }
 
         while ($custom_posts->have_posts()): $custom_posts->the_post();
@@ -133,7 +142,9 @@ function shortcode_clipit_coupons($atts) {
                     'button_bg' => $button_bg,
                     'logo_url' => $logo_url,
                     'coupon_fineprint' => $coupon_fineprint,
-                    'button_accent' => $button_accent
+                    'button_accent' => $button_accent,
+                    'coupon_dynamic_expiration' => $coupon_dynamic_expiration,
+                    'coupon_dynamic_expiration_plus_days' => $coupon_dynamic_expiration_plus_days
                 );
                 echo clipit_render_single_coupon($post, 'multi', $to_be_deprecated);
             }

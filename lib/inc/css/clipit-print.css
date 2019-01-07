@@ -4,6 +4,7 @@
 }
 .printstyles {
   display: block !important;
+  visibility: visible;
 }
 .pg-promotions .logo {
   text-align: center;
@@ -68,6 +69,7 @@
 footer,
 header {
   display: none !important;
+  visibility: hidden;
 }
 
 .lnbCoupon__actions {
@@ -76,4 +78,8 @@ header {
 
 .lnbCoupon__image img {
   max-width: 250px;
+}
+
+.lnbCoupon__expirationSub {
+  display: none;
 }

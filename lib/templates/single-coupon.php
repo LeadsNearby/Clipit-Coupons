@@ -50,28 +50,33 @@ wp_enqueue_script('countdown');
 			$button_accent = Avada()->settings->get('button_accent_color');
 		}
 
+		$styles = array();
+		if($button_bg !== '#a0ce4e') {
+			$styles[] = '--button-bg: '.$button_bg.';';
+		}
+
+		if($button_accent !== '#ffffff') {
+			$styles[] = '--button-accent: '.$button_accent.';';
+		}
+
 		if (have_posts()) : while (have_posts()) : the_post();
 			if(get_option('clipit_beta_coupon_display', true) == 'on') {
+				$to_be_deprecated = array(
+                    'coupon_expiration' => $coupon_expiration,
+                    'button_bg' => $button_bg,
+                    'logo_url' => $logo_url,
+                    'coupon_fineprint' => $coupon_fineprint,
+                    'button_accent' => $button_accent,
+                    'coupon_dynamic_expiration' => $coupon_dynamic_expiration,
+                    'coupon_dynamic_expiration_plus_days' => $coupon_dynamic_expiration_plus_days
+				);
+				
 				if(!empty($coupon_expiration) and $unix_coupon_expiration < current_time('timestamp')) {
 					echo '<h3>Sorry, the coupon expired on '.$coupon_expiration.', but our customers also viewed the following coupons.</h3>';
 				} else {
 					ob_start(); ?>
-					<div class="lnbCoupons lnbCoupons--singlePage">
-						<article class="lnbCoupon" style="--button-bg: <?php echo $button_bg; ?>; --button-accent: <?php echo $button_accent; ?>">
-							<span class="lnbCoupon__icon"><i class="far fa-cut"></i></span>
-							<div class="lnbCoupon__content">
-								<h2 class="lnbCoupon__title"><?php the_title(); ?></h2>
-								<span class="lnbCoupon__description"><?php the_content() ;?></span>
-								<span class="lnbCoupon__expiration"><?php echo $coupon_expiration ? 'Expires:' . $coupon_expiration : 'Limited time offer.'; ?></span>
-								<span class="lnbCoupon__finePrint"><?php echo $coupon_fineprint; ?></span>
-								<span class="lnbCoupon__image">
-									<img src="<?php echo $logo_url; ?>" />
-								</span>
-							</div>
-							<div class="lnbCoupon__actions">
-								<a href="javascript:window.print()" class="lnbCoupon__button">Print Coupon</a>
-							</div>
-						</article>
+					<div class="lnbCoupons lnbCoupons--singlePage" style="<?php echo implode($styles); ?>">
+						<?php echo clipit_render_single_coupon($post, 'single', $to_be_deprecated); ?>
 					</div>
 					<?php echo ob_get_clean();
 				}

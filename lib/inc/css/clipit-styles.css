@@ -73,51 +73,7 @@
 .printstyles {
   display: none !important;
 }
-/* Star Rating */
-.clipit-star-rating.flat {
-  box-sizing: border-box;
-}
-.clipit-star-rating.flat .ratings_stars {
-  background: url('../images/star.png') repeat scroll 0 0 rgba(0, 0, 0, 0);
-  cursor: pointer;
-  display: inline-block;
-  float: left;
-  height: 30px;
-  text-align: center;
-  width: 30px;
-}
-.clipit-star-rating.flat .ratings_over {
-  background: url('../images/star-hover.png') repeat scroll 0 0 rgba(0, 0, 0, 0);
-  cursor: pointer;
-  display: inline-block;
-  float: left;
-  height: 30px;
-  text-align: center;
-  width: 30px;
-}
-.clipit-star-rating.flat .total_votes {
-  background: rgb(221, 221, 221) none repeat scroll 0 0;
-  border-radius: 4px;
-  cursor: pointer;
-  display: inline-block;
-  float: none;
-  font-size: 12px;
-  height: 30px;
-  line-height: 29px;
-  margin: 10px 0 0;
-  padding: 0 5px;
-  text-align: left;
-  vertical-align: middle;
-  width: auto;
-}
-.single-coupon .clipit-star-rating {
-  margin-top: 12px;
-}
-.clipit-star-rating.flat .loading {
-  background: url('images/loading.gif') no-repeat scroll 12px 7px rgb(221, 221, 221);
-}
 /* Locations Taxonomy */
-
 #clipit .post {
   margin: 0 0 20px;
 }
@@ -130,7 +86,6 @@
   width: 26.0417%;
 }
 /* Single / Shortcode */
-
 #clipit {
   background: none repeat scroll 0 0 #fff;
 }
@@ -606,21 +561,6 @@
 .single .comments-area {
   margin-top: 20px;
 }
-/* Thumbs */
-
-.thumbs-rating-container {
-  padding: 8px 0 !important;
-}
-.thumbs-rating-container .thumbs-rating-up,
-.thumbs-rating-container .thumbs-rating-down {
-  color: white;
-  margin: 0 0 0.75em;
-  padding: 0.7em 0.27em !important;
-}
-.thumbs-rating-container span {
-  cursor: pointer;
-  font-size: 11px;
-}
 /* Shortcode */
 
 .clipshort ol.comment-list {
@@ -932,6 +872,8 @@ span.div {
   grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
   grid-gap: 2rem;
   font-size: 16px;
+  --button-bg: #004983;
+  --button-accent: #fff;
 }
 
 .lnbCoupons--singlePage {
@@ -948,8 +890,6 @@ span.div {
   width: 100%;
   max-width: 500px;
   margin: 0 auto !important;
-  --button-bg: #004983;
-  --button-accent: #fff;
 }
 
 .lnbCoupon__icon {
@@ -969,6 +909,7 @@ span.div {
   max-width: 500px;
   padding: 1rem;
   border: 3px dashed #ccc;
+  background-color: #fff;
 }
 
 @media screen and (min-width: 640px) {
@@ -1003,6 +944,20 @@ span.div {
   display: block;
 }
 
+.lnbCoupon__expiration--limited {
+  color: #f43127;
+  font-weight: bold;
+}
+
+.lnbCoupon__expirationSub {
+  display: block;
+  margin-top: 4px;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 0.8em;
+  color: #666;
+}
+
 .lnbCoupon__finePrint {
   font-style: italic;
   font-size: 0.8em;
@@ -1019,7 +974,9 @@ span.div {
 
 .lnbCoupon__button {
   display: inline-block;
+  background-color: #004983;
   background-color: var(--button-bg);
+  color: #fff;
   color: var(--button-accent);
   padding: 1rem 2rem;
   transition: opacity 0.25s;
