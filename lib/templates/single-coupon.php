@@ -78,7 +78,7 @@ wp_enqueue_script('countdown');
 								</span>
 							</div>
 							<div class="lnbCoupon__actions">
-								<a href="javascript:window.print()" class="lnbCoupon__button">Print Coupon</a>
+								<a href="javascript:window.print()" class="lnbCoupon__button">Print Coupon <span style="display: inline-block; width: 0.5rem;"></span><i class="fas fa-print"></i></a>
 							</div>
 						</article>
 					</div>
