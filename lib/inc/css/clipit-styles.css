@@ -951,6 +951,7 @@ span.div {
 
 .lnbCoupon__expirationSub {
   display: block;
+  margin-top: 4px;
   font-weight: 400;
   font-style: italic;
   font-size: 0.8em;
