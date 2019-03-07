@@ -126,7 +126,9 @@ wp_enqueue_script('countdown');
 		$plusdate = strtotime($coupon_dynamic_expiration_plus_days);
 		
 		?>		
-				<div class="post" id="post-<?php the_ID(); ?>">	
+				<div class="post" id="post-<?php the_ID(); ?>">
+
+					<?php if(get_option('clipit_beta_coupon_display', true) != 'on') { ?>
 					<!-- To be displayed on print only -->
 					<div class="page-body pg-promotions print-trigger printstyles">
 						<?php if ($coupon_type == 'Upload') {
@@ -174,7 +176,8 @@ wp_enqueue_script('countdown');
 						<div class="single-fineprint">Please call your service provider for more details.</div>	
 						<?php } ?>						
 					</div>
-					<!-- End print only -->				
+					<!-- End print only -->
+						<?php } ?>	
 					<div class="grid" <?php if(get_option('clipit_beta_coupon_display', true) == 'on') { echo 'style="display: none"';} ?>>
 						<div class="single-coupon-title" itemprop="itemOffered"><?php echo( $coupon_title ); ?></div> 
 						<div class="right-border col-2-3">
