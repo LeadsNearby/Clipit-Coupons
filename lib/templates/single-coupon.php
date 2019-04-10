@@ -53,6 +53,7 @@ wp_enqueue_script('countdown');
 		$styles = array();
 		if($button_bg !== '#a0ce4e') {
 			$styles[] = '--button-bg: '.$button_bg.';';
+			$styles[] = '--save-bkg: '.$button_bg.';';
 		}
 
 		if($button_accent !== '#ffffff') {
