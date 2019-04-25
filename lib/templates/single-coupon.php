@@ -77,7 +77,7 @@ wp_enqueue_script('countdown');
 				} else {
 					ob_start(); ?>
 					<div class="lnbCoupons lnbCoupons--singlePage" style="<?php echo implode($styles); ?>">
-						<?php echo clipit_render_single_coupon($post, 'single', $to_be_deprecated); ?>
+						<?php echo clipit_render_single_coupon($post, 'single-page', $to_be_deprecated); ?>
 					</div>
 					<?php echo ob_get_clean();
 				}
