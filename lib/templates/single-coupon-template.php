@@ -38,7 +38,15 @@ function clipit_render_single_coupon($post, $display = 'single', $to_be_deprecat
             </svg>
             </span>
             <span class="lnbCoupon__title"><?php the_title();?></span>
-            <span class="lnbCoupon__description"><?php echo wp_strip_all_tags(get_the_content()); ?></span>
+            <span class="lnbCoupon__description">
+                <?php
+                    if(($display === 'single' || $display === 'multi') || $display !== 'single-page') {
+                        echo wp_strip_all_tags(get_the_content());
+                    } else {
+                        the_content();
+                    }
+                ?>
+            </span>
             <span class="lnbCoupon__expiration<?php echo $coupon_dynamic_expiration == 'on' ? ' lnbCoupon__expiration--limited' : ''; ?>"><?php echo clipit_get_expiration_text($coupon_expiration, $coupon_dynamic_expiration, $coupon_dynamic_expiration_plus_days); ?></span>
             <?php if ($display !== 'multi') {?>
             <span class="lnbCoupon__finePrint"><?php echo $coupon_fineprint; ?></span>
@@ -47,7 +55,12 @@ function clipit_render_single_coupon($post, $display = 'single', $to_be_deprecat
             </span>
             <?php } else {?>
             <div class="lnbCoupon__actions lnbCoupon__actions--multi">
-                <a href="<?php echo get_post_permalink($post) ?>" class="lnbCoupon__button lnbCoupon__button--smaller lnbCoupon__button--fullwidth">More Details</a>
+                <?php
+                    $button_text = 'More Details';
+                    $custom_button_text = get_post_meta($post->ID, 'coupon_button_text', true);
+                    if($custom_button_text) $button_text = $custom_button_text;
+                ?>
+                <a href="<?php echo get_post_permalink($post) ?>" class="lnbCoupon__button lnbCoupon__button--smaller lnbCoupon__button--fullwidth"><?php echo $button_text; ?></a>
             </div>
             <?php }?>
         </div>
