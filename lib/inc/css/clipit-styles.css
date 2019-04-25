@@ -905,6 +905,14 @@ span.div {
   line-height: 1;
 }
 
+.lnbCoupon__icon svg {
+  width: 1em;
+}
+
+.lnbCoupon__icon svg path {
+  fill: currentColor;
+}
+
 .lnbCoupon__content {
   position: relative;
   display: grid;
