@@ -137,9 +137,7 @@ wp_enqueue_script('countdown');
 							if(has_post_thumbnail()) {                    
 								$image_src = wp_get_attachment_image_src( get_post_thumbnail_id(),'full' );
 								 echo '<img title="'.the_title().'" alt="'.the_content().'" id="image-slide" itemprop="image" src="' . $image_src[0]  . '" style="height:auto; width:100%; margin:0 auto 20px; display:block;" />';
-							}else {
-								echo'<img title="'.the_title().'" alt="'.the_content().'" id="image-slide" itemprop="image" src="' . plugins_url('clipit-coupons/lib/inc/images/default-image.png') . '" style="height:auto; width:100%; margin:0 auto 20px; display:block;" />';
-							} 
+							}
 							
 						} elseif ($coupon_type == 'Build' && get_option('clipit_beta_coupon_display', true) !== 'on') { ?>
 						<div class="print-coupons">
@@ -190,9 +188,8 @@ wp_enqueue_script('countdown');
 									if(has_post_thumbnail()) {                    
 										$image_src = wp_get_attachment_image_src( get_post_thumbnail_id(),'full' );
 										 echo '<img title="'.the_title().'" alt="'.the_content().'" class="main-upload" id="image-slide" itemprop="image" src="' . $image_src[0]  . '" style="height:auto; width:100%; margin:0 auto 20px; display:block;" />';
-									} else {
-										echo'<img title="'.the_title().'" alt="'.the_content().'" class="main-upload" id="image-slide" itemprop="image" src="' . plugins_url('clipit-coupons/lib/inc/images/default-image.png') . '"height:auto; width:100%; margin:0 auto 20px; display:block;" />';
-									}?>	
+									}
+									?>	
 								</a>
 								<?php } elseif ($coupon_action == 'print') { 
 
@@ -200,8 +197,6 @@ wp_enqueue_script('countdown');
 									if(has_post_thumbnail()) {                    
 										$image_src = wp_get_attachment_image_src( get_post_thumbnail_id(),'full' );
 										 echo '<img title="'.the_title().'" alt="'.the_content().'" class="main-upload" id="image-slide" itemprop="image" src="' . $image_src[0]  . '" style="height:auto; width:100%; margin:0 auto 20px; display:block;" />';
-									} else {
-										echo'<img title="'.the_title().'" alt="'.the_content().'" class="main-upload" id="image-slide" itemprop="image" src="' . plugins_url('clipit-coupons/lib/inc/images/default-image.png') . '"height:auto; width:100%; margin:0 auto 20px; display:block;" />';
 									} 
 								}
 							} elseif ($coupon_type == 'Build') { ?>
@@ -215,9 +210,8 @@ wp_enqueue_script('countdown');
 									if(has_post_thumbnail()) {                    
 										$image_src = wp_get_attachment_image_src( get_post_thumbnail_id(),'full' );
 										 echo '<img title="'.the_title().'" alt="'.the_content().'" id="image-slide" itemprop="image" src="' . $image_src[0]  . '" style="height:auto; width:100%; margin:0 auto 20px; display:block;" />';
-									}else {
-										echo'<img title="'.the_title().'" alt="'.the_content().'" id="image-slide" itemprop="image" src="' . plugins_url('clipit-coupons/lib/inc/images/default-image.png') . '" style="height:auto; width:100%; margin:0 auto 20px; display:block;" />';
-									}?>								
+									}
+									?>								
 								</div>						
 							</div>
 							<?php } ?>
@@ -335,9 +329,8 @@ wp_enqueue_script('countdown');
 															if(has_post_thumbnail()) {                    
 																$image_src = wp_get_attachment_image_src( get_post_thumbnail_id(),'full' );
 																 echo '<img title="'.the_title().'" alt="'.the_content().'" id="image-slide" itemprop="image" src="' . $image_src[0]  . '" style="max-width:200px; height:auto; width:100%; margin:0; display:block;" />';
-															}else {
-																echo'<img title="'.the_title().'" alt="'.the_content().'" id="image-slide" itemprop="image" src="' . plugins_url('clipit-coupons/lib/inc/images/default-image.png') . '" style="max-width:200px; height:auto; width:100%; margin:0; display:block;" />';
-															}?>								
+															}
+															?>								
 														</div>
 														<div class="col-2-3 last single-coup-content" style="float:left; width:66%;">
 															<div class="coupon-title" style="font-size:30px" itemprop="itemOffered"><?php the_title(); ?></div>
