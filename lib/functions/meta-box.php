@@ -12,6 +12,14 @@ function clipit_meta_box(){
 	add_meta_box("coupon_qrcode", "Coupon QR Code", "coupon_qrcode", "coupon", "side", "default");
 }
 
+add_action('rest_api_init', function() {
+	register_meta('post', 'coupon_expiration', [
+  		'object_subtype' => 'coupon',
+			'single' => true,
+  		'show_in_rest' => true
+	]);	
+});
+
 add_action('do_meta_boxes', 'coupon_image_box');
 function coupon_image_box() {
 	remove_meta_box( 'postimagediv', 'coupon', 'side' );
