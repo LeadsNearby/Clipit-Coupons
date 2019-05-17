@@ -46,6 +46,12 @@ require_once ClipIt_FUNCTIONS . '/clipit-functions.php';
 
 // Load Custom Shortcodes
 require_once ClipIt_SHORTCODES . '/clipit-shortcode.php';
+require_once ClipIt_SHORTCODES . '/clipit-rotator-shortcode.php';
+
+add_action('wp_enqueue_scripts', function () {
+    wp_register_style('clipit-rotator', plugin_dir_url(__FILE__) . '/lib/inc/css/clipit-rotator.css', array(), null);
+    wp_register_script('clipit-rotator-js', plugin_dir_url(__FILE__) . '/lib/inc/js/coupon-rotator.js', array(), null, true);
+});
 
 // Load Email Functions
 //require_once(ClipIt_EMAIL . '/client/client_email.php');
