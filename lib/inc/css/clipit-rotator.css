@@ -1,0 +1,101 @@
+body * {
+  box-sizing: border-box;
+}
+
+h1,
+h2 {
+  margin: 0;
+}
+
+:root {
+  --rotator-bg: transparent;
+  --rotator-text-color: inherit;
+}
+
+.clipit-rotator {
+  visibility: hidden;
+  background: var(--rotator-bg);
+  color: var(--rotator-text-color);
+  padding: 2rem 4rem;
+  position: relative;
+}
+
+.clipit-rotator.loaded {
+  visibility: visible;
+}
+
+.clipit-rotator__coupons {
+  position: absolute;
+  top: 2rem;
+  left: 4rem;
+  width: calc(100% - 8rem);
+  height: calc(100% - 4rem);
+}
+
+.clipit-rotator__coupon {
+  display: block;
+  opacity: 0;
+  transition: opacity 0.15s;
+  color: inherit;
+  text-decoration: none;
+}
+
+.clipit-rotator.loaded .clipit-rotator__coupon {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.clipit-rotator__couponTitle {
+  font-size: 1.5em;
+  display: block;
+  line-height: 1.25;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.clipit-rotator__couponSubtitle {
+  font-size: 1.15em;
+  line-height: 1.25;
+  display: block;
+}
+
+.clipit-rotator__nav {
+  width: 2rem;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  font-size: 1.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.clipit-rotator__nav--previous {
+  left: 1rem;
+}
+
+.clipit-rotator__nav--next {
+  right: 1rem;
+}
+
+.clipit-rotator__nav:hover {
+  cursor: hand;
+  cursor: pointer;
+  user-select: none;
+}
+
+.clipit-rotator:hover .clipit-rotator__nav {
+  opacity: 1;
+}
+
+.clipit-rotator__nav svg {
+  height: 2em;
+}
+
+.clipit-rotator__nav svg path {
+  fill: currentColor;
+}
