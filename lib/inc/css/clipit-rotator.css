@@ -18,6 +18,7 @@ h2 {
   color: var(--rotator-text-color);
   padding: 2rem 4rem;
   position: relative;
+  text-align: center;
 }
 
 .clipit-rotator.loaded {
@@ -30,10 +31,17 @@ h2 {
   left: 4rem;
   width: calc(100% - 8rem);
   height: calc(100% - 4rem);
+  transition: transform 0.15s;
+}
+
+.clipit-rotator__coupons:hover {
+  transform: scale(1.1);
 }
 
 .clipit-rotator__coupon {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   opacity: 0;
   transition: opacity 0.15s;
   color: inherit;
