@@ -29,9 +29,6 @@ require_once ClipIt_ADMIN . '/admin-scripts.php';
 // Load Plugin Scripts and Css
 require_once ClipIt_INCLUDES . '/plugin-scripts.php';
 
-// Load Plugin Widgets
-require_once ClipIt_INCLUDES . '/widgets.php';
-
 // Load Custom Post Type Functions
 require_once ClipIt_FUNCTIONS . '/post-types.php';
 
