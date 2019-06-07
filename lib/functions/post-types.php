@@ -10,7 +10,7 @@ function clipit_coupon() {
         'edit_item' => __('Edit Coupon'),
         'new_item' => __('New Coupon'),
         'all_items' => __('Manage Coupons'),
-        'view_item' => __('View Coupons'),
+        'view_item' => __('View Coupon'),
         'search_items' => __('Search Coupons'),
         'not_found' => __('No Coupons found'),
         'not_found_in_trash' => __('No Coupons found in the Trash'),
