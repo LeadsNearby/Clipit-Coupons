@@ -10,7 +10,7 @@ function clipit_coupon() {
         'edit_item' => __('Edit Coupon'),
         'new_item' => __('New Coupon'),
         'all_items' => __('Manage Coupons'),
-        'view_item' => __('View Coupons'),
+        'view_item' => __('View Coupon'),
         'search_items' => __('Search Coupons'),
         'not_found' => __('No Coupons found'),
         'not_found_in_trash' => __('No Coupons found in the Trash'),
@@ -50,30 +50,6 @@ function clipit_coupon() {
             'show_in_rest' => true,
             'rest_base' => 'coupons',
             'rest_controller_class' => 'WP_REST_Posts_Controller',
-        )
-    );
-}
-
-// Build taxonomies for each post type
-add_action('init', 'coupon_locations');
-function coupon_locations() {
-    $labels = array(
-        'add_new_item' => __('Add New Location'),
-        'new_item_name' => __('New Location'),
-        'edit_item' => __('Edit Location'),
-        'view_item' => __('View Location'),
-    );
-    register_taxonomy(
-        'locations',
-        'coupon',
-        array(
-            'labels' => $labels,
-            'public' => true,
-            'show_in_nav_menus' => true,
-            'hierarchical' => true,
-            'label' => 'Locations',
-            'query_var' => true,
-            'rewrite' => true,
         )
     );
 }
