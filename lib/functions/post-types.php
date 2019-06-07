@@ -55,30 +55,6 @@ function clipit_coupon() {
 }
 
 // Build taxonomies for each post type
-add_action('init', 'coupon_locations');
-function coupon_locations() {
-    $labels = array(
-        'add_new_item' => __('Add New Location'),
-        'new_item_name' => __('New Location'),
-        'edit_item' => __('Edit Location'),
-        'view_item' => __('View Location'),
-    );
-    register_taxonomy(
-        'locations',
-        'coupon',
-        array(
-            'labels' => $labels,
-            'public' => true,
-            'show_in_nav_menus' => true,
-            'hierarchical' => true,
-            'label' => 'Locations',
-            'query_var' => true,
-            'rewrite' => true,
-        )
-    );
-}
-
-// Build taxonomies for each post type
 add_action('init', 'coupon_display_category');
 function coupon_display_category() {
     $labels = array(
