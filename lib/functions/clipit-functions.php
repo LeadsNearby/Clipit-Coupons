@@ -1,5 +1,87 @@
 <?php
 // ClipIt Functions
+ 
+/**
+ * Add Headline news checkbox to quick edit screen
+ *
+ * @param string $column_name Custom column name, used to check
+ * @param string $post_type
+ *
+ * @return void
+ */
+function clipit_quick_edit_add( $column_name, $post_type ) {
+    if ('exp' != $column_name) {
+        return;
+	}
+ 
+    printf(
+		'<fieldset>
+			<legend class="inline-edit-legend">Coupon Options</legend>
+			<div class="inline-edit-col">
+				<label style="display: inline-block">%s</label>
+				<span style="display: inline-block; margin-left: 8px">
+					<input style="width: auto" id="datepicker" class="clipit-datepicker coupon-text" type="text" size="" name="coupon_expiration"/>
+					<script>
+					window.addEventListener("DOMContentLoaded", () => {
+						jQuery("#datepicker").datepicker({
+							minDate: new Date()
+						});
+					})
+					</script>
+				</span>
+			</div>
+		</fieldset>',
+		'Expiration Date'
+	);
+}
+
+add_action('quick_edit_custom_box', 'clipit_quick_edit_add', 10, 2 );
+ 
+/**
+ * Save quick edit data
+ *
+ * @param int $post_id
+ *
+ * @return void|int
+ */
+function clipit_save_quick_edit_data( $post_id ) {
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+        return $post_id;
+    }
+ 
+    if ( ! current_user_can( 'edit_post', $post_id ) || 'coupon' != $_POST['post_type'] ) {
+        return $post_id;
+    }
+ 
+    $data = $_POST['coupon_expiration'];
+    update_post_meta( $post_id, 'coupn_expiration', $data );
+}
+
+// add_action( 'save_post', 'clipit_save_quick_edit_data' );
+
+/**
+ * Write javascript function to set checked to headline news checkbox
+ *
+ * @return void
+ */
+function clipit_quick_edit_javascript() {
+    global $current_screen;
+ 
+    if ( 'coupon' != $current_screen->post_type ) {
+        return;
+    }
+?>
+    <script type="text/javascript">
+    function checked_coupon_expiration( fieldValue ) {
+    console.log("TCL: functionchecked_coupon_expiration -> fieldValue", fieldValue)
+		inlineEditPost.revert();
+		// document.querySelector('#datepicker').value = fieldValue;
+    }
+    </script>
+<?php
+}
+
+// add_action( 'admin_footer', 'clipit_quick_edit_javascript' );
 
 function get_exired_posts_to_delete()
 {
