@@ -1,6 +1,7 @@
 <?php
 // ClipIt Functions
  
+// https://ducdoan.com/add-custom-field-to-quick-edit-screen-in-wordpress/
 /**
  * Add Headline news checkbox to quick edit screen
  *
@@ -20,14 +21,7 @@ function clipit_quick_edit_add( $column_name, $post_type ) {
 			<div class="inline-edit-col">
 				<label style="display: inline-block">%s</label>
 				<span style="display: inline-block; margin-left: 8px">
-					<input style="width: auto" id="datepicker" class="clipit-datepicker coupon-text" type="text" size="" name="coupon_expiration"/>
-					<script>
-					window.addEventListener("DOMContentLoaded", () => {
-						jQuery("#datepicker").datepicker({
-							minDate: new Date()
-						});
-					})
-					</script>
+					<input style="width: auto" class="clipit-datepicker coupon-text" type="text" size="" name="coupon_expiration"/>
 				</span>
 			</div>
 		</fieldset>',
@@ -45,7 +39,7 @@ add_action('quick_edit_custom_box', 'clipit_quick_edit_add', 10, 2 );
  * @return void|int
  */
 function clipit_save_quick_edit_data( $post_id ) {
-    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+    if (defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE) {
         return $post_id;
     }
  
@@ -57,13 +51,8 @@ function clipit_save_quick_edit_data( $post_id ) {
     update_post_meta( $post_id, 'coupn_expiration', $data );
 }
 
-// add_action( 'save_post', 'clipit_save_quick_edit_data' );
+add_action('save_post', 'clipit_save_quick_edit_data');
 
-/**
- * Write javascript function to set checked to headline news checkbox
- *
- * @return void
- */
 function clipit_quick_edit_javascript() {
     global $current_screen;
  
@@ -73,15 +62,35 @@ function clipit_quick_edit_javascript() {
 ?>
     <script type="text/javascript">
     function checked_coupon_expiration( fieldValue ) {
-    console.log("TCL: functionchecked_coupon_expiration -> fieldValue", fieldValue)
 		inlineEditPost.revert();
+		setTimeout(() => {
+			const inlineEditor = document.querySelector('.inline-editor');
+			const datePicker = inlineEditor.querySelector('.clipit-datepicker')
+			datePicker.value = fieldValue;
+			jQuery('.inline-editor .clipit-datepicker').datepicker({
+				minDate: new Date()
+			});
+		}, 0);
 		// document.querySelector('#datepicker').value = fieldValue;
     }
     </script>
 <?php
 }
+add_action( 'admin_footer', 'clipit_quick_edit_javascript' );
 
-// add_action( 'admin_footer', 'clipit_quick_edit_javascript' );
+function clipit_expand_quick_edit_link( $actions, $post ) {
+    global $current_screen;
+ 
+    if ( 'coupon' != $current_screen->post_type ) {
+        return $actions;
+    }
+ 
+	$data = get_post_meta( $post->ID, 'coupon_expiration', true );
+    $actions['inline hide-if-no-js'] = str_replace('type="button"', 'type="button" onclick="checked_coupon_expiration(\''.$data.'\')"', $actions['inline hide-if-no-js']);;
+    return $actions;
+}
+add_filter( 'post_row_actions', 'clipit_expand_quick_edit_link', 10, 2 );
+
 
 function get_exired_posts_to_delete()
 {
