@@ -42,15 +42,6 @@ function clipit_render_single_coupon($post, $display = 'single', $to_be_deprecat
             </svg>
             </span>
             <span class="lnbCoupon__title"><?php the_title();?></span>
-            <span class="lnbCoupon__description">
-                <?php
-                    if(($display === 'single' || $display === 'multi') || $display !== 'single-page') {
-                        echo wp_strip_all_tags(get_the_content());
-                    } else {
-                        the_content();
-                    }
-                ?>
-            </span>
             <span class="lnbCoupon__expiration<?php echo $coupon_dynamic_expiration == 'on' ? ' lnbCoupon__expiration--limited' : ''; ?>"><?php echo clipit_get_expiration_text($coupon_expiration, $coupon_dynamic_expiration, $coupon_dynamic_expiration_plus_days); ?></span>
             <?php if ($display !== 'multi') {?>
             <span class="lnbCoupon__finePrint"><?php echo $coupon_fineprint; ?></span>

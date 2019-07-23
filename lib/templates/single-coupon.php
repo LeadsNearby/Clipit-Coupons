@@ -13,10 +13,9 @@ wp_enqueue_style('clipit-print-styles');
 		$coupon_expiration = get_post_meta($post->ID, 'coupon_expiration', true);
 		$coupon_display_expiration = get_post_meta($post->ID, 'coupon_display_expiration', true);
 		$coupon_destination_url = get_post_meta($post->ID, 'coupon_destination_url', true);
-		$coupon_fineprint = get_post_meta($post->ID, 'coupon_fineprint', true) ? get_post_meta($post->ID, 'coupon_fineprint', true) : get_option('clipit_fineprint_default', true);
+		$coupon_fineprint = get_post_meta($post->ID, 'coupon_fineprint', true) ? get_post_meta($post->ID, 'coupon_fineprint', true) : get_option('clipit_fineprint_default', '');
 		$coupon_shorts = get_post_meta($post->ID, 'coupon_shorts', true);
 		$coupon_css_class = get_post_meta($post->ID, 'coupon_css_class', true);
-		$social_content = get_the_content();
 		
 		//Calls email function
 		// clipit_email();
@@ -54,9 +53,11 @@ wp_enqueue_style('clipit-print-styles');
 				echo '<h3>Sorry, the coupon expired on '.$coupon_expiration.'</h3>';
 			} else {
 				ob_start(); ?>
+				<?php the_content(); ?>
 				<div class="lnbCoupons lnbCoupons--singlePage" style="<?php echo implode($styles); ?>">
 					<?php echo clipit_render_single_coupon($post, 'single-page', $to_be_deprecated); ?>
 				</div>
+				<?php echo do_shortcode($coupon_shorts); ?>
 				<?php echo ob_get_clean();
 			}
 		endwhile;
