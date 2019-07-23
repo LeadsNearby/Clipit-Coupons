@@ -8,7 +8,7 @@ function coupon_template_function($template_path) {
             $template_path = plugin_dir_path(__FILE__) . 'single-coupon.php';
         }
         if (is_archive()) {
-            $template_path = plugin_dir_path(__FILE__) . 'coupon-archive.php';
+            $template_path = plugin_dir_path(__FILE__) . 'archive-coupon.php';
         }
     }
     return $template_path;
