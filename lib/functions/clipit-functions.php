@@ -300,46 +300,6 @@ add_filter( 'post_row_actions', 'clipit_expand_quick_edit_link', 10, 2 );
 	}  
 	add_action( 'edited_locations', 'save_taxonomy_custom_meta', 10, 2 );  
 	add_action( 'create_locations', 'save_taxonomy_custom_meta', 10, 2 );
-
-	//Counts Button Clicks on Coupons
-	if ( is_admin() ) add_action( 'wp_ajax_nopriv_link_click_counter', 'link_click_counter' );
-	function link_click_counter() {
-
-		if ( isset( $_POST['nonce'] ) &&  isset( $_POST['post_id'] ) && wp_verify_nonce( $_POST['nonce'], 'link_click_counter_' . $_POST['post_id'] ) ) {
-			$count = get_post_meta( $_POST['post_id'], 'link_click_counter', true );
-			update_post_meta( $_POST['post_id'], 'link_click_counter', ( $count === '' ? 1 : $count + 1 ) );
-		}
-		exit();
-	}
-
-	add_action( 'wp_head', 'coupon_link_click_head' );
-	function coupon_link_click_head() {
-		global $post;
-
-		if( isset( $post->ID ) ) {
-	?>
-		<script type="text/javascript" >
-		jQuery(function ($) {
-			var ajax_options = {
-				action: 'link_click_counter',
-				nonce: '<?php echo wp_create_nonce( 'link_click_counter_' . $post->ID ); ?>',
-				ajaxurl: '<?php echo admin_url( 'admin-ajax.php' ); ?>',
-				post_id: '<?php echo $post->ID; ?>'
-			};
-
-			$( '.countable_link' ).on( 'click', function() {
-				var self = $( this );
-				$.post( ajax_options.ajaxurl, ajax_options, function() {
-				
-				});
-			});
-		});
-		</script>
-	<?php
-		}
-	}
-	
-	add_action( 'wp_head', 'coupon_custom_styles' );
 	function coupon_custom_styles() {
 		global $post;
 
