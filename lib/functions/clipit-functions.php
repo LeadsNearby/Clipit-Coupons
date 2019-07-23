@@ -330,10 +330,10 @@ add_filter( 'post_row_actions', 'clipit_expand_quick_edit_link', 10, 2 );
 	}
 
 	// Removes the excerpt field from the coupons post type
-	add_action( 'admin_menu' , 'remove_clipit_excerpt_fields' );
-	function remove_clipit_excerpt_fields() {
-		remove_meta_box( 'postexcerpt', 'post', 'normal' );
-	}
+	// add_action( 'admin_menu' , 'remove_clipit_excerpt_fields' );
+	// function remove_clipit_excerpt_fields() {
+	// 	remove_meta_box( 'postexcerpt', 'post', 'normal' );
+	// }
 	// Change the columns for the edit Coupon screen
 	function change_columns( $cols ) {
 	  $cols = array(
