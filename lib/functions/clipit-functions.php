@@ -300,49 +300,6 @@ add_filter( 'post_row_actions', 'clipit_expand_quick_edit_link', 10, 2 );
 	}  
 	add_action( 'edited_locations', 'save_taxonomy_custom_meta', 10, 2 );  
 	add_action( 'create_locations', 'save_taxonomy_custom_meta', 10, 2 );
-
-	add_action( 'wp_footer', 'clipit_page_banner' );
-	function clipit_page_banner() {
-		if (get_option('clipit_coupon_banner_enable') == 1){ ?>
-		
-		<style type="text/css">	
-		.clipit-tag-wrap {
-			position: fixed;
-			<?php if (get_option('clipit_coupon_banner_position') == "right"){ ?>
-			right: 0;
-			<?php } else if (get_option('clipit_coupon_banner_position') == "left"){ ?>
-			left: 0;
-			<?php } ?>
-			top: 134px;
-			z-index: 60;
-		}
-		.clipit-tag {
-			<?php if (get_option('clipit_coupon_banner_width') <> ""){ ?>
-			width: <?php echo get_option('clipit_coupon_banner_width'); ?>;
-			<?php } else { ?>
-			width: 200px;
-			<?php } ?>
-			<?php if (get_option('clipit_coupon_banner_height') <> ""){ ?>
-			height: <?php echo get_option('clipit_coupon_banner_height'); ?>;
-			<?php } else { ?>
-			height: 60px;
-			<?php } ?>
-			<?php if (get_option('clipit_coupon_banner_image') <> ""){ ?>
-			background: url(<?php echo get_option('clipit_coupon_banner_image'); ?>) 1px 0 no-repeat;
-			<?php } else { ?>
-			background: url(<?php echo plugin_dir_url( dirname( __FILE__ ) ) . 'inc/images/coupon-banner.png'; ?>) 1px 0 no-repeat;
-			<?php } ?>
-			text-indent: -9999px;
-			overflow: hidden;
-			display: block;
-		}		
-		</style>
-		<div class="clipit-tag-wrap">
-			<a class="clipit-tag" href="<?php echo get_option('clipit_coupon_banner_link'); ?>">Coupons</a>
-		</div>
-		
-	<?php } 
-	}
 	
 	//Set Email as text/html
 	function wps_set_content_type(){
