@@ -8,16 +8,37 @@
 }
 
 .clipit-coupon {
-  display: block;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto auto auto;
+  /* grid-gap: 1em; */
   border: 1px solid #cccccc;
   padding: 1em;
   border-radius: 0.5em;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
 }
 
 .clipit-coupon__title {
   display: block;
-  margin-bottom: 1em;
+  margin-bottom: 0.5em;
+  color: var(--color-title);
+  font-size: 1.9375em;
+  line-height: 1.5em;
+  text-align: center;
+}
+
+.clipit-coupon__subtitle {
+  font-size: 1.375em;
+  line-height: 1.45em;
+}
+
+.clipit-coupon__subtitle * {
+  margin: 0;
+}
+
+.clipit-coupon__spacer {
+  display: block;
+  min-height: 1em;
 }
 
 .clipit-coupon__button {
