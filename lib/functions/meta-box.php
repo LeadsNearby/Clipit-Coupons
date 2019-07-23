@@ -4,11 +4,7 @@ add_action("admin_init", "clipit_meta_box");
 function clipit_meta_box(){
 	//Profile
 	add_meta_box("coupon_options", "Coupon Options", "coupon_options", "coupon", "normal", "core");
-	add_meta_box("coupon_discount", "Discounts", "coupon_discount", "coupon", "side", "default");
-	add_meta_box("coupon_how", "How To Use", "coupon_how", "coupon", "side", "default");
-	add_meta_box("coupon_rules", "The Rules", "coupon_rules", "coupon", "side", "default");
 	add_meta_box("coupon_shorts", "Contact Form Shortcode", "coupon_shorts", "coupon", "side", "default");
-	add_meta_box("coupon_qrcode", "Coupon QR Code", "coupon_qrcode", "coupon", "side", "default");
 }
 
 add_action('rest_api_init', function() {
@@ -198,52 +194,6 @@ function coupon_options( $post ) {
     <?php   
 }
 
-function coupon_discount( $post )
-{
-$values = get_post_custom( $post->ID );
-	$coupon_savings = (isset( $values['coupon_savings'] ) ? esc_attr( $values['coupon_savings'][0] ) : '');
-	$coupon_value = (isset( $values['coupon_value'] ) ? esc_attr( $values['coupon_value'][0] ) : '');
-?>
-	<p>Enter the actual value of the service or item in the first field, then enter the deal amount in the second field. The total savings will be calculated and displayed on the coupon.</p>
-	<p><label for="coupon_value"><?php _e( 'Actual Value', 'inputvalue' ); ?>:</label><br />
-		<em>Enter the actual dollar value of the service or item (no symbols). Ex: 25</em><br />
-		<span>$</span><input class="coupon_value" type="text" size="" name="coupon_value" value="<?php echo esc_html($coupon_value); ?>" /> 
-	</p>	
-	<p><label for="coupon_savings"><?php _e( 'Savings', 'inputsavings' ); ?>:</label><br />
-		<em>Enter the deal amount (no symbols). Ex: 50</em><br />
-		<span>$</span><input class="coupon_savings" type="text" size="" name="coupon_savings" value="<?php echo esc_html($coupon_savings); ?>" /> 
-	</p>
-	<?php
-}
-
-function coupon_how( $post )
-{
-$values = get_post_custom( $post->ID );
-	$coupon_how_to = (isset( $values['coupon_how_to'] ) ? esc_attr( $values['coupon_how_to'][0] ) : '');
-?>
-	<p>
-        <label for="coupon_how_to"><?php _e( 'Description', 'textdesc' ); ?>:</label><br />
-		<em>Enter and directions for use.</em><br />
-        <textarea name="coupon_how_to" id="coupon_how_to" cols="25" rows="10"><?php echo stripslashes(get_post_meta($post->ID, 'coupon_how_to', true)); ?></textarea><br />
-		<em><?php _e( 'Suitable for text and HTML. May include %s tags.', 'coupons' ); ?></em>
-    </p>
-	<?php
-}
-
-function coupon_rules( $post )
-{
-$values = get_post_custom( $post->ID );
-	$coupon_rules = isset( $values['coupon_rules'] ) ? esc_attr( $values['coupon_rules'][0] ) : '';
-?>
-	<p>
-        <label for="coupon_rules"><?php _e( 'The Rules', 'textfine' ); ?>:</label><br />
-		<em>Enter any restrictions not specified in the Fine Print.</em><br />
-        <textarea name="coupon_rules" id="coupon_rules" cols="25" rows="10"><?php echo stripslashes(get_post_meta($post->ID, 'coupon_rules', true)); ?></textarea><br />
-		<em><?php _e( 'Suitable for text and HTML. May include %s tags.', 'coupons' ); ?></em>
-    </p>
-	<?php
-}
-
 function coupon_shorts( $post )
 {
 $values = get_post_custom( $post->ID );
@@ -255,15 +205,6 @@ $values = get_post_custom( $post->ID );
         <textarea name="coupon_shorts" id="coupon_shorts" cols="25" rows="10"><?php echo stripslashes(get_post_meta($post->ID, 'coupon_shorts', true)); ?></textarea><br />
 		<em><?php _e( 'Suitable for text and HTML. May include %s tags.', 'coupons' ); ?></em>
     </p>
-	<?php
-}
-
-function coupon_qrcode( $post )
-{
-$values = get_post_custom( $post->ID );
-	$coupon_shorts = isset( $values['coupon_shorts'] ) ? esc_attr( $values['coupon_shorts'][0] ) : '';
-?>
-	<img src="https://chart.googleapis.com/chart?cht=qr&amp;chs=225x225&amp;chl=<?php echo get_permalink( $post->ID ); ?>" width="225" height="225" />
 	<?php
 }
 
@@ -294,9 +235,6 @@ function cd_meta_box_save( $post_id )
 	if( isset( $_POST['coupon_expiration'] ) )
 		update_post_meta( $post_id, 'coupon_expiration', wp_kses( $_POST['coupon_expiration'], $allowed ) );
 
-	if( isset( $_POST['coupon_dynamic_expiration_plus_days'] ) )
-		update_post_meta( $post_id, 'coupon_dynamic_expiration_plus_days', esc_attr( $_POST['coupon_dynamic_expiration_plus_days'] ) );		
-
 	if( isset( $_POST['coupon_destination_url'] ) )
 		update_post_meta( $post_id, 'coupon_destination_url', wp_kses( $_POST['coupon_destination_url'], $allowed ) );
 
@@ -309,20 +247,8 @@ function cd_meta_box_save( $post_id )
 	if( isset( $_POST['coupon_name'] ) )
 		update_post_meta( $post_id, 'coupon_name', wp_kses( $_POST['coupon_name'], $allowed ) );
 
-	if( isset( $_POST['coupon_value'] ) )
-		update_post_meta( $post_id, 'coupon_value', wp_kses( $_POST['coupon_value'], $allowed ) );		
-		
-	if( isset( $_POST['coupon_savings'] ) )
-		update_post_meta( $post_id, 'coupon_savings', wp_kses( $_POST['coupon_savings'], $allowed ) );	
-
 	if( isset( $_POST['coupon_fineprint'] ) )
 		update_post_meta( $post_id, 'coupon_fineprint', $_POST['coupon_fineprint'] );
-	
-	if( isset( $_POST['coupon_rules'] ) )
-		update_post_meta( $post_id, 'coupon_rules', $_POST['coupon_rules'] );
-	
-	if( isset( $_POST['coupon_how_to'] ) )
-		update_post_meta( $post_id, 'coupon_how_to', $_POST['coupon_how_to'] );
 		
 	if( isset( $_POST['coupon_shorts'] ) )
 		update_post_meta( $post_id, 'coupon_shorts', $_POST['coupon_shorts'] );
