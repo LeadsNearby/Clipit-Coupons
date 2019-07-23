@@ -4,7 +4,7 @@ add_action('init', 'clipit_coupon');
 function clipit_coupon() {
     $labels = array(
         'name' => _x('ClipIt Coupons', 'post type general name'),
-        'singular_name' => _x('ClipIt Coupons', 'post type singular name'),
+        'singular_name' => _x('ClipIt Coupon', 'post type singular name'),
         'add_new' => _x('Add New Coupon', 'Coupon'),
         'add_new_item' => __('Add New Coupon'),
         'edit_item' => __('Edit Coupon'),
@@ -34,7 +34,6 @@ function clipit_coupon() {
             ),
             'taxonomies' => array(
                 'post_tag',
-                'locations',
                 'display-category',
             ),
             'show_ui' => true,
@@ -43,7 +42,10 @@ function clipit_coupon() {
             'has_archive' => true,
             'query_var' => true,
             'can_export' => true,
-            'rewrite' => true,
+            'rewrite' => array(
+                'slug' => 'coupon',
+                'with_front', false,
+            ),
             'capability_type' => 'post',
             'show_in_rest' => true,
             'rest_base' => 'coupons',
