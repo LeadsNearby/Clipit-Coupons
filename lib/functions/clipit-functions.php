@@ -91,55 +91,6 @@ function clipit_expand_quick_edit_link( $actions, $post ) {
 add_filter( 'post_row_actions', 'clipit_expand_quick_edit_link', 10, 2 );
 
 
-function get_exired_posts_to_delete()
-{
-    /**
-     * If you need posts that expired more than a week ago, we would need to
-     * get the unix time stamp of the day a week ago. You can adjust the relative 
-     * date and time formats as needed. 
-     * @see http://php.net/manual/en/function.strtotime.php
-     * @see http://php.net/manual/en/datetime.formats.php
-     */
-    // As example, we need to get posts that has expired more than 7days ago
-    $past = strtotime( "- 1 day" );
-
-    // Set our query arguments
-    $args = [
-        'fields'         => 'ids', // Only get post ID's to improve performance
-        'post_type'      => 'coupon',
-        'post_status'    => 'publish',
-        'posts_per_page' => -1,
-        'meta_query'     => [
-            [
-                'key'     => '_coupon_expiration',
-                'value'   => $past,
-                'compare' => '<='
-            ]
-        ]
-    ];
-    $q = get_posts( $args );
-
-    // Check if we have posts to delete, if not, return false
-    if ( !$q )
-        return false;
-
-    // OK, we have posts to delete, lets delete them
-    foreach ( $q as $id )
-        wp_trash_post( $id );
-}
-add_action( 'expired_post_delete', 'get_exired_posts_to_delete' );
-
-// Add function to register event to wp
-add_action( 'wp', 'register_daily_post_delete_event');
-function register_daily_post_delete_event() {
-    // Make sure this event hasn't been scheduled
-    if( !wp_next_scheduled( 'expired_post_delete' ) ) {
-        // Schedule the event
-        wp_schedule_event( time(), 'daily', 'expired_post_delete' );
-    }
-}
-
-
 	//Email Function
 	function clipit_email() {
 		//EMail response generation function
