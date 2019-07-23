@@ -61,7 +61,7 @@ function clipit_quick_edit_javascript() {
     }
 ?>
     <script type="text/javascript">
-    function checked_coupon_expiration( fieldValue ) {
+    function checked_coupon_expiration(fieldValue) {
 		inlineEditPost.revert();
 		setTimeout(() => {
 			const inlineEditor = document.querySelector('.inline-editor');
@@ -71,12 +71,11 @@ function clipit_quick_edit_javascript() {
 				minDate: new Date()
 			});
 		}, 0);
-		// document.querySelector('#datepicker').value = fieldValue;
     }
     </script>
 <?php
 }
-add_action( 'admin_footer', 'clipit_quick_edit_javascript' );
+add_action('admin_footer', 'clipit_quick_edit_javascript');
 
 function clipit_expand_quick_edit_link( $actions, $post ) {
     global $current_screen;
