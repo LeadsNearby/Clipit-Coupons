@@ -61,7 +61,7 @@ function coupon_options( $post ) {
 	  </p>
 	  <p>
 	    <label for="coupon_fineprint"><?php _e( 'The Fine Print', 'textfine' ); ?>:</label><br />
-	    <em>Enter your coupon fine print information here.</em><br />
+	    <em>Enter your coupon fine print information here. If nothing is entered, will fall back to fine print set in main settings.</em><br />
 	        <?php $fineprint_textarea = get_post_meta($post->ID, 'coupon_fineprint', true);
 	    wp_editor($fineprint_textarea, 'coupon_fineprint', array(
 	      'wpautop' => true,
@@ -73,35 +73,11 @@ function coupon_options( $post ) {
 	    ?>    
 	    <em><?php _e( 'Suitable for text and HTML. May include %s tags.', 'coupons' ); ?></em>
 	  </p>
-	  <p><label>Custom Button Text</label><br />
-	    <em>Enter in your custom button text. This will override the default button text</em><br />
-	    <input class="coupon_button_text" type="text" size="" name="coupon_button_text" value="<?php echo esc_html($coupon_button_text); ?>" /> 
-	  </p>
 	  <p><label>CSS Class</label><br />
 	    <em>Enter in your custom CSS class. This will add a custom class to the coupon</em><br />
 	    <input class="coupon_css_class" type="text" size="" name="coupon_css_class" value="<?php echo esc_html($coupon_css_class); ?>" /> 
 	  </p>
 	</div>
-	<div class="clear"></div>
-	<script>
-    function openOption(evt, optionName) {
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-        document.getElementById(optionName).style.display = "block";
-        evt.currentTarget.className += " active";
-    }
-    
-    // Get the element with id="defaultOpen" and click on it
-    document.getElementById("defaultOpen").click();
-    </script>
-	
     <?php   
 }
 
@@ -140,8 +116,6 @@ function cd_meta_box_save( $post_id )
 	);
 
 	// Make sure your data is set before trying to save it
-	if( isset( $_POST['coupon_promo_code'] ) )
-		update_post_meta( $post_id, 'coupon_promo_code', wp_kses( $_POST['coupon_promo_code'], $allowed ) );	
 
 	if( isset( $_POST['coupon_expiration'] ) )
 		update_post_meta( $post_id, 'coupon_expiration', wp_kses( $_POST['coupon_expiration'], $allowed ) );
@@ -155,9 +129,6 @@ function cd_meta_box_save( $post_id )
 	if( isset( $_POST['coupon_action'] ) )
 		update_post_meta( $post_id, 'coupon_action', esc_attr( $_POST['coupon_action'] ) );
 
-	if( isset( $_POST['coupon_name'] ) )
-		update_post_meta( $post_id, 'coupon_name', wp_kses( $_POST['coupon_name'], $allowed ) );
-
 	if( isset( $_POST['coupon_fineprint'] ) )
 		update_post_meta( $post_id, 'coupon_fineprint', $_POST['coupon_fineprint'] );
 		
@@ -167,14 +138,6 @@ function cd_meta_box_save( $post_id )
 	if( isset( $_POST['coupon_css_class'] ) )
 		update_post_meta( $post_id, 'coupon_css_class', $_POST['coupon_css_class'] );
 	
-	if( isset( $_POST['coupon_button_text'] ) )
-		update_post_meta( $post_id, 'coupon_button_text', wp_kses( $_POST['coupon_button_text'], $allowed ) );
-	
-	$display_expiration = isset( $_POST['coupon_display_expiration'] ) && $_POST['coupon_display_expiration'] ? 'on' : 'off';
-	update_post_meta( $post_id, 'coupon_display_expiration', $display_expiration );
-	
-	$claim = isset( $_POST['coupon_email'] ) && $_POST['coupon_email'] ? 'on' : 'off';
-	update_post_meta( $post_id, 'coupon_email', $claim );
 	   
 }
 ?>
