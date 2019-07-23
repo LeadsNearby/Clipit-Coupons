@@ -19,12 +19,6 @@ add_action('rest_api_init', function() {
 	]);	
 });
 
-add_action('do_meta_boxes', 'coupon_image_box');
-function coupon_image_box() {
-	remove_meta_box( 'postimagediv', 'coupon', 'side' );
-	add_meta_box('postimagediv', __('Coupon Image'), 'post_thumbnail_meta_box', 'coupon', 'normal', 'high');
-}
-
 function coupon_options( $post ) {
 	$values = get_post_custom( $post->ID );
 	$coupon_feature = (isset( $values['coupon_feature'] ) ? esc_attr( $values['coupon_feature'][0] ) : '');
