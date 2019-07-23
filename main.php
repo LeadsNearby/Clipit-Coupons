@@ -35,8 +35,18 @@ require_once ClipIt_FUNCTIONS . '/post-types.php';
 // Load Custom META Box Functions
 require_once ClipIt_FUNCTIONS . '/meta-box.php';
 
-// Load Template Functions
-require_once ClipIt_TEMPLATES . '/template-functions.php';
+add_filter('template_include', 'coupon_template_function', 1);
+function coupon_template_function($template_path) {
+    if (get_post_type() == 'coupon') {
+        if (is_single()) {
+            $template_path = plugin_dir_path(__FILE__) . 'lib/templates/single-coupon.php';
+        }
+        if (is_archive()) {
+            $template_path = plugin_dir_path(__FILE__) . 'lib/templates/archive-coupon.php';
+        }
+    }
+    return $template_path;
+}
 
 // Load Theme Functions
 require_once ClipIt_FUNCTIONS . '/clipit-functions.php';
