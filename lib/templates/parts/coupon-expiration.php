@@ -17,6 +17,11 @@ if ($coupon_expiration) {
         $days = 'day';
     }
 
+    if ($diff == 0) {
+        $coupon_expiration_text = 'Expires: ' . $coupon_expiration;
+        $act_text = 'Act now, expires today!';
+    }
+
     if ($diff > 0 && $diff < 16) {
         $coupon_expiration_text = 'Expires: ' . $coupon_expiration;
         $act_text = 'Act now, ' . $diff . ' ' . $days . ' left!';
