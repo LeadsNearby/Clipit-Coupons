@@ -2,7 +2,7 @@
   --color-accent: #d40400;
   --color-title: #4285f4;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 350px));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: 2em;
   font-size: 16px;
 }
@@ -16,6 +16,24 @@
   border-radius: 0.5em;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
   background-color: #fff;
+}
+
+.clipit-coupon__save-wrapper {
+  text-align: center;
+  margin: -1em -1em 1em -1em;
+}
+
+.clipit-coupon__save {
+  font-family: 'Arvo', sans-serif;
+  display: inline-block;
+  background-color: var(--color-accent);
+  color: #fff;
+  font-size: 2.5em;
+  line-height: 1;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 0.25em 1em 0.75em;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 0.75em), 0 0);
 }
 
 .clipit-coupon__title {
@@ -41,6 +59,17 @@
   min-height: 1em;
 }
 
+.clipit-coupon__expiration,
+.clipit-coupon__act {
+  display: block;
+  text-align: center;
+}
+
+.clipit-coupon__act {
+  font-weight: 600;
+  font-style: italic;
+}
+
 .clipit-coupon__button {
   display: block;
   background-color: var(--color-accent);
@@ -48,6 +77,7 @@
   padding: 0.75em;
   text-align: center;
   transition: opacity 0.15s ease;
+  margin-top: 1em;
 }
 
 .clipit-coupon__button:hover {
