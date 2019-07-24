@@ -45,7 +45,11 @@ function shortcode_clipit_coupons($atts) {
 
     if ($custom_posts->have_posts()):
         while ($custom_posts->have_posts()): $custom_posts->the_post();
-            include ClipIt_TEMPLATES . '/parts/coupon.php';
+            $coupon_expiration = get_post_meta(get_the_ID(), 'coupon_expiration', true);
+            $unix_coupon_expiration = strtotime($coupon_expiration . ' 11:59 pm');
+            if (empty($coupon_expiration) || $unix_coupon_expiration > current_time('timestamp')) {
+                include ClipIt_TEMPLATES . '/parts/coupon.php';
+            }
         endwhile;
     else:
         echo 'No coupons to display';
