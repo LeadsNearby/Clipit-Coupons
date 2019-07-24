@@ -16,9 +16,6 @@ function shortcode_clipit_coupons($atts) {
         'category' => '',
     ), $atts));
 
-    ob_start();
-    echo '<div id="clipit" class="clipit-coupons">';
-
     // WP_Query arguments
     $args = array(
         'p' => $post_id,
@@ -43,7 +40,9 @@ function shortcode_clipit_coupons($atts) {
     // The Query
     $custom_posts = new WP_Query($args);
 
+    ob_start();
     if ($custom_posts->have_posts()):
+        echo '<div id="clipit" class="clipit-coupons">';
         while ($custom_posts->have_posts()): $custom_posts->the_post();
             $coupon_expiration = get_post_meta(get_the_ID(), 'coupon_expiration', true);
             $unix_coupon_expiration = strtotime($coupon_expiration . ' 11:59 pm');
@@ -51,11 +50,11 @@ function shortcode_clipit_coupons($atts) {
                 include ClipIt_TEMPLATES . '/parts/coupon.php';
             }
         endwhile;
+        echo '</div>';
     else:
         echo 'No coupons to display';
     endif;
     wp_reset_postdata();
 
-    echo '</div>';
     return ob_get_clean();
 }

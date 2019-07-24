@@ -7,6 +7,11 @@
   font-size: 16px;
 }
 
+.clipit-coupons--single {
+  display: block;
+  text-align: center;
+}
+
 .clipit-coupon {
   display: grid;
   grid-template-rows: auto auto 1fr auto auto auto;
@@ -16,6 +21,43 @@
   border-radius: 0.5em;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
   background-color: #fff;
+}
+
+.clipit-coupon--single {
+  display: block;
+  text-align: left;
+  max-width: 500px;
+  margin: 2em auto;
+  box-shadow: none;
+  border-style: dashed;
+  border-width: 3px;
+}
+
+.clipit-coupon--single .clipit-coupon__title,
+.clipit-coupon--single .clipit-coupon__subtitle,
+.clipit-coupon--single .clipit-coupon__expiration,
+.clipit-coupon--single .clipit-coupon__act {
+  text-align: left;
+}
+
+.clipit-coupon--single .clipit-coupon__subtitle {
+  display: block;
+  margin-bottom: 1em;
+}
+
+.clipit-coupon--single .clipit-coupon__expiration,
+.clipit-coupon--single .clipit-coupon__act {
+  display: inline-block;
+}
+
+.clipit-coupon--single .clipit-coupon__expiration {
+  margin-right: 0.5em;
+}
+
+.clipit-coupon__fine {
+  display: block;
+  margin-top: 1em;
+  font-size: 0.85em;
 }
 
 .clipit-coupon__save-wrapper {
@@ -85,6 +127,12 @@
   opacity: 0.8;
 }
 
+.clipit-coupon__button--single {
+  margin-top: 0;
+  display: inline-block;
+  padding: 0.75em 2em;
+}
+
 *:before,
 *:after {
   box-sizing: border-box;
@@ -95,9 +143,6 @@
 /* Single / Shortcode */
 #clipit {
   background: none repeat scroll 0 0 #fff;
-}
-#clipit article {
-  margin: 0 0 5%;
 }
 .single-coupon #clipit {
   background: none repeat scroll 0 0 #fff;
