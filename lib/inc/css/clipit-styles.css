@@ -2,7 +2,7 @@
   --color-accent: #d40400;
   --color-title: #4285f4;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 350px));
   grid-gap: 2em;
   font-size: 16px;
 }
