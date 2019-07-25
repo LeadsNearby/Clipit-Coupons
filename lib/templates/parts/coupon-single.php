@@ -5,6 +5,7 @@
     <?php include 'coupon-expiration.php';?>
     <span class="clipit-coupon__fine">
         <?php echo $coupon_fineprint; ?>
+        <?php include 'coupon-logo.php';?>
     </span>
 </article>
 <a class="clipit-coupon__button clipit-coupon__button--single" href="javascript:window.print()">

@@ -55,9 +55,17 @@
 }
 
 .clipit-coupon__fine {
-  display: block;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-gap: 1em;
+  width: 100%;
   margin-top: 1em;
   font-size: 0.85em;
+}
+
+.clipit-coupon__fine img {
+  display: inline-block;
+  max-height: 100px;
 }
 
 .clipit-coupon__save-wrapper {
@@ -136,7 +144,7 @@
 .clipit-coupon__button svg {
   display: inline-block;
   height: 1em;
-  vertical-align: -.125em;
+  vertical-align: -0.125em;
   margin-left: 0.5em;
 }
 
