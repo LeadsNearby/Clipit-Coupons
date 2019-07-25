@@ -8,15 +8,22 @@ wp_enqueue_style('clipit-print-styles');
 
 echo '<div id="clipit" class="clipit-coupons clipit-coupons--single">';
 
+$coupons_fineprint_general = get_option('clipit_fineprint_default', '');
+
 if (have_posts()):
     while (have_posts()): the_post();
         $post_id = get_the_ID();
         $coupon_expiration = get_post_meta($post_id, 'coupon_expiration', true);
-        $coupon_fineprint = get_post_meta($post_id, 'coupon_fineprint', true) ? get_post_meta($post_id, 'coupon_fineprint', true) : get_option('clipit_fineprint_default', '');
+        $coupons_fineprint_meta = get_post_meta($post_id, 'coupon_fineprint', true);
+        $coupon_fineprint = $coupons_fineprint_meta ? $coupons_fineprint_meta : $coupons_fineprint_general;
         $coupon_shorts = get_post_meta($post_id, 'coupon_shorts', true);
         $coupon_css_class = get_post_meta($post_id, 'coupon_css_class', true);
         $unix_coupon_expiration = strtotime($coupon_expiration . ' 11:59 pm');
-        include 'parts/coupon-single.php';
+        if (empty($coupon_expiration) || $unix_coupon_expiration > current_time('timestamp')) {
+            include 'parts/coupon-single.php';
+        } else {
+            echo "<h3>Sorry, this coupon expired on {$coupon_expiration}</h3>";
+        }
     endwhile;
 endif;
 
