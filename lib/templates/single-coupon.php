@@ -15,7 +15,6 @@ if (have_posts()):
         $coupon_shorts = get_post_meta($post->ID, 'coupon_shorts', true);
         $coupon_css_class = get_post_meta($post->ID, 'coupon_css_class', true);
         $unix_coupon_expiration = strtotime($coupon_expiration . ' 11:59 pm');
-
         include 'parts/coupon-single.php';
     endwhile;
 endif;

@@ -1,85 +1,12 @@
-*:before,
-*:after {
-  box-sizing: border-box;
+body {
+  background-color: #fff;
 }
-.printstyles {
-  display: block !important;
-  visibility: visible;
-}
-.pg-promotions .logo {
-  text-align: center;
-  margin-bottom: 20px;
-}
-.pg-promotions .logo img {
-  border: 0 none;
-  max-width: 350px;
-}
-.pg-promotions .coupons {
-  padding: 30px 0;
-}
-.pg-promotions .coupon {
-  margin: 0 auto;
-  max-width: 800px;
-}
-.pg-promotions .print-coupons {
-  background: #f5f5f6 none repeat scroll 0 0;
-  border: 5px dashed #b7bbc0;
-  margin-bottom: 40px;
-  padding: 30px;
-  text-align: center;
-  list-style-type: none;
-}
-.pg-promotions .coupon-title {
-  color: #13296f;
-  font-size: 35px;
-  font-weight: bold;
-  text-align: center;
-}
-.pg-promotions .coupon-details {
-  font-size: 24px;
-  line-height: 30px;
-  margin-top: 30px;
-}
-.pg-promotions .coupon-disclaimer {
-  margin-top: 20px;
-  font-size: 16px;
-  bottom: -15px;
-  position: relative;
-  right: -10px;
-  text-align: right;
-}
-#main {
-  padding: none;
-}
-#wrapper > *:not(#main),
-#shiftnav-toggle-main,
-#slidingbar-area,
-#reviews,
-#clipit .grid,
-.fusion-header-wrapper,
-.fusion-page-title-bar,
-.couponbutton,
-.deal-discount,
-.expirydate,
-.social-icons,
-.bypassme,
-.map,
-.fusion-footer,
-.fusion-header-wrapper,
-footer,
-header {
-  display: none !important;
+
+body * {
   visibility: hidden;
 }
 
-.lnbCoupon__actions {
-  display: none;
-}
-
-.lnbCoupon__image img {
-  max-width: 250px;
-}
-
-.lnbCoupon__expirationSub {
-  display: none;
+.clipit-coupons--single .clipit-coupon,
+.clipit-coupons--single .clipit-coupon * {
+  visibility: visible;
 }
