@@ -1,5 +1,7 @@
 body {
   background-color: #fff;
+  overflow: hidden;
+  height: 100vh !important;
 }
 
 body * {
@@ -9,4 +11,10 @@ body * {
 .clipit-coupons--single .clipit-coupon,
 .clipit-coupons--single .clipit-coupon * {
   visibility: visible;
+}
+
+.clipit-coupons--single .clipit-coupon {
+  position: fixed;
+  top: 10%;
+  left: calc((100vw - 500px) / 2);
 }
