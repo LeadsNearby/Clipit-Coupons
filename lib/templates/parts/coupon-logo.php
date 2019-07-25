@@ -14,4 +14,4 @@ switch ($theme) {
         break;
 }
 ?>
-<img src="<?php echo $logo_src; ?>">
+<img src="<?php echo apply_filters('clipit_logo_url', $logo_src); ?>">
