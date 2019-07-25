@@ -13,6 +13,7 @@
 }
 
 .clipit-coupon {
+  position: relative;
   display: grid;
   grid-template-rows: auto auto 1fr auto auto auto;
   /* grid-gap: 1em; */
@@ -66,6 +67,19 @@
 .clipit-coupon__fine img {
   display: inline-block;
   max-height: 100px;
+}
+
+.clipit-coupon__icon {
+  position: absolute;
+  width: 1.5em;
+  top: -.95em;
+  left: 2em;
+  height: 1.5em;
+  color: #ccc;
+}
+
+.clipit-coupon__icon path {
+  fill: currentColor;
 }
 
 .clipit-coupon__save-wrapper {
