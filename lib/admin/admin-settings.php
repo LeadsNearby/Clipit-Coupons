@@ -86,56 +86,9 @@ $image_library_url = get_upload_iframe_src('image', null, 'library');
 				</tr>
 				<tr>
 					<td>
-						<label for="beta_coupon_display"><?php esc_html_e('Use Beta Coupon Layout');?></label><br />
-						<input type="checkbox" name="beta_coupon_display" id="beta_coupon_display" class="col-input text-style" style="font-size:11px;" <?php if (get_option('clipit_beta_coupon_display', true) === 'on') {echo 'checked';}?> />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label for="expired_coupon_text"><?php esc_html_e('Expired Coupon Text');?></label><br />
-						<em><?php esc_html_e('Expired Coupon Texr. You can use HTML for links etc.');?></em><br/>
-						<textarea name="expired_coupon_text" id="expired_coupon_text" class="col-input text-style" rows="10" cols="70" style="font-size:11px;"><?php echo stripslashes(get_option('clipit_expired_coupon_text')); ?></textarea>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label for="rules_default"><?php esc_html_e('The Rules Default content');?></label><br />
-						<em><?php esc_html_e('Default Coupon Rules. You can use HTML for links etc.');?></em><br/>
-						<textarea name="rules_default" id="rules_default" class="col-input text-style" rows="10" cols="70" style="font-size:11px;"><?php echo stripslashes(get_option('clipit_rules_default')); ?></textarea>
-					</td>
-				</tr>
-				<tr>
-					<td>
 						<label for="fineprint_default"><?php esc_html_e('The Fine Print Default content');?></label><br />
 						<em><?php esc_html_e('Default Fine Print Rules. You can use HTML for links etc.');?></em><br />
 						<textarea name="fineprint_default" id="fineprint_default" class="col-input text-style" rows="10" cols="70" style="font-size:11px;"><?php echo stripslashes(get_option('clipit_fineprint_default')); ?></textarea>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div class="section-header"><?php esc_html_e('Email Settings');?></div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<p><label for="customer-logo">Logo</label><br />
-						<em>Enter in the URL of your logo.</em><br />
-						<input class="upload_image wp-media-buttons" id="customer_logo" type="text" name="customer_logo" size="70" value="<?php echo get_option('clipit_customer_logo'); ?>" />
-						<span class="wp-media-buttons"><a title="Add Media" data-editor="customer_logo" class="button upload_coupon_button add_media" href="#"><span class="wp-media-buttons-icon"></span> Add Media</a></span><span class="wp-media-remove"><a title="Remove Media" data-editor="removal" class="button remove_image_button remove_media" href="#"><span class="wp-media-buttons-icon"></span> Remove</a></span></p>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div class="form_element">
-							<img class="loadit" src="<?php echo get_option('clipit_customer_logo'); ?>" />
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label for="email_claim_address"><?php esc_html_e('Email to Claim Coupon');?></label><br />
-						<em><?php esc_html_e('Enter the contact email address to receive notifications of when someone enters their contact information to claim a coupon.<br /> Got multiple email addresses? Separate each with a comma and space i.e., test@test.com, test@test.com');?></em><br />
-						<input name="email_claim_address" type="text" id="email_claim_address" class="col-input body-style" value="<?php echo get_option('clipit_email_claim_address'); ?>" class="regular-text" />
 					</td>
 				</tr>
 			</table>
