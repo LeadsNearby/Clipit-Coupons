@@ -3,7 +3,6 @@
 Template Name: Coupons Single
  */
 get_header();
-wp_enqueue_script('coupon-commons');
 wp_enqueue_style('clipit-styles');
 wp_enqueue_style('clipit-print-styles');
 
@@ -21,12 +20,9 @@ if (have_posts()):
         $coupon_css_class = get_post_meta($post_id, 'coupon_css_class', true);
         $unix_coupon_expiration = strtotime($coupon_expiration . ' 11:59 pm');
         if (empty($coupon_expiration) || $unix_coupon_expiration > current_time('timestamp')) {
+            wp_enqueue_script('coupon-commons');
             include 'parts/coupon-single.php';
-            $print = true;
-            echo '<div class="clipit-print-modal" hidden>';
-            include 'parts/coupon-single.php';
-            echo '</div>';
-            unset($print);
+            echo '<div class="clipit-print-modal" hidden></div>';
         } else {
             echo "<h3>Sorry, this coupon expired on {$coupon_expiration}</h3>";
         }
