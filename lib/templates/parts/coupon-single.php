@@ -3,10 +3,6 @@ $classes = array(
     'clipit-coupon',
     'clipit-coupon--single',
 );
-
-if ($print) {
-    $classes[] = 'clipit-coupon--print';
-}
 ?>
 <?php the_content();?>
 <article class="<?php echo implode($classes, ' '); ?>">
