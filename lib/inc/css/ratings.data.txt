@@ -1,1 +1,0 @@
-a:1:{s:0:"";a:4:{s:12:"number_votes";i:31;s:12:"total_points";i:0;s:7:"dec_avg";d:0;s:9:"whole_avg";d:0;}}
