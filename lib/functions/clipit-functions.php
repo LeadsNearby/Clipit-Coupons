@@ -355,6 +355,7 @@ add_filter( 'post_row_actions', 'clipit_expand_quick_edit_link', 10, 2 );
 	add_filter( "manage_coupon_posts_columns", "change_columns" );
 	// Echo the values in the columns
 	function custom_columns( $column, $post_id ) {
+		global $post;
 		switch ( $column ) {
 			case "exp":
 				$exp = get_post_meta( $post_id, 'coupon_expiration', true);
@@ -362,11 +363,7 @@ add_filter( 'post_row_actions', 'clipit_expand_quick_edit_link', 10, 2 );
 				break;
 			case "postid":
 				echo $post_id;
-				break;		  	  		  
-			case "coupon_type":
-				$coupon_type = get_post_meta( $post_id, 'coupon_type', true);
-				echo '<span>' . $coupon_type. '</span>';
-				break; 
+				break;		  	  		   
 			case "display-category" :
 				/* Get the genres for the post. */
 				$terms = get_the_terms( $post_id, 'display-category' );
@@ -388,15 +385,6 @@ add_filter( 'post_row_actions', 'clipit_expand_quick_edit_link', 10, 2 );
 					_e( 'No Display Types' );
 				}
 			break;
-			case "coupon_img":
-				$coupon_type = get_post_meta( $post_id, 'coupon_type', true);
-				$coupon_image = get_post_meta($post_id, 'coupon_main_upload', true);
-				if ($coupon_type == 'upload') {
-					echo '<img src="' .$coupon_image. '" />';
-				}else {
-					echo '<img src="'.plugins_url( '/images/default-coup-img.png', __FILE__).'" />';
-				}			
-			break; 
 		}
 	}
 	add_action( "manage_posts_custom_column", "custom_columns", 10, 2 );
