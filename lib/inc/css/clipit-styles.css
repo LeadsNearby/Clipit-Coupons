@@ -188,6 +188,6 @@
 
 @media print {
   div[class^='artibot-wrapper'] {
-    display: none;
+    display: none !important;
   }
 }
