@@ -60,20 +60,11 @@ add_action('wp_enqueue_scripts', function () {
     wp_register_script('clipit-rotator-js', plugin_dir_url(__FILE__) . '/lib/inc/js/coupon-rotator.js', array(), null, true);
 });
 
-// Load Email Functions
-//require_once(ClipIt_EMAIL . '/client/client_email.php');
-
-// Load Admin Interface
-require_once ClipIt_ADMIN . '/admin-docs.php';
-
 // Load Admin Settings
 require_once ClipIt_ADMIN . '/admin-settings.php';
 
 // Load Admin Functions
 require_once ClipIt_ADMIN . '/admin-functions.php';
-
-// Load Admin Emails
-require_once ClipIt_ADMIN . '/admin-emails.php';
 
 add_action('admin_init', function () {
     if (class_exists('\lnb\core\GitHubPluginUpdater')) {
