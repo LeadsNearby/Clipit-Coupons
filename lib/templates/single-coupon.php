@@ -21,6 +21,11 @@ if (have_posts()):
         $unix_coupon_expiration = strtotime($coupon_expiration . ' 11:59 pm');
         if (empty($coupon_expiration) || $unix_coupon_expiration > current_time('timestamp')) {
             include 'parts/coupon-single.php';
+            add_action('wp_footer', function () {
+                $print = true;
+                include 'parts/coupon-single.php';
+                unset($print);
+            });
         } else {
             echo "<h3>Sorry, this coupon expired on {$coupon_expiration}</h3>";
         }

@@ -55,6 +55,10 @@
   margin-right: 0.5em;
 }
 
+.clipit-coupon--print {
+  display: none;
+}
+
 .clipit-coupon__fine {
   display: grid;
   grid-template-columns: 3fr 2fr;
@@ -72,7 +76,7 @@
 .clipit-coupon__icon {
   position: absolute;
   width: 1.5em;
-  top: -.95em;
+  top: -0.95em;
   left: 2em;
   height: 1.5em;
   color: #ccc;
