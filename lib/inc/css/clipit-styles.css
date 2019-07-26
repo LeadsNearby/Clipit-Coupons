@@ -187,6 +187,11 @@
 }
 
 @media print {
+  body,
+  html {
+    overflow: hidden !important;
+    height: 100vh !important;
+  }
   div[class^='artibot-wrapper'] {
     display: none !important;
   }
