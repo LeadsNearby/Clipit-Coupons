@@ -340,15 +340,13 @@ add_filter( 'post_row_actions', 'clipit_expand_quick_edit_link', 10, 2 );
 		'cb'       => '<input type="checkbox" />',
 		'title'    => __( 'Coupon' ),
 		'tags'   => __( 'Coupon Tags' ),
-		'comments' => __( 'Comments' ),
 		'date' => __( 'Date' ),
 		'exp'      => __( 'Expiration' ),
 		//'postid' => __( 'Post ID' ),
 		//'thumbs_rating_up_count' =>  __( '+ Votes', 'thumbs-rating' ),
 	    //'thumbs_rating_down_count' => __( '- Votes', 'thumbs-rating' ),
 		'coupon_type' => __( 'Coupon Type' ),
-		'display-category' => __( 'Display Type' ),
-		'coupon_img' => __( 'Coupon Image' ),			
+		'display-category' => __( 'Display Type' ),	
 	  );
 	  return $cols;
 	}
