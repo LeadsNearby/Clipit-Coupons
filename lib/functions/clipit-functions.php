@@ -304,6 +304,9 @@ add_filter( 'post_row_actions', 'clipit_expand_quick_edit_link', 10, 2 );
 	//Update Coupons CPT Messages
 	add_filter('post_updated_messages', 'coupon_updated_messages');
 	function coupon_updated_messages( $messages ) {
+		if(empty($_GET['post'])) {
+			return $messages;
+		}
 	$messages['coupon'] = array(
 		0 => '', // Unused. Messages start at index 1.
 		1 => sprintf( __('Coupon updated. <a href="%s">View Coupon</a>'), esc_url( get_permalink($_GET['post']) ) ),
