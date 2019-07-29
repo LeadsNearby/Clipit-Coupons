@@ -300,31 +300,25 @@ add_filter( 'post_row_actions', 'clipit_expand_quick_edit_link', 10, 2 );
 	}  
 	add_action( 'edited_locations', 'save_taxonomy_custom_meta', 10, 2 );  
 	add_action( 'create_locations', 'save_taxonomy_custom_meta', 10, 2 );
-	
-	//Set Email as text/html
-	function wps_set_content_type(){
-		return "text/html";
-	}
-	add_filter( 'wp_mail_content_type','wps_set_content_type' );
 
 	//Update Coupons CPT Messages
 	add_filter('post_updated_messages', 'coupon_updated_messages');
 	function coupon_updated_messages( $messages ) {
 	$messages['coupon'] = array(
 		0 => '', // Unused. Messages start at index 1.
-		1 => sprintf( __('Coupon updated. <a href="%s">View Coupon</a>'), esc_url( get_permalink($post_ID) ) ),
+		1 => sprintf( __('Coupon updated. <a href="%s">View Coupon</a>'), esc_url( get_permalink($_GET['post']) ) ),
 		2 => __('Custom field updated.'),
 		3 => __('Custom field deleted.'),
 		4 => __('Coupon updated.'),
 		/* translators: %s: date and time of the revision */
 		5 => isset($_GET['revision']) ? sprintf( __('Coupon restored to revision from %s'), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
-		6 => sprintf( __('Coupon published. <a href="%s">View Coupon</a>'), esc_url( get_permalink($post_ID) ) ),
+		6 => sprintf( __('Coupon published. <a href="%s">View Coupon</a>'), esc_url( get_permalink($_GET['post']) ) ),
 		7 => __('Coupon saved.'),
-		8 => sprintf( __('Coupon submitted. <a target="_blank" href="%s">Preview Coupon</a>'), esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID) ) ) ),
+		8 => sprintf( __('Coupon submitted. <a target="_blank" href="%s">Preview Coupon</a>'), esc_url( add_query_arg( 'preview', 'true', get_permalink($_GET['post']) ) ) ),
 		9 => sprintf( __('Coupon scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview Coupon</a>'),
 		// translators: Publish box date format, see http://php.net/date
-		date_i18n( __( 'M j, Y @ G:i' ), strtotime( $post->post_date ) ), esc_url( get_permalink($post_ID) ) ),
-		10 => sprintf( __('Coupon draft updated. <a target="_blank" href="%s">Preview Coupon</a>'), esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID) ) ) ),
+		date_i18n( __( 'M j, Y @ G:i' ), strtotime( get_the_date($_GET['post']) ) ), esc_url( get_permalink($_GET['post']) ) ),
+		10 => sprintf( __('Coupon draft updated. <a target="_blank" href="%s">Preview Coupon</a>'), esc_url( add_query_arg( 'preview', 'true', get_permalink($_GET['post']) ) ) ),
 	);
 	return $messages;
 	}
