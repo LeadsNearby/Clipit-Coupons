@@ -336,10 +336,6 @@ add_filter( 'post_row_actions', 'clipit_expand_quick_edit_link', 10, 2 );
 		'tags'   => __( 'Coupon Tags' ),
 		'date' => __( 'Date' ),
 		'exp'      => __( 'Expiration' ),
-		//'postid' => __( 'Post ID' ),
-		//'thumbs_rating_up_count' =>  __( '+ Votes', 'thumbs-rating' ),
-	    //'thumbs_rating_down_count' => __( '- Votes', 'thumbs-rating' ),
-		'coupon_type' => __( 'Coupon Type' ),
 		'display-category' => __( 'Display Type' ),	
 	  );
 	  return $cols;
@@ -386,7 +382,6 @@ add_filter( 'post_row_actions', 'clipit_expand_quick_edit_link', 10, 2 );
 	  return array(
 		'exp'       	=> 'exp',
 		'tags'      	=> 'tags',
-		'coupon_type'   => 'coupon_type',
 		'display-category'   => 'display-category',
 	  );
 	}
@@ -403,22 +398,6 @@ add_filter( 'post_row_actions', 'clipit_expand_quick_edit_link', 10, 2 );
 		}
 		return 'Viewed ' .$count. ' Times';
 	}
-	
-	// Displays the view counter
-	function setCouponViews($postID) {
-		$count_key = 'post_views_count';
-		$count = get_post_meta($postID, $count_key, true);
-		if($count==''){
-			$count = 0;
-			delete_post_meta($postID, $count_key);
-			add_post_meta($postID, $count_key, '0');
-		}else{
-			$count++;
-			update_post_meta($postID, $count_key, $count);
-		}
-	}	
-	// Remove issues with prefetching adding extra views
-	remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);	
 	
 	// Removes Yoast Columns from Coupons List
 	function coupon_remove_columns( $columns ) {
@@ -438,205 +417,3 @@ add_filter( 'post_row_actions', 'clipit_expand_quick_edit_link', 10, 2 );
 	
 	//Allow HTML in Category Description	
 	remove_filter('pre_term_description', 'wp_filter_kses');
-
-	// Function creates post duplicate as a draft and redirects then to the edit post screen
-	function rd_duplicate_post_as_draft(){
-		global $wpdb;
-		if (! ( isset( $_GET['post']) || isset( $_POST['post'])  || ( isset($_REQUEST['action']) && 'rd_duplicate_post_as_draft' == $_REQUEST['action'] ) ) ) {
-			wp_die('No post to duplicate has been supplied!');
-		}
-	 
-		// get the original post id
-		$post_id = (isset($_GET['post']) ? $_GET['post'] : $_POST['post']);
-		
-		// and all the original post data then
-		$post = get_post( $post_id );
-
-		// if you don't want current user to be the new post author,
-		// then change next couple of lines to this: $new_post_author = $post->post_author;
-		$current_user = wp_get_current_user();
-		$new_post_author = $current_user->ID;
-	 
-		// if post data exists, create the post duplicate
-		if (isset( $post ) && $post != null) {
-	 
-			// new post data array
-			$args = array(
-				'comment_status' => $post->comment_status,
-				'ping_status'    => $post->ping_status,
-				'post_author'    => $new_post_author,
-				'post_content'   => $post->post_content,
-				'post_excerpt'   => $post->post_excerpt,
-				'post_name'      => $post->post_name,
-				'post_parent'    => $post->post_parent,
-				'post_password'  => $post->post_password,
-				'post_status'    => 'draft',
-				'post_title'     => $post->post_title,
-				'post_type'      => $post->post_type,
-				'to_ping'        => $post->to_ping,
-				'menu_order'     => $post->menu_order
-			);
-	 
-			// insert the post by wp_insert_post() function
-			$new_post_id = wp_insert_post( $args );
-	 
-			//get all current post terms ad set them to the new post draft
-			$taxonomies = get_object_taxonomies($post->post_type); // returns array of taxonomy names for post type, ex array("category", "post_tag");
-			foreach ($taxonomies as $taxonomy) {
-				$post_terms = wp_get_object_terms($post_id, $taxonomy, array('fields' => 'slugs'));
-				wp_set_object_terms($new_post_id, $post_terms, $taxonomy, false);
-			}
-	 
-			// duplicate all post meta
-			$post_meta_infos = $wpdb->get_results("SELECT meta_key, meta_value FROM $wpdb->postmeta WHERE post_id=$post_id");
-			if (count($post_meta_infos)!=0) {
-				$sql_query = "INSERT INTO $wpdb->postmeta (post_id, meta_key, meta_value) ";
-				foreach ($post_meta_infos as $meta_info) {
-					$meta_key = $meta_info->meta_key;
-					$meta_value = addslashes($meta_info->meta_value);
-					$sql_query_sel[]= "SELECT $new_post_id, '$meta_key', '$meta_value'";
-				}
-				$sql_query.= implode(" UNION ALL ", $sql_query_sel);
-				$wpdb->query($sql_query);
-			}
-	 
-			// finally, redirect to the edit post screen for the new draft
-			wp_redirect( admin_url( 'post.php?action=edit&post=' . $new_post_id ) );
-			exit;
-		} else {
-			wp_die('Post creation failed, could not find original post: ' . $post_id);
-		}
-	}
-	add_action( 'admin_action_rd_duplicate_post_as_draft', 'rd_duplicate_post_as_draft' );
-	 
-	// Add the duplicate link to action list for post_row_actions
-	function rd_duplicate_post_link( $actions, $post ) {
-		if (current_user_can('edit_posts')) {
-			$actions['duplicate'] = '<a href="admin.php?action=rd_duplicate_post_as_draft&amp;post=' . $post->ID . '" title="Clone this item" rel="permalink">Clone</a>';
-		}
-		return $actions;
-	}
-	 
-	add_filter( 'post_row_actions', 'rd_duplicate_post_link', 10, 2 );	
-
-
-	
-	//------------------------------------------------------
-    //------------- PAGE/POST EDIT PAGE ---------------------
-
-	add_action('admin_header', 'page_supports_add_clipit_button');
-    function page_supports_add_clipit_button(){
-		if ( !current_user_can( 'edit_posts' ) && !current_user_can( 'edit_pages' ) ) {
-		        return;
-		}
-    }
-
-    //Action target that adds the "Insert Form" button to the post/page edit screen
-	add_action('media_buttons', 'add_clipit_button', 20);
-    function add_clipit_button(){
-
-        // do a version check for the new 3.5 UI
-        $version    = get_bloginfo('version');
-
-        if ($version < 3.5) {
-            // show button for v 3.4 and below
-            $image_btn = plugins_url('/images/form-button.png', __FILE__);
-            echo '<a href="#TB_inline?width=750&height=450&inlineId=select_coupon" class="thickbox" id="add_clipit" title="' . __("Add ClipIt Shortcode", 'clipit') . '"><img src="'.$image_btn.'" alt="' . __("Add ClipIt Shortcode", 'clipit') . '" /></a>';
-        } else {
-            // display button matching new UI
-            echo '<a href="#TB_inline?width=750&height=450&inlineId=select_coupon" class="thickbox button gform_media_link" id="add_clipit" title="' . __("Add ClipIt Shortcode", 'clipit') . '"><span style="padding-top: 3px;" class="dashicons dashicons-tickets"></span> ' . __("Add Coupon", "clipit") . '</a>';
-        }
-    }
-	
-    //Action target that displays the popup to insert a form to a post/page
-	add_action('admin_footer', 'add_mce_popup');
-    function add_mce_popup(){
-        ?>
-        <script>
-            function InsertCoupon(){
-                var clipit_id = jQuery("#add_clipit_id").val();
-                if(clipit_id == ""){
-                    alert("<?php _e("Please select a coupon", "clipit") ?>");
-                    return;
-                }
-
-                var clipit_name = jQuery("#add_clipit_id option[value='" + clipit_id + "']").text().replace(/[\[\]]/g, '');
-                var clipit_title = jQuery("#clipit_title").is(":checked");
-                var display_description = jQuery("#display_description").is(":checked");
-                var clipit_sidebar = jQuery("#clipit_sidebar").is(":checked");
-                var clipit_desc= jQuery("#clipit_desc").is(":checked");
-                var clipit_img = jQuery("#clipit_img").is(":checked");
-                var clipit_trim = jQuery("#clipit_trim").is(":checked");
-                var clipit_fine = jQuery("#clipit_fine").is(":checked");
-                var clipit_feature = jQuery("#clipit_feature").is(":checked");
-                var clipit_discount = jQuery("#clipit_discount").is(":checked");
-                var clipit_views = jQuery("#clipit_views").is(":checked");
-                var clipit_comments = jQuery("#clipit_comments").is(":checked");
-                var clipit_exp = jQuery("#clipit_exp").is(":checked");
-				
-                var title_qs = clipit_title ? "yes" : "";
-                var trim_qs = clipit_trim ? "yes" : "";
-                var desc_qs = clipit_desc ? "yes" : "";
-                var sidebar_qs = clipit_sidebar ? "yes" : "";
-                var img_qs = clipit_img ? "yes" : "";
-                var fine_qs = clipit_fine ? "yes" : "";
-                var feature_qs = clipit_feature ? "yes" : "";
-                var discount_qs = clipit_discount ? "yes" : "";
-                var views_qs = clipit_views ? "yes" : "";
-                var comments_qs = clipit_comments ? "yes" : "";
-                var exp_qs = clipit_exp ? "yes" : "";
-
-                window.send_to_editor("[clipit_coupons columns=\"\" class=\"\" tag=\"\" post_id=\"" + clipit_id + "\" trim_desc=\"" + trim_qs +"\" show_title=\"" + title_qs +"\" show_discount=\"" + discount_qs +"\" show_fine=\"" + fine_qs +"\" show_feature=\"" + feature_qs +"\" sidebar=\"" + sidebar_qs +"\" show_img=\"" + img_qs +"\" show_views=\"" + views_qs +"\" show_exp=\"" + exp_qs +"\" show_desc=\"" + desc_qs +"\" name=\"" + clipit_name + "\"]");
-            }
-        </script>
-
-        <div id="select_coupon" style="display:none;">
-            <div class="wrap">
-                <div>
-                    <div style="padding:15px 15px 0 15px;">
-                        <h3 style="color:#5A5A5A!important; font-family:Georgia,Times New Roman,Times,serif!important; font-size:1.8em!important; font-weight:normal!important;"><?php _e("Insert A Coupon", "clipit"); ?></h3>
-                        <span>
-                            <?php _e("Select a coupon below to add it to your post or page.", "clipit"); ?>
-                        </span>
-                    </div>
-                    <div style="padding:15px 15px 0 15px;">
-                        <select id="add_clipit_id">
-                            <option value="">  <?php _e("Select a Coupon", "clipit"); ?>  </option>
-							<?php
-							global $post;
-							$args = array(
-								'numberposts' => -1,
-								'post_type' => 'coupon'
-							);						 
-							$posts = get_posts($args);
-							foreach( $posts as $post ) : setup_postdata($post); ?>
-							<option value="<? echo $post->ID; ?>"><?php the_title(); ?></option>
-							<?php endforeach; ?>
-                        </select><br/>
-                        <div style="padding:8px 0 0 0; font-size:11px; font-style:italic; color:#5A5A5A"><?php _e("Can't find your Coupon? Make sure it is not expired.", "clipit"); ?></div>
-                    </div>
-                    <div style="padding:15px 15px 0 15px;">
-						<!-- New Fields -->
-                        <input type="checkbox" id="clipit_title" /> <label for="clipit_title"><?php _e("Show Coupon Title", "clipit"); ?></label><br />
-                        <input type="checkbox" id="clipit_sidebar" /> <label for="clipit_sidebar"><?php _e("Enable Sidbar Style", "clipit"); ?></label><br />
-                        <input type="checkbox" id="clipit_desc" /> <label for="clipit_desc"><?php _e("Show Description", "clipit"); ?></label><br />
-                        <input type="checkbox" id="clipit_feature" /> <label for="clipit_feature"><?php _e("Show Featured Image", "clipit"); ?></label><br />
-                        <input type="checkbox" id="clipit_fine" /> <label for="clipit_fine"><?php _e("Show Fine Print", "clipit"); ?></label><br />
-                        <input type="checkbox" id="clipit_img" /> <label for="clipit_img"><?php _e("Show Image", "clipit"); ?></label><br />
-                        <input type="checkbox" id="clipit_trim" /> <label for="clipit_trim"><?php _e("Trim Description", "clipit"); ?></label><br />
-                        <input type="checkbox" id="clipit_discount" /> <label for="clipit_discount"><?php _e("Show Discount", "clipit"); ?></label><br />
-						<input type="checkbox" id="clipit_views" /> <label for="clipit_views"><?php _e("Show Coupon Views", "clipit"); ?></label><br />
-						<input type="checkbox" id="clipit_exp" /> <label for="clipit_exp"><?php _e("Show Coupon Expiration", "clipit"); ?></label><br />
-                    </div>
-                    <div style="padding:15px;">
-                        <input type="button" class="button-primary" value="<?php _e("Insert Coupons", "clipit"); ?>" onclick="InsertCoupon();"/>&nbsp;&nbsp;&nbsp;
-						<a class="button" style="color:#bbb;" href="#" onclick="tb_remove(); return false;"><?php _e("Cancel", "clipit"); ?></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <?php
-
-	}
-?>
