@@ -91,6 +91,12 @@ $image_library_url = get_upload_iframe_src('image', null, 'library');
 						<textarea name="fineprint_default" id="fineprint_default" class="col-input text-style" rows="10" cols="70" style="font-size:11px;"><?php echo stripslashes(get_option('clipit_fineprint_default')); ?></textarea>
 					</td>
 				</tr>
+				<tr>
+					<td>
+						<label for="contact_form_default"><?php esc_html_e('Global Contact Form');?></label><br />
+						<textarea name="contact_form_default" id="contact_form_default" class="col-input text-style" rows="10" cols="70" style="font-size:11px;"><?php echo stripslashes(get_option('clipit_contact_form_default')); ?></textarea>
+					</td>
+				</tr>
 			</table>
 			</fieldset>
 			<p class="submit">
