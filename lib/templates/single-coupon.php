@@ -9,6 +9,7 @@ wp_enqueue_style('clipit-print-styles');
 echo '<div id="clipit" class="clipit-coupons clipit-coupons--single">';
 
 $coupons_fineprint_general = get_option('clipit_fineprint_default', '');
+$coupons_shorts_general = get_option('clipit_contact_form_default', '');
 
 if (have_posts()):
     while (have_posts()): the_post();
@@ -16,7 +17,8 @@ if (have_posts()):
         $coupon_expiration = get_post_meta($post_id, 'coupon_expiration', true);
         $coupons_fineprint_meta = get_post_meta($post_id, 'coupon_fineprint', true);
         $coupon_fineprint = $coupons_fineprint_meta ? $coupons_fineprint_meta : $coupons_fineprint_general;
-        $coupon_shorts = get_post_meta($post_id, 'coupon_shorts', true);
+        $coupon_shorts_meta = get_post_meta($post_id, 'coupon_shorts', true);
+        $coupon_shorts = $coupon_shorts_meta ? $coupon_shorts_meta : $coupons_shorts_general;
         $coupon_css_class = get_post_meta($post_id, 'coupon_css_class', true);
         $unix_coupon_expiration = strtotime($coupon_expiration . ' 11:59 pm');
         if (empty($coupon_expiration) || $unix_coupon_expiration > current_time('timestamp')) {
