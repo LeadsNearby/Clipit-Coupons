@@ -31,6 +31,7 @@ function clipit_coupon() {
                 'editor',
                 'revisions',
                 'excerpt',
+                'custom-fields',
             ),
             'taxonomies' => array(
                 'post_tag',
