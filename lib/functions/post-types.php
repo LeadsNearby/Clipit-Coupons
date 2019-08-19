@@ -45,7 +45,7 @@ function clipit_coupon() {
             'can_export' => true,
             'rewrite' => array(
                 'slug' => 'coupon',
-                'with_front', false,
+                'with_front' => false,
             ),
             'capability_type' => 'post',
             'show_in_rest' => true,
