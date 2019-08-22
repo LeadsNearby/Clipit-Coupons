@@ -199,7 +199,14 @@
     width: 100vw !important;
     overflow: hidden !important;
   }
-  div[class^='artibot-wrapper'] {
+
+  header,
+  footer {
+    display: none !important;
+  }
+
+  div[class^='artibot-wrapper'],
+  #bc-chat-container {
     display: none !important;
   }
 }
