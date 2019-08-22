@@ -193,6 +193,12 @@
     height: 100vh !important;
     display: block !important;
   }
+  body {
+    position: fixed !important;
+    top: 0 !important;
+    width: 100vw !important;
+    overflow: hidden !important;
+  }
   div[class^='artibot-wrapper'] {
     display: none !important;
   }
