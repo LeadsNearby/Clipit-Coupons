@@ -42,7 +42,8 @@ function shortcode_clipit_coupons($atts) {
 
     ob_start();
     if ($custom_posts->have_posts()):
-        echo '<div id="clipit" class="clipit-coupons">';
+        $accent_color = get_option('clipit_accent_color');
+        echo '<div id="clipit" class="clipit-coupons"', !empty($accent_color) ? "style='--color-accent:{$accent_color}'" : '', '>';
         while ($custom_posts->have_posts()): $custom_posts->the_post();
             $coupon_expiration = get_post_meta(get_the_ID(), 'coupon_expiration', true);
             $unix_coupon_expiration = strtotime($coupon_expiration . ' 11:59 pm');

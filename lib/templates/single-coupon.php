@@ -6,7 +6,9 @@ get_header();
 wp_enqueue_style('clipit-styles');
 wp_enqueue_style('clipit-print-styles');
 
-echo '<div id="clipit" class="clipit-coupons clipit-coupons--single">';
+$accent_color = get_option('clipit_accent_color');
+
+echo '<div id="clipit" class="clipit-coupons clipit-coupons--single"', !empty($accent_color) ? "style='--color-accent:{$accent_color}'" : '', '>';
 
 $coupons_fineprint_general = get_option('clipit_fineprint_default', '');
 $coupons_shorts_general = get_option('clipit_contact_form_default', '');

@@ -10,6 +10,7 @@ function clipit_settings_page() {
             'fineprint_default',
             'contact_form_default',
             'css_styling',
+            'accent_color',
         );
 
         foreach ($options as $opt) {

@@ -4,7 +4,9 @@ function coupon_plugin_settings() {
     add_submenu_page("edit.php?post_type=coupon", "ClipIt Coupons Settings", "Clipit Settings", "edit_themes", basename(__FILE__), "clipit_settings");
 }
 
-function clipit_settings() {global $title;?>
+function clipit_settings() {
+    global $title;
+    ?>
 	<h2><?php echo $title; ?></h2>
 <script>
   jQuery(document).ready(function() {
@@ -86,6 +88,12 @@ $image_library_url = get_upload_iframe_src('image', null, 'library');
 				</tr>
 				<tr>
 					<td>
+						<label for="coupon-accent-color"><?php esc_html_e('Coupon Accent Color');?></label><br /><br />
+						<input name="accent_color" id="coupon-accent-color" type="text" class="color-field" value=<?php echo get_option('clipit_accent_color', '#d40400') ?>>
+					</td>
+				</tr>
+				<tr>
+					<td>
 						<label for="fineprint_default"><?php esc_html_e('The Fine Print Default content');?></label><br />
 						<em><?php esc_html_e('Default Fine Print Rules. You can use HTML for links etc.');?></em><br />
 						<textarea name="fineprint_default" id="fineprint_default" class="col-input text-style" rows="10" cols="70" style="font-size:11px;"><?php echo stripslashes(get_option('clipit_fineprint_default')); ?></textarea>
@@ -140,5 +148,14 @@ $image_library_url = get_upload_iframe_src('image', null, 'library');
 		</p>
 	</div>
 	</form>
+	<script>
+	(function( $ ) {
+		// Add Color Picker to all inputs that have 'color-field' class
+		$(function() {
+			$('.color-field').wpColorPicker();
+		});
+
+	})( jQuery );
+	</script>
 </div>
 <?php }?>

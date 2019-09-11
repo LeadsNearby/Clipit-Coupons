@@ -1,8 +1,8 @@
 <?php
 
 get_header();
-
-echo '<div id="clipit" class="clipit-coupons">';
+$accent_color = get_option('clipit_accent_color');
+echo '<div id="clipit" class="clipit-coupons"', !empty($accent_color) ? "style='--color-accent:{$accent_color}'" : '', '>';
 
 if (have_posts()): while (have_posts()): the_post();
         $coupon_expiration = get_post_meta(get_the_ID(), 'coupon_expiration', true);
