@@ -1,7 +1,7 @@
 <?php
 add_action("admin_menu", "coupon_plugin_settings");
 function coupon_plugin_settings() {
-    add_submenu_page("edit.php?post_type=coupon", "ClipIt Coupons Settings", "Clipit Settings", "edit_themes", basename(__FILE__), "clipit_settings");
+    add_submenu_page("edit.php?post_type=coupon", "ClipIt Coupons Settings", "Clipit Settings", "list_users", basename(__FILE__), "clipit_settings");
 }
 
 function clipit_settings() {
@@ -24,21 +24,21 @@ function clipit_settings() {
 		).addClass( "ui-tabs-vertical ui-helper-clearfix" );
         jQuery( "#tabs li" ).removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );
 		var curtab = jQuery.cookie("curtab");
-		if (curtab.length > 0) {
+		if (curtab ? && curtab.length > 0) {
 		     jQuery("#tabs").tabs({active:curtab});
         }
 
-		jQuery('.clipit_upload_button').click(function() {
-			 targetfield = jQuery(this).prev('.upload-url');
-			 tb_show('', 'media-upload.php?type=image&amp;TB_iframe=true');
-			 return false;
-		});
+		// jQuery('.clipit_upload_button').click(function() {
+		// 	 targetfield = jQuery(this).prev('.upload-url');
+		// 	 tb_show('', 'media-upload.php?type=image&amp;TB_iframe=true');
+		// 	 return false;
+		// });
 
-		window.send_to_editor = function(html) {
-			 imgurl = jQuery('img',html).attr('src');
-			 jQuery(targetfield).val(imgurl);
-			 tb_remove();
-		}
+		// window.send_to_editor = function(html) {
+		// 	 imgurl = jQuery('img',html).attr('src');
+		// 	 jQuery(targetfield).val(imgurl);
+		// 	 tb_remove();
+		// }
 
 	});
 </script>
@@ -89,7 +89,7 @@ $image_library_url = get_upload_iframe_src('image', null, 'library');
 				<tr>
 					<td>
 						<label for="coupon-accent-color"><?php esc_html_e('Coupon Accent Color');?></label><br /><br />
-						<input name="accent_color" id="coupon-accent-color" type="text" class="color-field" value=<?php echo get_option('clipit_accent_color', '#d40400') ?>>
+						<input name="accent_color" id="coupon-accent-color" type="text" class="color-field" value="<?php echo get_option('clipit_accent_color', '#d40400') ?>">
 					</td>
 				</tr>
 				<tr>

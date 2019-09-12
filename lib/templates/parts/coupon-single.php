@@ -29,5 +29,5 @@ $classes = array(
 <?php
 if ($coupon_shorts):
     echo '<h3 class="clipit-schedule-title">Schedule Service</h3>';
-    echo do_shortcode($coupon_shorts);
+    echo stripslashes(do_shortcode($coupon_shorts));
 endif;
