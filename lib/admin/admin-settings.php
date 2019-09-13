@@ -24,7 +24,7 @@ function clipit_settings() {
 		).addClass( "ui-tabs-vertical ui-helper-clearfix" );
         jQuery( "#tabs li" ).removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );
 		var curtab = jQuery.cookie("curtab");
-		if (curtab ? && curtab.length > 0) {
+		if (curtab && curtab.length > 0) {
 		     jQuery("#tabs").tabs({active:curtab});
         }
 
