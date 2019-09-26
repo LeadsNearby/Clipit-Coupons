@@ -16,7 +16,7 @@ $classes = array(
     <span class="clipit-coupon__subtitle"><?php esc_html(the_excerpt());?></span>
     <?php include 'coupon-expiration.php';?>
     <span class="clipit-coupon__fine">
-        <?php echo $coupon_fineprint; ?>
+        <span><?php echo wp_strip_all_tags($coupon_fineprint); ?></span>
         <?php include 'coupon-logo.php';?>
     </span>
 </article>
