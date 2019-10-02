@@ -5,11 +5,14 @@
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: 2em;
   font-size: 16px;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
 .clipit-coupons--single {
   display: block;
   /* text-align: center; */
+  padding: 3em 0 5em;
 }
 
 .clipit-coupon {
