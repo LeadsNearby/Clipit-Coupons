@@ -8,7 +8,8 @@ switch ($theme) {
         }
         break;
     case 'hypercore':
-        $logo_src = '';
+        $logo_id = get_theme_mod('custom_logo');
+        $logo_src = wp_get_attachment_image_url($logo_id, 'medium');
     default:
         '';
         break;
