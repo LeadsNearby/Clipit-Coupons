@@ -17,7 +17,7 @@ Filters the logo used on the coupon. Use case would be, client has a white logo 
 * **post_id**: Specify a specific coupon to be displayed. *No default*
 * **number_posts**: Specify number of coupons to be displayed. *Default is 15*
 * **tag**: Pull coupons in by tag slug, e.g., **monthly-deals**. *No default*
-* **tag**: Pull coupons in by display category slug, e.g., **website**. *No default*
+* **category**: Pull coupons in by display category slug, e.g., **website**. *No default*
 
 ### [clipit_rotator]
 
