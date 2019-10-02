@@ -4,7 +4,9 @@ ClipIt Coupons uses CPT to create coupons for your visitors to print, view or us
 
 ## Filters
 
-* clipit_logo_url: Filters the logo used on the coupon. Use case would be, client has a white logo or logo that contains white and it needs to be visible on a white background.
+### clipit_logo_url
+
+Filters the logo used on the coupon. Use case would be, client has a white logo or logo that contains white and it needs to be visible on a white background.
 
 ## Shortcodes
 
