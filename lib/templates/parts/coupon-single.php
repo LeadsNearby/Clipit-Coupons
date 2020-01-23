@@ -1,4 +1,6 @@
 <?php
+wp_enqueue_script('print');
+wp_enqueue_style('print');
 $classes = array(
     'clipit-coupon',
     'clipit-coupon--single',

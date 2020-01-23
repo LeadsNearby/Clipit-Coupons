@@ -58,10 +58,6 @@
   margin-right: 0.5em;
 }
 
-.clipit-coupon--print {
-  display: none;
-}
-
 .clipit-coupon__fine {
   display: grid;
   grid-template-columns: 3fr 2fr;
@@ -94,7 +90,7 @@
 }
 
 .clipit-coupon__save {
-  font-family: 'Arvo', sans-serif;
+  font-family: "Arvo", sans-serif;
   display: inline-block;
   background-color: var(--color-accent);
   color: #fff;
@@ -177,39 +173,4 @@
   margin: 2em 0 1em;
   text-transform: uppercase;
   font-size: 2em;
-}
-
-.clipit-print-modal {
-  position: fixed;
-  z-index: 999999;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #fff;
-}
-
-@media print {
-  body,
-  html {
-    overflow: hidden !important;
-    height: 100vh !important;
-    display: block !important;
-  }
-  body {
-    position: fixed !important;
-    top: 0 !important;
-    width: 100vw !important;
-    overflow: hidden !important;
-  }
-
-  header,
-  footer {
-    display: none !important;
-  }
-
-  div[class^='artibot-wrapper'],
-  #bc-chat-container {
-    display: none !important;
-  }
 }

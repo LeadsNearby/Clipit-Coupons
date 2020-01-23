@@ -4,7 +4,6 @@ Template Name: Coupons Single
  */
 get_header();
 wp_enqueue_style('clipit-styles');
-wp_enqueue_style('clipit-print-styles');
 
 $accent_color = get_option('clipit_accent_color');
 
