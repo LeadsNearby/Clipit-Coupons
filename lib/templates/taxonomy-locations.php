@@ -4,7 +4,6 @@ Template Name: Coupons Taxonomy
  */
 get_header();
 wp_enqueue_style('clipit-styles');
-wp_enqueue_style('clipit-print-styles');
 wp_enqueue_script('jquery-ui-tooltip');
 wp_enqueue_script('jquery-ui-dialog');
 wp_enqueue_script('jquery-ui-tabs');
