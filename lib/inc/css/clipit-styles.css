@@ -174,3 +174,10 @@
   text-transform: uppercase;
   font-size: 2em;
 }
+
+@media print {
+  body,
+  html {
+    background-color: #fff !important;
+  }
+}
