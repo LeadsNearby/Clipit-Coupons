@@ -7,5 +7,5 @@
     <span class="clipit-coupon__subtitle"><?php esc_html(the_excerpt());?></span>
     <span class="clipit-coupon__spacer"></span>
     <?php include 'coupon-expiration.php';?>
-    <a class="clipit-coupon__button" href="<?php the_permalink();?>">View Details</a>
+    <a class="clipit-coupon__button coupon_btn_click" href="<?php the_permalink();?>">View Details</a>
 </article>
