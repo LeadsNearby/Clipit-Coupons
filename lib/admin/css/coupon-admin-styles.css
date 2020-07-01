@@ -2,56 +2,57 @@
 
 /* Style the tab */
 #coupon_options div.tab {
-    float: left;
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
-    width: 30%;
-    border-right:none;
+  float: left;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+  width: 30%;
+  border-right: none;
 }
 
 /* Style the buttons inside the tab */
 #coupon_options div.tab .tablinks {
-    display: block;
-    background-color: inherit;
-    color: black;
-    padding: 8% 4%;
-    width: 92%;
-    border: none;
-    outline: none;
-    text-align: left;
-    cursor: pointer;
-    transition: 0.3s;
+  display: block;
+  background-color: inherit;
+  color: black;
+  padding: 8% 4%;
+  width: 92%;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
 /* Change background color of buttons on hover */
 #coupon_options div.tab .tablinks:hover {
-    background-color: #ddd;
+  background-color: #ddd;
 }
 
 /* Create an active/current "tab button" class */
 #coupon_options div.tab .tablinks.active {
-    background-color: #ccc;
+  background-color: #ccc;
 }
 
 /* Style the tab content */
 #coupon_options .tabcontent {
-    float: left;
-    padding: 0 4%;
-    border: 1px solid #ccc;
-    width: 61%;
-    min-height:400px;
+  float: left;
+  padding: 0 4%;
+  border: 1px solid #ccc;
+  width: 61%;
+  min-height: 400px;
 }
 
 /* Input Styles */
-#coupon_options select, #coupon_options input[type='text'] {
-    width: 100%;
-    height: 35px;
+#coupon_options select,
+#coupon_options input[type='text'] {
+  width: 100%;
+  height: 35px;
 }
 #coupon_options input.upload_image {
-    width: 75%;
+  width: 75%;
 }
 #coupon_options .wp-media-buttons {
-    float: none;
+  float: none;
 }
 
 /* Dashboard Styles */
@@ -60,249 +61,249 @@
 #popular-coupons ol,
 #clicked-coupons ol,
 #expired-coupons ol {
-    list-style-type: decimal;
-    margin-left: 1em;
+  list-style-type: decimal;
+  margin-left: 1em;
 }
 #popular-coupons ol span,
 #clicked-coupons ol span {
-    color: #777;
-    float: left;
-    margin-right: 8px;
-    min-width: 150px;
+  color: #777;
+  float: left;
+  margin-right: 8px;
+  min-width: 150px;
 }
 #conversions-coupons ol span,
 #expired-coupons ol span {
-    color: #777;
-    float: right;
-    margin-right: 8px;
-    min-width: 150px;
+  color: #777;
+  float: right;
+  margin-right: 8px;
+  min-width: 150px;
 }
 #clipit_conversion_db .hndle,
 #clipit_recent_clicks_db .hndle,
 #clipit_recent_coupons_db .hndle,
 #clipit_views_db .hndle,
 #clipit_expired_db .hndle {
-    background-color: #0074a2;
-    color: #fff;
+  background-color: #0074a2;
+  color: #fff;
 }
 .coupon-edit {
-    float: right !important;
-    margin-left: 5px;
-    min-width: 30px !important;
-    text-align: right;
+  float: right !important;
+  margin-left: 5px;
+  min-width: 30px !important;
+  text-align: right;
 }
 /* Admin Styles */
 
-#coupon_info .postbox input[type="text"],
-#coupon_theme .postbox input[type="text"] {
-    padding: 5px 3px;
-    width: 70% !important;
+#coupon_info .postbox input[type='text'],
+#coupon_theme .postbox input[type='text'] {
+  padding: 5px 3px;
+  width: 70% !important;
 }
 #coupon_theme .upload_image {
-    float: left;
-    margin-right: 5px;
-    width: 70%;
+  float: left;
+  margin-right: 5px;
+  width: 70%;
 }
 #coupon_info .coupon_title,
 #coupon_info .coupon_promo_text {
-    width: 70%;
+  width: 70%;
 }
 .upload .wp-media-buttons .button {
-    margin-top: 0;
+  margin-top: 0;
 }
 .coup_upload {
-    width: 100%;
+  width: 100%;
 }
-#coupon_theme input[type="radio"] {
-    display: none;
-    visibility: hidden;
+#coupon_theme input[type='radio'] {
+  display: none;
+  visibility: hidden;
 }
 #coupon_theme .col-1-2 {
-    float: left;
-    width: 48%;
-    margin-right: 1%;
+  float: left;
+  width: 48%;
+  margin-right: 1%;
 }
 #add_clipit_id {
-    width: 480px;
+  width: 480px;
 }
 /* Coupon List */
 
 .fixed .column-comments {
-    width: 8%;
+  width: 8%;
 }
 .coupon_img img {
-    width: 100%;
+  width: 100%;
 }
 /* Changes size of coupon on list column*/
 
 .coupon_img.column-coupon_img img {
-    width: 100%;
+  width: 100%;
 }
 #coupon_info em,
 #coupon_theme em {
-    color: #777;
-    font-size: 12px;
+  color: #777;
+  font-size: 12px;
 }
 /* Coupon Docs */
 
 #accordion {
-    max-width: 1320px;
-    width: 100%;
+  max-width: 1320px;
+  width: 100%;
 }
 .clipit-docs-code {
-    background: none repeat scroll 0 0 #eee;
-    border: 1px solid #ccc;
-    padding: 10px 15px;
+  background: none repeat scroll 0 0 #eee;
+  border: 1px solid #ccc;
+  padding: 10px 15px;
 }
 .clipit-docs .alignleft {
-    float: left;
-    width: 525px;
-    margin: 10px 0;
+  float: left;
+  width: 525px;
+  margin: 10px 0;
 }
 .clipit-docs .alignright {
-    float: right;
-    margin: 10px 0;
+  float: right;
+  margin: 10px 0;
 }
 .clipit-docs .example {
-    max-width: 700px;
-    width: 100%;
+  max-width: 700px;
+  width: 100%;
 }
 .clipit-docs .bullets {
-    list-style: disc outside none;
-    padding-left: 15px;
+  list-style: disc outside none;
+  padding-left: 15px;
 }
 .clipit-docs .sub {
-    list-style: disc outside none;
-    padding-left: 30px;
+  list-style: disc outside none;
+  padding-left: 30px;
 }
 .clipit-docs .activate {
-    background: url('../images/doc/activation-key.png') no-repeat scroll 0 0 transparent;
-    height: 140px;
+  background: url('../images/doc/activation-key.png') no-repeat scroll 0 0 transparent;
+  height: 140px;
 }
 .clipit-docs .plugins {
-    background: url('../images/doc/install-additional-plugins.png') no-repeat scroll 0 0 transparent;
-    height: 140px;
+  background: url('../images/doc/install-additional-plugins.png') no-repeat scroll 0 0 transparent;
+  height: 140px;
 }
 .clipit-docs .locations {
-    background: url('../images/doc/locations.png') no-repeat scroll 0 0 transparent;
-    height: 536px;
+  background: url('../images/doc/locations.png') no-repeat scroll 0 0 transparent;
+  height: 536px;
 }
 .clipit-docs .step-one {
-    background: url('../images/doc/step-one.png') no-repeat scroll 0 0 transparent;
-    height: 151px;
+  background: url('../images/doc/step-one.png') no-repeat scroll 0 0 transparent;
+  height: 151px;
 }
 .clipit-docs .step-two {
-    background: url('../images/doc/step-two.png') no-repeat scroll 0 0 transparent;
-    height: 664px;
+  background: url('../images/doc/step-two.png') no-repeat scroll 0 0 transparent;
+  height: 664px;
 }
 .clipit-docs .step-two-a {
-    background: url('../images/doc/step-two-a.png') no-repeat scroll 0 0 transparent;
-    height: 418px;
-    margin-top: 10px;
+  background: url('../images/doc/step-two-a.png') no-repeat scroll 0 0 transparent;
+  height: 418px;
+  margin-top: 10px;
 }
 .clipit-docs .step-three {
-    background: url('../images/doc/step-three.png') no-repeat scroll 0 0 transparent;
-    height: 664px;
+  background: url('../images/doc/step-three.png') no-repeat scroll 0 0 transparent;
+  height: 664px;
 }
 .clipit-docs .step-four {
-    background: url('../images/doc/step-four.png') no-repeat scroll 0 0 transparent;
-    height: 241px;
+  background: url('../images/doc/step-four.png') no-repeat scroll 0 0 transparent;
+  height: 241px;
 }
 .clipit-docs .step-four-a {
-    background: url('../images/doc/step-four-a.png') no-repeat scroll 0 0 transparent;
-    height: 243px;
+  background: url('../images/doc/step-four-a.png') no-repeat scroll 0 0 transparent;
+  height: 243px;
 }
 .clipit-docs .step-five {
-    background: url('../images/doc/step-five.png') no-repeat scroll 0 0 transparent;
-    height: 210px;
+  background: url('../images/doc/step-five.png') no-repeat scroll 0 0 transparent;
+  height: 210px;
 }
 .clipit-docs .step-six {
-    background: url('../images/doc/step-six.png') no-repeat scroll 0 0 transparent;
-    height: 218px;
+  background: url('../images/doc/step-six.png') no-repeat scroll 0 0 transparent;
+  height: 218px;
 }
 .clipit-docs .discount-step {
-    background: url('../images/doc/discount-step.png') no-repeat scroll 0 0 transparent;
-    height: 373px;
+  background: url('../images/doc/discount-step.png') no-repeat scroll 0 0 transparent;
+  height: 373px;
 }
 .clipit-docs .step-seven {
-    background: url('../images/doc/step-seven.png') no-repeat scroll 0 0 transparent;
-    height: 373px;
+  background: url('../images/doc/step-seven.png') no-repeat scroll 0 0 transparent;
+  height: 373px;
 }
 .clipit-docs .step-eight {
-    background: url('../images/doc/step-eight.png') no-repeat scroll 0 0 transparent;
-    height: 394px;
+  background: url('../images/doc/step-eight.png') no-repeat scroll 0 0 transparent;
+  height: 394px;
 }
 .clipit-docs .step-nine {
-    background: url('../images/doc/step-nine.png') no-repeat scroll 0 0 transparent;
-    height: 277px;
+  background: url('../images/doc/step-nine.png') no-repeat scroll 0 0 transparent;
+  height: 277px;
 }
 .clipit-docs .step-ten {
-    background: url('../images/doc/step-ten.png') no-repeat scroll 0 0 transparent;
-    height: 375px;
+  background: url('../images/doc/step-ten.png') no-repeat scroll 0 0 transparent;
+  height: 375px;
 }
 .clipit-docs .step-eleven {
-    background: url('../images/doc/qrcode.png') no-repeat scroll 0 0 transparent;
-    height: 294px;
+  background: url('../images/doc/qrcode.png') no-repeat scroll 0 0 transparent;
+  height: 294px;
 }
 .clipit-docs .step-tweleve {
-    background: url('../images/doc/scheduler.png') no-repeat scroll 0 0 transparent;
-    height: 294px;
+  background: url('../images/doc/scheduler.png') no-repeat scroll 0 0 transparent;
+  height: 294px;
 }
 .clipit-docs .settings-general {
-    background: url('../images/doc/settings-general.png') no-repeat scroll 0 0 transparent;
-    height: 833px;
+  background: url('../images/doc/settings-general.png') no-repeat scroll 0 0 transparent;
+  height: 833px;
 }
 .clipit-docs .settings-styles {
-    background: url('../images/doc/settings-styles.png') no-repeat scroll 0 0 transparent;
-    height: 864px;
+  background: url('../images/doc/settings-styles.png') no-repeat scroll 0 0 transparent;
+  height: 864px;
 }
 .clipit-docs .settings-typography {
-    background: url('../images/doc/settings-typography.png') no-repeat scroll 0 0 transparent;
-    height: 1219px;
+  background: url('../images/doc/settings-typography.png') no-repeat scroll 0 0 transparent;
+  height: 1219px;
 }
 .clipit-docs .settings-css {
-    background: url('../images/doc/settings-css.png') no-repeat scroll 0 0 transparent;
-    height: 357px;
+  background: url('../images/doc/settings-css.png') no-repeat scroll 0 0 transparent;
+  height: 357px;
 }
 .clipit-docs .refresh-permalinks {
-    background: url('../images/doc/refresh-permalinks.png') no-repeat scroll 0 0 transparent;
-    height: 567px;
+  background: url('../images/doc/refresh-permalinks.png') no-repeat scroll 0 0 transparent;
+  height: 567px;
 }
-.clipit-docs .print-settings{
-    background: url('../images/doc/print-settings.png') no-repeat scroll 0 0 transparent;
-    height: 607px;
+.clipit-docs .print-settings {
+  background: url('../images/doc/print-settings.png') no-repeat scroll 0 0 transparent;
+  height: 607px;
 }
 /* Coupon Preview */
 /** Grid **/
 
 #clipit .grid {
-    margin: 0 auto;
-    max-width: 1080px;
-    width: 100%;
+  margin: 0 auto;
+  max-width: 1080px;
+  width: 100%;
 }
 #clipit .col-1-1,
 #clipit-style-two .col-1-1 {
-    width: 100%;
+  width: 100%;
 }
 #clipit .col-3-4,
 #clipit-style-two .col-3-4 {
-    width: 70%;
+  width: 70%;
 }
 #clipit .col-2-3,
 #clipit-style-two .col-2-3 {
-    width: 62.6666%;
+  width: 62.6666%;
 }
 #clipit .col-1-2,
 #clipit-style-two .col-1-2 {
-    width: 48%;
+  width: 48%;
 }
 #clipit .col-1-3,
 #clipit-style-two .col-1-3 {
-    width: 30.6666%;
+  width: 30.6666%;
 }
 #clipit .col-1-4,
 #clipit-style-two .col-1-4 {
-    width: 22%;
+  width: 22%;
 }
 #clipit .col-1-2,
 #clipit-style-two .col-1-2,
@@ -316,200 +317,200 @@
 #clipit-style-two .col-1-4,
 #clipit .col-1-8,
 #clipit-style-two .col-1-8 {
-    float: left;
-    margin-bottom: 20px;
-    margin: 0 1%;
-    position: relative;
+  float: left;
+  margin-bottom: 20px;
+  margin: 0 1%;
+  position: relative;
 }
 #clipit .last {
-    clear: right;
-    margin-right: 0 !important;
+  clear: right;
+  margin-right: 0 !important;
 }
 .clear {
-    clear: both;
-    display: block;
-    font-size: 0;
-    height: 0;
-    line-height: 0;
-    overflow: hidden;
-    width: 100%;
+  clear: both;
+  display: block;
+  font-size: 0;
+  height: 0;
+  line-height: 0;
+  overflow: hidden;
+  width: 100%;
 }
 /* Single / Shortcode */
 
 #clipit {
-    background: none repeat scroll 0 0 #fff;
+  background: none repeat scroll 0 0 #fff;
 }
 #clipit article {
-    margin: 0 0 5%;
+  margin: 0 0 5%;
 }
 .single-coupon #clipit {
-    background: none repeat scroll 0 0 #fff;
-    border: none;
+  background: none repeat scroll 0 0 #fff;
+  border: none;
 }
 #clipit hr {
-    background-color: #ddd;
-    border: 0 none;
-    height: 1px;
-    margin: 10px 0 17px;
+  background-color: #ddd;
+  border: 0 none;
+  height: 1px;
+  margin: 10px 0 17px;
 }
 .single-coup-container {
-    background-color: #fff;
-    border-bottom: 1px solid #e1e1e1;
-    border-left: 2px solid #e1e1e1;
-    border-radius: 4px 4px 0 0;
-    border-right: 2px solid #e1e1e1;
-    border-style: solid;
-    border-top: 2px solid #e1e1e1;
-    color: #727272;
-    display: block;
-    line-height: 1.42857;
-    padding: 10px;
-    position: relative;
-    transition: all 0.2s ease-in-out 0s;
+  background-color: #fff;
+  border-bottom: 1px solid #e1e1e1;
+  border-left: 2px solid #e1e1e1;
+  border-radius: 4px 4px 0 0;
+  border-right: 2px solid #e1e1e1;
+  border-style: solid;
+  border-top: 2px solid #e1e1e1;
+  color: #727272;
+  display: block;
+  line-height: 1.42857;
+  padding: 10px;
+  position: relative;
+  transition: all 0.2s ease-in-out 0s;
 }
 .single-coup-img {
-    margin-bottom: 10px !important;
+  margin-bottom: 10px !important;
 }
 .coupon-container {
-    padding-bottom: 0;
+  padding-bottom: 0;
 }
 .coupon-highlight {
-    background-color: #f7f7f9;
-    border-bottom: 2px solid #e1e1e1;
-    border-left: 2px solid #e1e1e1;
-    border-radius: 0 0 4px 4px;
-    border-right: 2px solid #e1e1e1;
-    margin-bottom: 0;
-    padding: 9px 14px;
+  background-color: #f7f7f9;
+  border-bottom: 2px solid #e1e1e1;
+  border-left: 2px solid #e1e1e1;
+  border-radius: 0 0 4px 4px;
+  border-right: 2px solid #e1e1e1;
+  margin-bottom: 0;
+  padding: 9px 14px;
 }
 .coupon-highlight > .col-3-4 {
-    margin-bottom: 0px !important;
+  margin-bottom: 0px !important;
 }
 .ldc-ul_cont {
-    margin: 10px 0 0 !important;
+  margin: 10px 0 0 !important;
 }
 .single-coup-img {
-    background: none repeat scroll 0 0 #f3f3f3;
-    border: 1px solid #ddd;
-    margin-bottom: 30px;
-    margin-right: 20px;
-    padding: 2%;
-    position: relative;
+  background: none repeat scroll 0 0 #f3f3f3;
+  border: 1px solid #ddd;
+  margin-bottom: 30px;
+  margin-right: 20px;
+  padding: 2%;
+  position: relative;
 }
 .coupon-title {
-    font-size: 24px;
-    text-align: left;
+  font-size: 24px;
+  text-align: left;
 }
 .views {
-    background: url("../images/chk-icon.png") no-repeat scroll 0 8px transparent;
-    padding: 7px 5px 7px 25px;
-    text-align: left;
+  background: url('../images/chk-icon.png') no-repeat scroll 0 8px transparent;
+  padding: 7px 5px 7px 25px;
+  text-align: left;
 }
 .commentbubble {
-    background: url("../images/cloud-icon.png") no-repeat scroll 0 8px transparent;
-    padding: 7px 5px 7px 25px;
-    text-align: left;
+  background: url('../images/cloud-icon.png') no-repeat scroll 0 8px transparent;
+  padding: 7px 5px 7px 25px;
+  text-align: left;
 }
 .expiration {
-    background: url("../images/exp-icon.png") no-repeat scroll 0 11px transparent;
-    padding: 7px 0 7px 20px;
-    text-align: left;
+  background: url('../images/exp-icon.png') no-repeat scroll 0 11px transparent;
+  padding: 7px 0 7px 20px;
+  text-align: left;
 }
 .single-coup-content .description {
-    font-style: normal;
-    text-align: left;
+  font-style: normal;
+  text-align: left;
 }
 .main-upload {
-    max-width: 100%;
-    width: 100%;
+  max-width: 100%;
+  width: 100%;
 }
 .couponbutton a {
-    background-color: #7bb12f;
-    border: 1px solid #658e2a;
-    border-radius: 6px;
-    box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.1), 0 1px 0 0 #bdd894 inset;
-    color: #fff !important;
-    cursor: pointer;
-    display: block;
-    font-size: 18px;
-    font-weight: bold;
-    letter-spacing: 1px;
-    min-width: 100px;
-    padding: 10px;
-    text-align: center;
-    text-decoration: none;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.7);
+  background-color: #7bb12f;
+  border: 1px solid #658e2a;
+  border-radius: 6px;
+  box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.1), 0 1px 0 0 #bdd894 inset;
+  color: #fff !important;
+  cursor: pointer;
+  display: block;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  min-width: 100px;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.7);
 }
 .clicktoreveal,
 .reveal {
-    background: none repeat scroll 0 0 #ffffe2;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    cursor: pointer;
-    height: 40px;
-    overflow: hidden;
-    position: relative;
-    text-align: right;
-    min-width: 140px;
+  background: none repeat scroll 0 0 #ffffe2;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  cursor: pointer;
+  height: 40px;
+  overflow: hidden;
+  position: relative;
+  text-align: right;
+  min-width: 140px;
 }
 .clicktoreveal .overlay {
-    border-bottom-left-radius: 6px;
-    border-top-left-radius: 6px;
-    color: #fff;
-    font-size: 18px;
-    font-weight: bold;
-    padding: 10px;
-    position: absolute;
-    text-align: left;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.7);
-    width: 85%;
-    z-index: 100;
+  border-bottom-left-radius: 6px;
+  border-top-left-radius: 6px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px;
+  position: absolute;
+  text-align: left;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.7);
+  width: 85%;
+  z-index: 100;
 }
 .clicktoreveal .code {
-    color: #ff9900;
-    font-size: 18px;
-    font-weight: bold;
-    padding: 5px;
+  color: #ff9900;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 5px;
 }
 .reveal .code {
-    color: #ff9900;
-    display: block;
-    font-size: 18px;
-    font-weight: bold;
-    padding: 10px 5px;
-    text-align: center;
+  color: #ff9900;
+  display: block;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px 5px;
+  text-align: center;
 }
 .clicktoreveal.green {
-    border: 1px solid #658e2a;
-    box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.1), 0 1px 0 0 #bdd894 inset;
+  border: 1px solid #658e2a;
+  box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.1), 0 1px 0 0 #bdd894 inset;
 }
 .clicktoreveal.green .overlay {
-    background: url("../images/clicktoreveal_g.png") no-repeat scroll right top transparent;
+  background: url('../images/clicktoreveal_g.png') no-repeat scroll right top transparent;
 }
 .clicktoreveal.green .overlay.none {
-    background-position: -10px 0;
-    text-align: center;
-    width: 100%;
+  background-position: -10px 0;
+  text-align: center;
+  width: 100%;
 }
 .featured-banner {
-    background: url("../images/featured-banner.png") no-repeat scroll right top transparent;
-    display: block;
-    height: 144px;
-    left: -1px;
-    position: absolute;
-    top: -1px;
-    width: 159px;
-    z-index: 1;
+  background: url('../images/featured-banner.png') no-repeat scroll right top transparent;
+  display: block;
+  height: 144px;
+  left: -1px;
+  position: absolute;
+  top: -1px;
+  width: 159px;
+  z-index: 1;
 }
 .fineprint {
-    font-size: 12px;
-    text-align: left;
+  font-size: 12px;
+  text-align: left;
 }
 .fineprint p {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 .coupon-container.col-1-2 .hightlight .col-1-4 {
-    width: 48% !important;
+  width: 48% !important;
 }
 .coupon-container.col-1-3 .col-1-4,
 .coupon-container.col-1-3 .col-1-2,
@@ -521,597 +522,599 @@
 .coupon-container.col-1-4 .col-1-3,
 .coupon-container.col-1-4 .col-2-3,
 .coupon-container.col-1-4 .col-3-4 {
-    clear: both;
-    width: 100% !important;
-    float: none !important;
+  clear: both;
+  width: 100% !important;
+  float: none !important;
 }
-.coupon-container.col-1-2:nth-child(2n+1),
-.coupon-container.col-1-3:nth-child(3n+1),
-.coupon-container.col-1-4:nth-child(4n+1) {
-    clear: left;
+.coupon-container.col-1-2:nth-child(2n + 1),
+.coupon-container.col-1-3:nth-child(3n + 1),
+.coupon-container.col-1-4:nth-child(4n + 1) {
+  clear: left;
 }
 .coupon_main_img {
-    text-align: left;
+  text-align: left;
 }
 .coup_upload {
-    width: 100%;
+  width: 100%;
 }
 /* Thumbs */
 
 .thumbs-rating-container {
-    padding: 8px 0 !important;
+  padding: 8px 0 !important;
 }
 .thumbs-rating-container .thumbs-rating-up,
 .thumbs-rating-container .thumbs-rating-down {
-    color: white;
-    margin: 0 0 0.75em;
-    padding: 0.7em 0.27em !important;
+  color: white;
+  margin: 0 0 0.75em;
+  padding: 0.7em 0.27em !important;
 }
 .thumbs-rating-container span {
-    cursor: pointer;
-    font-size: 11px;
+  cursor: pointer;
+  font-size: 11px;
 }
 /* ClipIt Two Styles */
 
 #clipit-style-two .single-coup-container,
 #clipit-style-two .coupon-highlight {
-    border-radius: 0;
+  border-radius: 0;
 }
 #clipit-style-two .featured-banner {
-    background: url("../images/featured-banner-two.png") no-repeat scroll right top transparent;
-    display: block;
-    height: 44px;
-    left: -14px;
-    position: absolute;
-    top: 25px;
-    width: 140px;
-    z-index: 1;
+  background: url('../images/featured-banner-two.png') no-repeat scroll right top transparent;
+  display: block;
+  height: 44px;
+  left: -14px;
+  position: absolute;
+  top: 25px;
+  width: 140px;
+  z-index: 1;
 }
 #clipit-style-two .single-coup-img {
-    background: none repeat scroll 0 0 #f3f3f3;
-    border: 1px solid #ddd;
-    max-height: 200px;
-    margin-bottom: 30px;
-    margin-right: 20px;
-    overflow: hidden;
-    padding: 0;
-    position: relative;
+  background: none repeat scroll 0 0 #f3f3f3;
+  border: 1px solid #ddd;
+  max-height: 200px;
+  margin-bottom: 30px;
+  margin-right: 20px;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
 }
 #clipit-style-two .expirydate-coupon .expirydate-date {
-    -moz-border-bottom-colors: none;
-    -moz-border-left-colors: none;
-    -moz-border-right-colors: none;
-    -moz-border-top-colors: none;
-    background: linear-gradient(to bottom, #ed7b39, #df5e14) repeat scroll 0 0 #eb6b22;
-    border-color: #d15813 #c85412 #bf5011;
-    border-image: none;
-    border-radius: 0 2px 2px 0;
-    border-style: solid;
-    border-width: 1px;
-    color: white;
-    font-size: 12px;
-    line-height: normal;
-    min-height: 26px;
-    opacity: 0.95;
-    padding: 4.5px 7px 4px 6px;
-    text-shadow: 0 -1px rgba(0, 0, 0, 0.3);
-    transition-delay: 0s;
-    transition-duration: 0.3s;
-    transition-property: padding, max-width;
-    transition-timing-function: ease-out;
+  -moz-border-bottom-colors: none;
+  -moz-border-left-colors: none;
+  -moz-border-right-colors: none;
+  -moz-border-top-colors: none;
+  background: linear-gradient(to bottom, #ed7b39, #df5e14) repeat scroll 0 0 #eb6b22;
+  border-color: #d15813 #c85412 #bf5011;
+  border-image: none;
+  border-radius: 0 2px 2px 0;
+  border-style: solid;
+  border-width: 1px;
+  color: white;
+  font-size: 12px;
+  line-height: normal;
+  min-height: 26px;
+  opacity: 0.95;
+  padding: 4.5px 7px 4px 6px;
+  text-shadow: 0 -1px rgba(0, 0, 0, 0.3);
+  transition-delay: 0s;
+  transition-duration: 0.3s;
+  transition-property: padding, max-width;
+  transition-timing-function: ease-out;
 }
 #clipit-style-two .expirydate-coupon .expirydate-text,
 .expirydate-coupon .expirydate-date {
-    box-sizing: border-box;
-    display: block;
+  box-sizing: border-box;
+  display: block;
 }
 #clipit-style-two .expirydate-coupon div {
-    float: left;
-    margin: 5px 0;
-    position: relative;
+  float: left;
+  margin: 5px 0;
+  position: relative;
 }
 #clipit-style-two .expirydate-coupon .expirydate-text:after {
-    background: none repeat scroll 0 0 #eb6b22;
-    border-radius: 3px 0 0 3px;
-    box-shadow: 1px 0 #99400e inset;
-    content: "";
-    height: 6px;
-    opacity: 0.95;
-    position: absolute;
-    right: -2px;
-    top: 10px;
-    width: 5px;
-    z-index: 4;
+  background: none repeat scroll 0 0 #eb6b22;
+  border-radius: 3px 0 0 3px;
+  box-shadow: 1px 0 #99400e inset;
+  content: '';
+  height: 6px;
+  opacity: 0.95;
+  position: absolute;
+  right: -2px;
+  top: 10px;
+  width: 5px;
+  z-index: 4;
 }
 #clipit-style-two .expirydate-coupon .expirydate-text {
-    background: linear-gradient(to bottom, #fcfcfc, #f0f0f0) repeat scroll 0 0 #fafafa;
-    border-color: #dadada #d2d2d2 #c5c5c5;
-    border-radius: 3px 0 0 3px;
-    border-style: solid;
-    border-width: 1px 0 1px 1px;
-    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.7) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
-    color: #555;
-    font-size: 12px;
-    height: 26px;
-    line-height: 24px;
-    padding: 0 9px 0 8px;
-    text-decoration: none;
-    text-shadow: 0 1px white;
+  background: linear-gradient(to bottom, #fcfcfc, #f0f0f0) repeat scroll 0 0 #fafafa;
+  border-color: #dadada #d2d2d2 #c5c5c5;
+  border-radius: 3px 0 0 3px;
+  border-style: solid;
+  border-width: 1px 0 1px 1px;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.7) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+  color: #555;
+  font-size: 12px;
+  height: 26px;
+  line-height: 24px;
+  padding: 0 9px 0 8px;
+  text-decoration: none;
+  text-shadow: 0 1px white;
 }
 #clipit-style-two .single-coup-content .description {
-    clear: both;
-    font-style: normal;
-    text-align: left;
+  clear: both;
+  font-style: normal;
+  text-align: left;
 }
 #clipit-style-two .coupon-highlight {
-    padding: 0;
+  padding: 0;
 }
 #clipit-style-two span.div {
-    border-right: 1px solid #ebecf0;
-    color: #ababab;
-    display: inline-block;
-    font-size: 14px;
-    padding: 9px 15px;
+  border-right: 1px solid #ebecf0;
+  color: #ababab;
+  display: inline-block;
+  font-size: 14px;
+  padding: 9px 15px;
 }
 #clipit-style-two .action-buttons {
-    float: right;
-    margin: 0 !important;
+  float: right;
+  margin: 0 !important;
 }
 #clipit-style-two .clicktoreveal {
-    background-color: #0074a2;
-    border: 0 none;
-    border-radius: 0;
-    box-shadow: none;
-    color: #fff;
-    cursor: pointer;
-    font-size: 18px;
-    font-weight: bold;
-    height: auto;
-    letter-spacing: 1px;
-    line-height: 33px;
-    min-width: 100px;
-    text-align: center;
-    text-decoration: none;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.7);
-    transition: all 0.3s ease-in-out 0s;
+  background-color: #0074a2;
+  border: 0 none;
+  border-radius: 0;
+  box-shadow: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  height: auto;
+  letter-spacing: 1px;
+  line-height: 33px;
+  min-width: 100px;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.7);
+  transition: all 0.3s ease-in-out 0s;
 }
 #clipit-style-two .clicktoreveal a {
-    display: block;
-    padding: 10px;
+  display: block;
+  padding: 10px;
 }
 #clipit-style-two .couponbutton a,
 #clipit-style-two .reveal,
 #clipit-style-two .clicktoreveal.green {
-    background-color: #0074a2;
-    border: 0 none;
-    border-radius: 0;
-    box-shadow: none;
-    color: #fff;
-    cursor: pointer;
-    display: block;
-    font-size: 18px;
-    font-weight: bold;
-    height: auto;
-    letter-spacing: 1px;
-    line-height: 33px;
-    min-width: 100px;
-    padding: 10px;
-    text-align: center;
-    text-decoration: none;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.7);
-    transition: all 0.3s ease-in-out 0s;
+  background-color: #0074a2;
+  border: 0 none;
+  border-radius: 0;
+  box-shadow: none;
+  color: #fff;
+  cursor: pointer;
+  display: block;
+  font-size: 18px;
+  font-weight: bold;
+  height: auto;
+  letter-spacing: 1px;
+  line-height: 33px;
+  min-width: 100px;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.7);
+  transition: all 0.3s ease-in-out 0s;
 }
 #clipit-style-two .clicktoreveal .code,
 #clipit-style-two .clicktoreveal a {
-    color: #fff;
-    transition: all 0.3s ease-in-out 0s;
+  color: #fff;
+  transition: all 0.3s ease-in-out 0s;
 }
 /*******************************    Google Web Fonts*******************************/
 
-@import url(http://fonts.googleapis.com/css?family=Economica:400,700);
-@import url(http://fonts.googleapis.com/css?family=Fjalla+One);
+@import url(http://fonts.googleapis.com/css?family=Economica:400, 700);
+@import url(http://fonts.googleapis.com/css?family=Fjalla + One);
 @import url(http://fonts.googleapis.com/css?family=Rancho);
 /*******************************    jQuery UI Tab Styles*******************************/
 
 .admin-logo {
-    display: block;
+  display: block;
 }
 .admin-logo-min {
-    display: none;
+  display: none;
 }
 #theme-options-title {
-    padding: 10% 5%;
+  padding: 10% 5%;
 }
 #theme-options-title img {
-    max-width: 100%;
+  max-width: 100%;
 }
 .theme-options-text {
-    color: #959393;
-    font-size: 1em;
-    text-align: center;
-    font-weight: normal;
+  color: #959393;
+  font-size: 1em;
+  text-align: center;
+  font-weight: normal;
 }
 .ui-widget-header {
-    background-color: transparent;
-    border: 0 none;
-    color: #222222;
-    font-weight: bold;
+  background-color: transparent;
+  border: 0 none;
+  color: #222222;
+  font-weight: bold;
 }
 .ui-tabs-vertical {
-    border: 1px solid #D9D9D9;
-    margin-top: 30px;
-    padding: 0;
-    width: 70%;
+  border: 1px solid #d9d9d9;
+  margin-top: 30px;
+  padding: 0;
+  width: 70%;
 }
 .ui-tabs .ui-tabs-nav {
-    padding: 0;
+  padding: 0;
 }
 .ui-tabs-vertical .ui-tabs-nav {
-    float: left;
-    padding: 0;
-    width: 23%;
+  float: left;
+  padding: 0;
+  width: 23%;
 }
 .ui-tabs-vertical .ui-tabs-nav li {
-    border-radius: 0 0 0 0;
-    border-top: 1px solid #D3D3D3;
-    border-right: none;
-    border-bottom: 1px solid #D3D3D3;
-    border-left: none;
-    clear: left;
-    margin: 0 !important;
-    position: relative;
-    width: 100%;
+  border-radius: 0 0 0 0;
+  border-top: 1px solid #d3d3d3;
+  border-right: none;
+  border-bottom: 1px solid #d3d3d3;
+  border-left: none;
+  clear: left;
+  margin: 0 !important;
+  position: relative;
+  width: 100%;
 }
 .ui-tabs-vertical .ui-tabs-nav li a {
-    color: #777777;
-    cursor: pointer;
-    display: block;
-    float: none;
-    font-size: 11px;
-    font-weight: normal;
-    padding: 0.025em 0;
-    width: 91%;
+  color: #777777;
+  cursor: pointer;
+  display: block;
+  float: none;
+  font-size: 11px;
+  font-weight: normal;
+  padding: 0.025em 0;
+  width: 91%;
 }
 .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active {
-    padding-bottom: 0;
-    padding-right: .1em;
-    border-right-width: 1px;
-    border-right-width: 1px;
+  padding-bottom: 0;
+  padding-right: 0.1em;
+  border-right-width: 1px;
+  border-right-width: 1px;
 }
 .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active a {
-    color: #FA6A00;
+  color: #fa6a00;
 }
 .ui-tabs-vertical .ui-tabs-panel {
-    border-left: 1px solid #D3D3D3;
-    float: left;
-    padding: 0 1em 10em;
+  border-left: 1px solid #d3d3d3;
+  float: left;
+  padding: 0 1em 10em;
 }
 .right-col {
-    width: 70%;
+  width: 70%;
 }
 .ui-accordion .ui-accordion-content {
-    height: auto !important;
+  height: auto !important;
 }
 /*******************************    Admin Tab Icon Styles*******************************/
 
 .icon {
-    float: left;
-    height: 35px;
-    width: 40px;
+  float: left;
+  height: 35px;
+  width: 40px;
 }
 .admin-tabs-link {
-    float: none;
-    line-height: 3em;
+  float: none;
+  line-height: 3em;
 }
 .admin-tools-icon {
-    background: url("../images/tab-icons/tools.png") no-repeat scroll 8px 7px transparent;
+  background: url('../images/tab-icons/tools.png') no-repeat scroll 8px 7px transparent;
 }
 .admin-home-icon {
-    background: url("../images/tab-icons/home.png") no-repeat scroll 8px 7px transparent;
+  background: url('../images/tab-icons/home.png') no-repeat scroll 8px 7px transparent;
 }
 .admin-social-icon {
-    background: url("../images/tab-icons/social.png") no-repeat scroll 8px 7px transparent;
+  background: url('../images/tab-icons/social.png') no-repeat scroll 8px 7px transparent;
 }
 .admin-cog-icon {
-    background: url("../images/tab-icons/cog.png") no-repeat scroll 8px 7px transparent;
+  background: url('../images/tab-icons/cog.png') no-repeat scroll 8px 7px transparent;
 }
 .admin-seo-icon {
-    background: url("../images/tab-icons/seo.png") no-repeat scroll 8px 7px transparent;
+  background: url('../images/tab-icons/seo.png') no-repeat scroll 8px 7px transparent;
 }
 .admin-style-icon {
-    background: url("../images/tab-icons/style.png") no-repeat scroll 8px 7px transparent;
+  background: url('../images/tab-icons/style.png') no-repeat scroll 8px 7px transparent;
 }
 .admin-typography-icon {
-    background: url("../images/tab-icons/typography.png") no-repeat scroll 8px 7px transparent;
+  background: url('../images/tab-icons/typography.png') no-repeat scroll 8px 7px transparent;
 }
 .admin-slider-icon {
-    background: url("../images/tab-icons/slider.png") no-repeat scroll 8px 7px transparent;
+  background: url('../images/tab-icons/slider.png') no-repeat scroll 8px 7px transparent;
 }
 #clipit_collapse {
-    border-style: solid;
-    border-width: 1px 0 0;
-    color: #AAAAAA;
-    cursor: pointer;
-    font-size: 12px;
-    line-height: 34px;
+  border-style: solid;
+  border-width: 1px 0 0;
+  color: #aaaaaa;
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 34px;
 }
 #clipit_collapse #collapse-button {
-    margin: 8px 15px;
+  margin: 8px 15px;
 }
 #clipit_collapse span {
-    font-weight: normal;
+  font-weight: normal;
 }
 .jpg-folded #tabs ul.ui-tabs-nav {
-    width: 48px;
+  width: 48px;
 }
 .jpg-folded #tabs ul li div.admin-tabs-link,
 .jpg-folded #theme-options-title .admin-logo,
 .jpg-folded #theme-options-title .theme-options-text {
-    display: none;
+  display: none;
 }
 .jpg-folded #theme-options-title .admin-logo-min {
-    display: block;
-    margin: 2px 5px 0;
+  display: block;
+  margin: 2px 5px 0;
 }
 .jpg-folded #clipit_collapse span {
-    display: none;
+  display: none;
 }
 #clipit_collapse #collapse-button div {
-    background: transparent url(../images/arrows.png) no-repeat 0 -72px;
+  background: transparent url(../images/arrows.png) no-repeat 0 -72px;
 }
 .jpg-folded #clipit_collapse #collapse-button div {
-    background-position: 0 -108px;
+  background-position: 0 -108px;
 }
 .help {
-    display: none;
+  display: none;
 }
 .jpg-folded #tabs li a:hover + div.help {
-    background: #e4e4e4;
-    border: 1px solid #ddd;
-    border-bottom-color: #DFDFDF;
-    border-top-color: #F9F9F9;
-    border-top-right-radius: 3px;
-    box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.4);
-    color: #333;
-    display: block;
-    left: 48px;
-    padding: 5px;
-    position: absolute;
+  background: #e4e4e4;
+  border: 1px solid #ddd;
+  border-bottom-color: #dfdfdf;
+  border-top-color: #f9f9f9;
+  border-top-right-radius: 3px;
+  box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.4);
+  color: #333;
+  display: block;
+  left: 48px;
+  padding: 5px;
+  position: absolute;
 }
 /*******************************    Input / Textarea Styles*******************************/
 
-.jpgadmin input[type="radio"] {
-    display: none;
-    visibility: hidden;
+.jpgadmin input[type='radio'] {
+  display: none;
+  visibility: hidden;
 }
 .header-sample {
-    border: 2px solid transparent;
-    margin-bottom: 15px;
+  border: 2px solid transparent;
+  margin-bottom: 15px;
 }
 .highlight {
-    border: 2px solid #008CCB;
+  border: 2px solid #008ccb;
 }
 .section-header {
-    background-color: #EEEEEE;
-    border: 1px solid #CCCCCC;
-    padding: 10px;
+  background-color: #eeeeee;
+  border: 1px solid #cccccc;
+  padding: 10px;
 }
 .admin-page-title {
-    color: #008ccb;
-    float: left;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 17px;
-    margin: 25px 11px 20px;
-    width: 400px;
+  color: #008ccb;
+  float: left;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 17px;
+  margin: 25px 11px 20px;
+  width: 400px;
 }
 .save-top {
-    float: left;
+  float: left;
 }
 .save-top p.submit {
-    margin-top: 10px;
-    max-width: 100%;
-    padding-top: 6px;
-    text-align: left;
+  margin-top: 10px;
+  max-width: 100%;
+  padding-top: 6px;
+  text-align: left;
 }
 .header-sample {
-    padding: 15px;
-    max-width: 500px;
+  padding: 15px;
+  max-width: 500px;
 }
 /* Used on Font Selection */
 
 .text-demo {
-    border: 1px solid #E9E9E9;
-    border-radius: 6px 6px 6px 6px;
-    margin: 10px 0 0;
-    width: 40%;
+  border: 1px solid #e9e9e9;
+  border-radius: 6px 6px 6px 6px;
+  margin: 10px 0 0;
+  width: 40%;
 }
 .text-demo legend {
-    background: none repeat scroll 0 0 #FFFFFF;
-    color: #C1C1C1;
-    float: right;
-    font-size: 12px;
-    margin: 0 10px 0 0;
-    padding: 0 10px;
-    position: relative;
-    top: -14px;
+  background: none repeat scroll 0 0 #ffffff;
+  color: #c1c1c1;
+  float: right;
+  font-size: 12px;
+  margin: 0 10px 0 0;
+  padding: 0 10px;
+  position: relative;
+  top: -14px;
 }
 #fontdemo {
-    font-size: 16px;
-    padding: 8px;
+  font-size: 16px;
+  padding: 8px;
 }
 .site-header-grad {
-    background: linear-gradient(to bottom, #3C3C3C 1%, #202020 90%, #1B1B1B 100%) repeat scroll 0 0 transparent;
+  background: linear-gradient(to bottom, #3c3c3c 1%, #202020 90%, #1b1b1b 100%) repeat scroll 0 0 transparent;
 }
 .site-header-grad {
-    position: relative;
+  position: relative;
 }
 .site-header-grad {
-    background: linear-gradient(to bottom, #F1F1F1 0%, #F1F1F1 90%, #EAEAEA 100%) repeat scroll 0 0 transparent;
+  background: linear-gradient(to bottom, #f1f1f1 0%, #f1f1f1 90%, #eaeaea 100%) repeat scroll 0 0 transparent;
 }
 #project_images p {
-    clear: both;
+  clear: both;
 }
 #project_images input {
-    float: left;
+  float: left;
 }
 #project_images .wp-media-buttons {
-    float: left;
+  float: left;
 }
 .button.remove_image_button.remove_media {
-    background: none repeat scroll 0 0 #F94848;
-    border: 1px solid #FF0000;
-    box-shadow: 0 1px #FF0000 inset, 0 1px 0 rgba(0, 0, 0, 0.08);
-    color: #FFFFFF;
-    margin-left: 5px;
+  background: none repeat scroll 0 0 #f94848;
+  border: 1px solid #ff0000;
+  box-shadow: 0 1px #ff0000 inset, 0 1px 0 rgba(0, 0, 0, 0.08);
+  color: #ffffff;
+  margin-left: 5px;
 }
 body {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 12px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
 }
 html {
-    color: #000000;
-    font-size: 100%;
+  color: #000000;
+  font-size: 100%;
 }
 .form-table td {
-    padding: 10px 5px;
+  padding: 10px 5px;
 }
 .form-table label {
-    color: #6E6E6E;
+  color: #6e6e6e;
 }
 .form-table em {
-    color: #9B9B9B;
-    font-family: Georgia, Arial, Helvetica, sans-serif;
-    font-size: 11px !important;
-    font-style: italic;
-    line-height: 130% !important;
-    margin: 5px 0 0;
-    padding: 2px 0 !important;
+  color: #9b9b9b;
+  font-family: Georgia, Arial, Helvetica, sans-serif;
+  font-size: 11px !important;
+  font-style: italic;
+  line-height: 130% !important;
+  margin: 5px 0 0;
+  padding: 2px 0 !important;
 }
 .right-col hr {
-    background: none repeat scroll 0 0 #EEEEEE;
-    border: 0 none;
-    height: 1px;
-    outline: 0 none;
-    width: 98%;
+  background: none repeat scroll 0 0 #eeeeee;
+  border: 0 none;
+  height: 1px;
+  outline: 0 none;
+  width: 98%;
 }
 .form_element {
-    background: none repeat scroll 0 0 #F5F5F5;
-    border-radius: 6px 6px 6px 6px;
-    display: inline-block;
-    padding: 4px;
-    width: auto;
+  background: none repeat scroll 0 0 #f5f5f5;
+  border-radius: 6px 6px 6px 6px;
+  display: inline-block;
+  padding: 4px;
+  width: auto;
 }
 .col-input {
-    border: 1px solid #D9D9D9;
-    box-shadow: 1px 1px 5px #ebebeb;
-    font-size: 12px;
-    margin: 10px 0 0;
-    padding: 6px;
+  border: 1px solid #d9d9d9;
+  box-shadow: 1px 1px 5px #ebebeb;
+  font-size: 12px;
+  margin: 10px 0 0;
+  padding: 6px;
 }
 .body-style,
 .text-style {
-    width: 69%;
+  width: 69%;
 }
 textarea#coupon_description,
 textarea#coupon_fineprint {
-    height: auto;
+  height: auto;
 }
 #coupon_how textarea,
 #coupon_rules textarea,
 #coupon_shorts textarea {
-    width: 100%;
+  width: 100%;
 }
 .body-style {
-    float: left;
-    margin-right: 10px;
+  float: left;
+  margin-right: 10px;
 }
 .col-input:hover {
-    box-shadow: 1px 1px 8px #ccc;
+  box-shadow: 1px 1px 8px #ccc;
 }
 .submit {
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
-    float: left;
-    margin: 5px;
-    padding: 1.5em 0;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  float: left;
+  margin: 5px;
+  padding: 1.5em 0;
 }
 .wp-media-buttons .button {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 /*******************************    Header Option Styles*******************************/
 
 .loadit {
-    border: 2px solid #FFFFFF;
-    max-width: 474px;
+  border: 2px solid #ffffff;
+  max-width: 474px;
 }
 /****************************** Admin Widget Area----------------------------------------------- */
 
 .jpgadmin select {
-    height: 2.5em;
-    padding: 5px 2px;
-    width: 69%;
+  height: 2.5em;
+  padding: 5px 2px;
+  width: 69%;
 }
 #adminmenu .wp-menu-image img {
-    padding: 4px 0 0 4px;
+  padding: 4px 0 0 4px;
 }
 .jpg-save-popup {
-    background: none repeat scroll 0 0 #DDDDDD;
-    border-radius: 15px;
-    padding: 30px 60px;
-    width: 200px;
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    margin: -25px 0 0 -25px;
+  background: none repeat scroll 0 0 #dddddd;
+  border-radius: 15px;
+  padding: 30px 60px;
+  width: 200px;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  margin: -25px 0 0 -25px;
 }
 .jpg-save-save {
-    background-image: url("../images/button_check.png");
-    background-repeat: no-repeat;
-    font-size: 16px;
-    padding: 8px 0 8px 41px;
+  background-image: url('../images/button_check.png');
+  background-repeat: no-repeat;
+  font-size: 16px;
+  padding: 8px 0 8px 41px;
 }
 /* =Email table Styles----------------------------------------------- */
 #clipit-email-list {
-    background-color:#FFFFFF;
-    border-collapse:collapse;border-width:1px;
-    border-color:#cccccc;
-    border-style:solid;
-    color:#333333;
-    margin-top:20px;
-    width:90%;  
+  background-color: #ffffff;
+  border-collapse: collapse;
+  border-width: 1px;
+  border-color: #cccccc;
+  border-style: solid;
+  color: #333333;
+  margin-top: 20px;
+  width: 90%;
 }
 
-#clipit-email-list td, #clipit-email-list th {
-    padding:10px;
+#clipit-email-list td,
+#clipit-email-list th {
+  padding: 10px;
 }
 
 #clipit-email-list th {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 #clipit-email-list thead {
-background-color:#0073AA;
+  background-color: #0073aa;
 }
 
 /* =Responsive Structure----------------------------------------------- */
 
 @media (max-width: 1280px) {
-    #theme-options-title {
-        padding: 10% 19%;
-    }
-    #clipit_collapse span,
-    .admin-logo,
-    .theme-options-text,
-    .admin-tabs-link {
-        display: none;
-    }
-    .admin-logo-min {
-        display: block;
-    }
-    .ui-tabs-vertical .ui-tabs-nav {
-        width: 48px;
-    }
-    .body-style {
-        width: 90% !important;
-    }
+  #theme-options-title {
+    padding: 10% 19%;
+  }
+  #clipit_collapse span,
+  .admin-logo,
+  .theme-options-text,
+  .admin-tabs-link {
+    display: none;
+  }
+  .admin-logo-min {
+    display: block;
+  }
+  .ui-tabs-vertical .ui-tabs-nav {
+    width: 48px;
+  }
+  .body-style {
+    width: 90% !important;
+  }
 }
