@@ -1029,13 +1029,6 @@ textarea#coupon_fineprint {
 .col-input:hover {
   box-shadow: 1px 1px 8px #ccc;
 }
-.submit {
-  border-bottom-left-radius: 3px;
-  border-bottom-right-radius: 3px;
-  float: left;
-  margin: 5px;
-  padding: 1.5em 0;
-}
 .wp-media-buttons .button {
   margin-top: 10px;
 }
