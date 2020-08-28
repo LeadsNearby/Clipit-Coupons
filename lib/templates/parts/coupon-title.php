@@ -8,7 +8,6 @@ if (!empty($title_matches[0])) {
     $title = trim(str_replace($title_matches[0], '', $raw_title));
     $title_accent = $title_matches[0];
 }
-var_dump($title_matches);
 ?>
 
 <span class="clipit-coupon__title">
