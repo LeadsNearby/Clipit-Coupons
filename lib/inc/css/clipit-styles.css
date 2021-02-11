@@ -4,6 +4,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: 2em;
+  justify-items: center;
   font-size: 16px;
   max-width: 1100px;
   margin: 0 auto;
@@ -23,8 +24,10 @@
   border: 1px solid #cccccc;
   padding: 1em;
   border-radius: 0.5em;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2);
   background-color: #fff;
+  max-width: 550px;
 }
 
 .clipit-coupon--single {
