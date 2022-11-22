@@ -1,0 +1,46 @@
+/* setting page css */
+.status-success {
+  color: #4f8a10;
+  background-color: #dff2bf;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid;
+}
+.status-danger {
+  color: #d8000c;
+  background-color: #ffbaba;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid;
+}
+.btn-disconnect {
+  background-color: #d8000c !important;
+  border: #d8000c !important;
+}
+.location_list_div {
+  margin-top: 10px;
+  padding: 10px;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+.list_mb {
+  margin-bottom: 25px !important;
+}
+.list_mt {
+  margin-top: 15px !important;
+}
+
+/* metabox css */
+.input-text {
+  width: 100%;
+  margin-top: 3px;
+}
+.invalid {
+  border: 1px solid red !important;
+  outline: none !important;
+}
+.font-bold {
+  font-weight: bold !important;
+  font-style: normal;
+  font-size: 16px;
+  color: black !important;
+}

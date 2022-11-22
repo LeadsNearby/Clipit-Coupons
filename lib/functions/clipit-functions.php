@@ -158,7 +158,7 @@ function clipit_email() {
 									<table border="0" cellpadding="0" cellspacing="0" width="100%">
 										<tr>
 											<td>
-												&copy; ' . date('Y') . ' ClipIt Couponer | All Rights Reserved.
+												&copy; ' . date('Y') . ' ClipIt Coupons | All Rights Reserved.
 											</td>
 											<td><!-- Future Local for Contact Info --></td>
 										</tr>
