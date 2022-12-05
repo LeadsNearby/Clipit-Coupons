@@ -4,8 +4,7 @@ add_action("admin_init", "clipit_meta_box");
 function clipit_meta_box()
 {
     add_meta_box("coupon_options", "Coupon Options", "coupon_options", "coupon", "normal", "core");
-    // Add on once bug is corrected
-    // add_meta_box("gbp_options", "GBP Options", "gbp_options", "coupon", "normal", "core");
+    add_meta_box("gbp_options", "GBP Options", "gbp_options", "coupon", "normal", "core");
 }
 
 add_action('rest_api_init', function () {
@@ -96,8 +95,8 @@ function gbp_options($post)
     $redemption_url = (isset($values['gbp_redemption_url']) ? esc_attr($values['gbp_redemption_url'][0]) : '');
     $post_to_gbp = (isset($values['post_to_gbp']) ? esc_attr($values['post_to_gbp'][0]) : '');
     $image = get_post_meta($post->ID, 'gbp_custom_image', true);
-    $token = get_option('access_token');
-    $locations = get_option(('gbp_locations'));
+    $token = get_option('gbp_access_token');
+    $locations = get_option('gbp_locations');
     $selected_location = get_option('gbp_selected_location');
 
     if ($token != null && $locations != null && $selected_location != null) {
@@ -139,6 +138,8 @@ function gbp_options($post)
             <div id="img_div" style='border: 1px solid #8c8f94;padding: 15px;border-radius: 4px;'>
                 <p>
                     <label>Upload Offer Image*</label><br />
+                    <em>Upload an image that is 540px wide. (min size: 1MB)</em>
+                    <br />
                     <button name="file" class="gbp_upload_image_button" style='margin-top: 3px;'>Select Image</button><br />
                     <input type="hidden" name="gbp_custom_image" id="gbp_custom_image" value="<?php echo $image; ?>" style="width:500px;" />
                     <span class="img_err" style="color: red;"></span>

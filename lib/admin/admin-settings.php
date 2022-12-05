@@ -193,7 +193,7 @@ function clipit_settings()
                             <td>
 
                                 <?php
-                                $domain = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+                                $domain = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
                                 $action = 'connect';
                                 ?>
 
