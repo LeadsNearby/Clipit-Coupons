@@ -2,65 +2,68 @@
   --color-accent: #d40400;
   --color-title: #4285f4;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   grid-gap: 2em;
   justify-items: center;
   font-size: 16px;
   max-width: 1100px;
   margin: 0 auto;
 }
-
 .clipit-coupons--single {
   display: block;
-  /* text-align: center; */
   padding: 3em 0 5em;
 }
-
 .clipit-coupon {
   position: relative;
-  display: grid;
-  grid-template-rows: auto auto 1fr auto auto auto;
-  /* grid-gap: 1em; */
-  border: 1px solid #cccccc;
   padding: 1em;
-  border-radius: 0.5em;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
-    0 3px 1px -2px rgba(0, 0, 0, 0.2);
-  background-color: #fff;
+  background-color: #FFFFFF;
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='15' ry='15' stroke='%23333333B8' stroke-width='3' stroke-dasharray='6%2c 14' stroke-dashoffset='0' stroke-linecap='round'/%3e%3c/svg%3e");
+  border-radius: 15px;  
   max-width: 550px;
 }
-
+.featured {
+  width: 100%;
+  grid-area: 1 / 1 / 2 / 3;
+  max-width: 100%;
+}
+.featured  .clipit-coupon__title-pre {
+  font-size: 1.65em;
+}
+.clipit-coupon__int {
+  background-image: radial-gradient(#f1f1f1 30%, transparent 20%);
+  background-color: #fff;
+  background-position: 0 0, 100px 100px;
+  background-size: 70px 70px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;	
+  height:100%
+}
 .clipit-coupon--single {
   display: block;
   text-align: left;
   max-width: 500px;
   margin: 2em auto;
   box-shadow: none;
-  border-style: dashed;
-  border-width: 3px;
 }
-
 .clipit-coupon--single .clipit-coupon__title,
 .clipit-coupon--single .clipit-coupon__subtitle,
 .clipit-coupon--single .clipit-coupon__expiration,
 .clipit-coupon--single .clipit-coupon__act {
   text-align: left;
 }
-
 .clipit-coupon--single .clipit-coupon__subtitle {
   display: block;
   margin-bottom: 1em;
 }
-
 .clipit-coupon--single .clipit-coupon__expiration,
 .clipit-coupon--single .clipit-coupon__act {
   display: inline-block;
 }
-
 .clipit-coupon--single .clipit-coupon__expiration {
   margin-right: 0.5em;
 }
-
 .clipit-coupon__fine {
   display: grid;
   grid-template-columns: 3fr 2fr;
@@ -69,11 +72,9 @@
   margin-top: 1em;
   font-size: 0.85em;
 }
-
 .clipit-coupon__fine img {
   max-height: 100px;
 }
-
 .clipit-coupon__icon {
   position: absolute;
   width: 1.5em;
@@ -82,16 +83,37 @@
   height: 1.5em;
   color: #ccc;
 }
-
 .clipit-coupon__icon path {
   fill: currentColor;
 }
-
 .clipit-coupon__save-wrapper {
   text-align: center;
   margin: -1em -1em 1em -1em;
+	grid-area: 1 / 1 / 2 / 3;
 }
-
+.clipit-coupon__pretitle-wrapper {
+  grid-area: 2 / 1 / 2 / 3;
+}
+.clipit-coupon__asset-wrapper {
+	grid-area: 3 / 1 / 4 / 2;
+}
+.clipit-coupon__img img {
+  margin: 0 auto;
+  max-width: 150px;
+  display: block;
+}
+.clipit-coupon__content-wrapper {
+	grid-area: 3 / 1 / 4 / 3;
+}
+.clipit-coupon__content-wrapper.with-img {
+  grid-area: 3 / 2 / 4 / 3;
+}
+.clipit-coupon__footer-wrapper {
+	grid-area: 4 / 1 / 5 / 3;
+}
+.clipit-coupon__fblike-wrapper {
+  grid-area: 5 / 1 / 5 / 3;
+}
 .clipit-coupon__save {
   font-family: "Arvo", sans-serif;
   display: inline-block;
@@ -104,80 +126,95 @@
   padding: 0.25em 1em 0.75em;
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 0.75em), 0 0);
 }
-
 .clipit-coupon__title {
   display: block;
   margin-bottom: 0.5em;
   color: var(--color-title);
   font-size: 1.9375em;
   line-height: 1.5em;
-  text-align: center;
 }
-
-.clipit-coupon__subtitle {
+.clipit-coupon__title-main {
   font-size: 1.375em;
+  font-weight: bold;
+}
+.clipit-coupon__subtitle {
+  font-size: 1em;
   line-height: 1.45em;
 }
-
 .clipit-coupon__subtitle * {
   margin: 0;
 }
-
 .clipit-coupon__spacer {
   display: block;
   min-height: 1em;
 }
-
-.clipit-coupon__expiration,
-.clipit-coupon__act {
+.clipit-coupon__expiration, .clipit-coupon__act {
   display: block;
+  font-weight: bold;
   text-align: center;
+  font-size: .95em;
 }
-
 .clipit-coupon__act {
   font-weight: 600;
   font-style: italic;
 }
-
 .clipit-coupon__button {
-  display: block;
-  background-color: var(--color-accent);
-  color: #fff;
-  padding: 0.75em;
-  text-align: center;
-  transition: opacity 0.15s ease;
-  margin-top: 1em;
+    border-radius: 30px;
+    text-transform: uppercase;
+    display: block;
+    background-color: var(--color-accent);
+    color: #fff;
+    font-weight: bold;
+    padding: 0.75em;
+    text-align: center;
+    transition: opacity 0.15s ease;
+    margin-top: 1em;
 }
-
 .clipit-coupon__button:hover {
   color: #fff;
   opacity: 0.8;
 }
-
 .clipit-coupon__button--single {
   max-width: 250px;
   margin: 0 auto;
   padding: 0.75em 2em;
 }
-
 .clipit-coupon__button svg {
   display: inline-block;
   height: 1em;
   vertical-align: -0.125em;
   margin-left: 0.5em;
 }
-
 .clipit-coupon__button svg path {
   fill: currentColor;
 }
-
 .clipit-schedule-title {
   text-align: center;
   margin: 2em 0 1em;
   text-transform: uppercase;
   font-size: 2em;
 }
-
+.clipit-coupon__title-pre {
+  text-align: center;
+  font-weight: bold;
+}
+@media screen and (max-width: 480px) {
+  .featured {
+    grid-area: auto;
+  }
+  .clipit-coupon__asset-wrapper {
+    grid-area: 3 / 1 / 4 / 3;
+  }
+  .clipit-coupon__content-wrapper {
+    grid-area: 4 / 1 / 4 / 3;
+  }
+  .clipit-coupon__content-wrapper.with-img {
+    grid-area: 4 / 1 / 4 / 3;
+  }
+  .clipit-coupon__footer-wrapper {
+    grid-area: 5 / 1 / 5 / 3;
+  }
+}
 @media print {
   body,
   html {

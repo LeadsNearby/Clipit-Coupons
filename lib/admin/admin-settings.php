@@ -1,16 +1,53 @@
 <?php
+add_action('admin_init', 'admin_add_get_val');
+function admin_add_get_val()
+{
+    if (!is_null($_GET['data']) && !is_null($_GET['accounts']) && !is_null($_GET['locations'])) {
 
-$data = json_decode($_GET['data']);
-$accounts = json_decode($_GET['accounts']);
+        if (!get_option('gbp_isConnected') || get_option('gbp_isConnected') != '') {
 
-if ($_GET['data'] && $_GET['accounts'] && $_GET['locations']) {
-    update_option("gbp_access_token", $data->access_token, true);
-    update_option("gbp_refresh_token", $data->refresh_token, true);
-    update_option("gbp_id_token", $data->id_token, true);
-    update_option("gbp_scope", $data->scope, true);
-    update_option("gbp_accounts", $accounts->accounts, true);
-    update_option("gbp_locations", urldecode($_GET['locations']), true);
+            $data = json_decode(stripslashes(urldecode($_GET['data'])));
+            $accounts = json_decode(stripslashes(urldecode($_GET['accounts'])));
+            $locations = json_decode(stripslashes(urldecode($_GET['locations'])));
+
+            if (get_option('gbp_locations') || get_option('gbp_locations') == '') {
+                update_option('gbp_locations', $locations, false);
+            } else {
+                add_option('gbp_locations', $locations, false);
+            }
+            if (get_option('gbp_accounts') || get_option('gbp_accounts') == '') {
+                update_option('gbp_accounts', $accounts, false);
+            } else {
+                add_option('gbp_accounts', $accounts, false);
+            }
+
+            if (get_option('gbp_access_token') || get_option('gbp_access_token') == '') {
+                update_option('gbp_access_token', $data->access_token, false);
+            } else {
+                add_option('gbp_access_token', $data->access_token, false);
+            }
+            if (get_option('gbp_refresh_token') || get_option('gbp_refresh_token') == '') {
+                update_option('gbp_refresh_token', $data->refresh_token, false);
+            } else {
+                add_option('gbp_refresh_token', $data->refresh_token, false);
+            }
+            if (get_option('gbp_id_token') || get_option('gbp_id_token') == '') {
+                update_option('gbp_id_token', $data->id_token, false);
+            } else {
+                add_option('gbp_id_token', $data->id_token, false);
+            }
+            if (get_option('gbp_scope') || get_option('gbp_scope') == '') {
+                update_option('gbp_scope', $data->scope, false);
+            } else {
+                add_option('gbp_scope', $data->scope, false);
+            }
+            update_option('gbp_isConnected', true, false);
+        } else {
+            add_option('gbp_isConnected', true, false);
+        }
+    }
 }
+
 
 add_action("admin_menu", "coupon_plugin_settings");
 function coupon_plugin_settings()
@@ -42,18 +79,6 @@ function clipit_settings()
                     active: curtab
                 });
             }
-
-            // jQuery('.clipit_upload_button').click(function() {
-            // 	 targetfield = jQuery(this).prev('.upload-url');
-            // 	 tb_show('', 'media-upload.php?type=image&amp;TB_iframe=true');
-            // 	 return false;
-            // });
-
-            // window.send_to_editor = function(html) {
-            // 	 imgurl = jQuery('img',html).attr('src');
-            // 	 jQuery(targetfield).val(imgurl);
-            // 	 tb_remove();
-            // }
 
         });
     </script>
@@ -191,8 +216,15 @@ function clipit_settings()
                     <table class="form-table" id="gbp-table">
                         <tr id="connectBtn">
                             <td>
-
                                 <?php
+                                $gbpLocations = get_option('gbp_locations', null);
+                                $gbpAccessToken = get_option('gbp_access_token');
+                                $gbpAccounts = get_option('gbp_accounts');
+
+                                if (!is_array($gbpLocations)) {
+                                    $gbpLocations = array();
+                                }
+
                                 $domain = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
                                 $action = 'connect';
                                 ?>
@@ -200,23 +232,22 @@ function clipit_settings()
                                 <input type="hidden" id="page_url" value="<?php echo parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) . "?post_type=" . $_GET['post_type'] . "&page=" . $_GET['page']; ?>">
 
                                 <?php
-
-                                if ((get_option('gbp_locations') == '[]' || get_option('gbp_locations') == '') && (get_option('gbp_accounts') != '')) {
+                                if ((count($gbpLocations) === 0) && ($gbpAccounts != '')) {
                                 ?>
                                     <p class='status-danger'>Location Not Found.</p>
                                     <?php
                                 } else {
-                                    if (get_option('gbp_access_token') != '' && (get_option('gbp_locations') != '[]' || get_option('gbp_locations') != '')) {
+                                    if ($gbpAccessToken != '' && (count($gbpLocations) !== 0)) {
                                         echo "";
                                     ?>
                                         <p class='status-success'>Your GBP account is successfully connected.</p>
                                     <?php
                                     }
 
-                                    $locations = json_decode(get_option('gbp_locations'));
-                                    $selected_location_value = json_decode(get_option('gbp_selected_location'));
+                                    $locations = $gbpLocations;
+                                    $selected_location_value = get_option('gbp_selected_location');
 
-                                    if (!empty($locations)) {
+                                    if (count($locations) !== 0 || $gbpAccessToken != "") {
                                     ?>
 
                                         <p>
@@ -229,58 +260,55 @@ function clipit_settings()
                                             <div class="list_mb">
                                                 <b>List of locations: </b>
                                             </div>
-                                        <?php
-                                    }
-
-                                    foreach ($locations as $loc) {
-
-                                        if (!empty($selected_location_value) && in_array($loc->name, $selected_location_value)) {
-                                            $checked = 'checked';
-                                        } else {
-                                            $checked = '';
+                                            <?php
                                         }
-                                        ?>
-                                            <div class='list_mb'>
-                                                <input type='checkbox' name='gbp_radio_loc[]' value='<?php echo $loc->name; ?>' id='<?php echo $loc->title; ?>' style='display: inline-block;visibility: visible;' <?php echo $checked ?>>
-                                                <label for='<?php echo $loc->title; ?>'><?php echo $loc->title; ?></label>
-                                            </div>
-                                        <?php
-                                    }
 
-                                    if (get_option('gbp_access_token') != '') {
+                                        if (count($locations) !== 0 || $locations != "") {
+                                            foreach ($locations as $loc) {
 
-                                        ?>
+                                                $checked = '';
+                                                $locName = '';
+                                                $locTitle = '';
+                                                if (is_array($loc)) {
+                                                    $locName = $loc['name'];
+                                                    $locTitle = $loc['title'];
+                                                } else {
+                                                    $locName = $loc->name;
+                                                    $locTitle = $loc->title;
+                                                }
+
+                                                if (!empty($selected_location_value) && in_array($locName, $selected_location_value)) {
+                                                    $checked = 'checked';
+                                                } else {
+                                                    $checked = '';
+                                                }
+                                            ?>
+                                                <div class='list_mb'>
+                                                    <input type='checkbox' name='gbp_radio_loc[]' value='<?php echo $locName; ?>' id='<?php echo $locTitle; ?>' style='display: inline-block;visibility: visible;' <?php echo $checked ?>>
+                                                    <label for='<?php echo $locTitle; ?>'><?php echo $locTitle; ?></label>
+                                                </div>
+                                            <?php
+                                            }
+                                        }
+                                        if ($gbpAccessToken != '') {
+                                            ?>
                                             <hr>
                                             <input type="button" name="save" class="button-primary save_location" value="Save Location" />
-                                        <?php } ?>
+                                            <div style="height: 30px; display: flex; align-items: flex-end;">
+                                                <p style="color: green; margin: 0px 0px;" id="responseText"></p>
+                                            </div>
+                                        <?php
+                                        }
+                                        ?>
                                         </div>
                                     <?php
                                 }
-
-                                if (get_option('gbp_access_token') == '') {
+                                if ($gbpAccessToken == '') {
                                     ?>
                                         <a href="https://wp.digitalapps.studio/clipitoauth2/index.php?domain=<?php echo $domain; ?>&action=<?php echo $action; ?>" type="button" class="button-primary" id="" value="Connect GBP Account">Connect GBP Account</a>
                                     <?php
                                 }
                                     ?>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <?php
-                                if (get_option('gbp_access_token') != '') {
-
-                                    if ((get_option('gbp_locations') == '[]' || get_option('gbp_locations') == '') && (get_option('gbp_accounts') != '')) {
-                                ?>
-                                        <input type="button" name="disconnect" class="button-primary btn-disconnect" value="Disconnect" id="disconnect_gbp" />
-                                    <?php
-                                    } else {
-                                    ?>
-                                <?php
-                                    }
-                                }
-                                ?>
                             </td>
                         </tr>
                     </table>
@@ -289,110 +317,71 @@ function clipit_settings()
                     <input type="submit" name="Submit" class="button-primary" value="Save Changes" />
                     <input type="hidden" name="clipit_settings" value="save" style="display:none;" />
                 </p>
-        </div>
-        </form>
-        <script>
-            (function($) {
+                <script>
+                    jQuery(function($) {
+                        var ajax_url = "<?php echo admin_url('admin-ajax.php'); ?>";
 
-                $(function() {
-                    var ajax_url = "<?php echo admin_url('admin-ajax.php'); ?>";
-
-                    $(".refresh_page").click(function() {
-                        window.location.href = $("#page_url").val();
-                    });
-
-                    check_token();
-
-                    function check_token() {
-                        var data = {
-                            'action': 'check_access_token',
-                        };
-                        jQuery.post(ajax_url, data, function(response) {});
-                    }
-
-                    get_location();
-
-                    function get_location() {
-                        var data = {
-                            'action': 'get_locations',
-                        };
-                        jQuery.post(ajax_url, data, function(response) {
-                            // window.location.reload();
-                        });
-                    }
-                });
-
-                $(function() {
-                    var ajax_url = "<?php echo admin_url('admin-ajax.php'); ?>";
-
-                    $(".save_location").click(function() {
-
-                        var loc_value = new Array();
-                        $("input:checked").each(function() {
-                            loc_value.push($(this).val());
-                        });
-
-                        if (loc_value == '' || loc_value == undefined) {
-                            alert("Please Select Atleast One Location.");
-                            return false;
-                        } else {
+                        function check_token() {
                             var data = {
-                                'action': 'save_location',
-                                'location_value': loc_value
+                                'action': 'check_access_token',
+                            };
+                            jQuery.post(ajax_url, data, function(response) {});
+                        }
+                        check_token();
+
+                        $(".refresh_page").click(function() {
+
+                            var data = {
+                                'action': 'get_locations',
                             };
                             jQuery.post(ajax_url, data, function(response) {
-                                window.location.href = $("#page_url").val();
+                                if (response) {
+                                    window.location.href = $("#page_url").val();
+                                }
                             });
-                        }
-                    });
+                        });
 
-                    $("#disconnect_gbp").click(function() {
-                        if (confirm('Are you sure ?')) {
-                            var data = {
-                                'action': 'disconnect_gbp',
-                            };
-                        } else {
-                            return false;
-                        }
-                        jQuery.post(ajax_url, data, function(response) {
-                            // var pathArray = url.split('#');
+                        $(".save_location").click(function() {
+                            var loc_value = new Array();
+                            $("input:checked").each(function() {
+                                loc_value.push($(this).val());
+                            });
+
+                            if (loc_value == '' || loc_value == undefined) {
+                                alert("Please Select Atleast One Location.");
+                                return false;
+                            } else {
+                                var data = {
+                                    'action': 'save_location',
+                                    'location_value': loc_value
+                                };
+                                jQuery.post(ajax_url, data, function(response) {
+                                    $('#responseText').text(response);
+                                    $("#responseText").show().delay(1000).fadeOut();
+                                });
+                            }
+                        });
+
+                        $("#disconnect_gbp").click(function() {
+                            if (confirm('Are you sure?')) {
+                                var data = {
+                                    'action': 'disconnect_gbp',
+                                };
+                            } else {
+                                return false;
+                            }
+                            jQuery.post(ajax_url, data, function(response) {
+                                if(response){
+
+                                    window.location.href = $('#page_url').val();
+                                }
+                            });
                             window.location.href = $('#page_url').val();
                         });
                     });
+                </script>
+        </div>
+        </form>
 
-                    // Gbp Button Click
-                    $("#gbpButtonClick").click(function(e) {
-                        var data = {
-                            'action': 'connection_create',
-                        };
-                        jQuery.post(ajax_url, data, function(response) {
-                            console.log("response => " + response);
-                        });
-                    });
-
-                    $("#gbpButton").click(function(e) {
-                        e.preventDefault();
-                        const client_id = $("#gbp_client_number").val();
-                        const site_url = $("#site_url").val();
-
-                        if (client_id) {
-                            const redirect_url = encodeURIComponent(site_url + '/wp-admin/edit.php?post_type=coupon&page=admin-settings.php');
-                            let url = `https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?redirect_uri=${redirect_url}&prompt=consent&response_type=token&client_id=${client_id}&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fbusiness.manage&access_type=online&flowName=GeneralOAuthFlow`;
-                            var data = {
-                                'action': 'store_client_id',
-                                'client_id': client_id, // We pass php values differently!
-                            };
-                            jQuery.post(ajax_url, data, function(response) {
-                                console.log("response => " + response);
-                            });
-                            window.location.href = url;
-                            // window.location.reload();
-                        } else {
-                            $("#error").text('Please Enter Client ID!!');
-                        }
-                    });
-                });
-            })(jQuery);
-        </script>
     </div>
 <?php }

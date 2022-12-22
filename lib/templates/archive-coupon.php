@@ -2,6 +2,7 @@
 
 get_header();
 $accent_color = get_option('clipit_accent_color');
+$coupon_icon = get_option('clipit_icon');
 echo '<div id="clipit" class="clipit-coupons"', !empty($accent_color) ? "style='--color-accent:{$accent_color}'" : '', '>';
 
 if (have_posts()): while (have_posts()): the_post();

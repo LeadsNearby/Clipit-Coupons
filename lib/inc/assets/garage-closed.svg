@@ -1,0 +1,5 @@
+<svg id="li-garage-closed" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+    <path d="M5.4 21.2h21.3v2.1H5.4z"/>
+    <path d="M30.7 4.7H28L23.8 0H8.2L4 4.7H1.3C.6 4.7 0 5.5 0 6.5v2.1h1.5V32h29V8.6H32V6.5c0-1-.6-1.8-1.3-1.8zm-2.6 24.9H3.9V10.7h24.2v18.9z"/>
+    <path d="M5.4 12.8h21.3v2.1H5.4zm0 4.2h21.3v2.1H5.4zm0 8.4h21.3v2.1H5.4z"/>
+</svg>
