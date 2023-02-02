@@ -24,7 +24,7 @@ $formatted_title = preg_replace('/\s+/', '+', $raw_title);
         <?php if(get_post_meta(get_the_ID(), 'coupon_icon', true)) { ?>
             <div class="clipit-coupon__asset-wrapper">
                 <div class="clipit-coupon__img">
-                    <img src="<?php echo plugin_dir_url(dirname(FILE)) .'Clipit-Coupons/lib/inc/assets/'. $coupon_icon .'.jpg'; ?>" />
+                    <img src="<?php echo plugin_dir_url(dirname(__DIR__)) .'inc/assets/'. $coupon_icon .'.jpg'; ?>" />
                 </div>
             </div>
         

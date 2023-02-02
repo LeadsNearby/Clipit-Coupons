@@ -96,7 +96,10 @@
         }
         
         .clipit-coupon__asset-wrapper {
-            grid-area: 2 / 1 / 4 / 2;
+            display: flex;
+            grid-area: 2/1/4/2;
+            align-items: center;
+            justify-content: center;
         }
         @media screen and (max-width: 480px) {
             .clipit-coupon__asset-wrapper {

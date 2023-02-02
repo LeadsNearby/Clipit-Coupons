@@ -90,7 +90,10 @@
   }
 }
 .clipit-coupon .clipit-coupon__int .clipit-coupon__asset-wrapper {
+  display: flex;
   grid-area: 2/1/4/2;
+  align-items: center;
+  justify-content: center;
 }
 @media screen and (max-width: 480px) {
   .clipit-coupon .clipit-coupon__int .clipit-coupon__asset-wrapper {
