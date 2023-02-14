@@ -33,6 +33,5 @@ if ($coupon_expiration) {
 }
 
 ?>
-
-<span class="clipit-coupon__expiration"><?php echo $coupon_expiration_text; ?></span>
-<span class="clipit-coupon__act"><?php echo $act_text; ?></span>
+<span class="clipit-coupon__spacer"></span>
+<span class="clipit-coupon__expiration"><?php echo $coupon_expiration_text; ?> - <?php echo $act_text; ?></span>

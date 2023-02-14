@@ -4,6 +4,9 @@
 Admin Scripts
  ********************************/
 
+ global $clipitGBPoauth2;
+$clipitGBPoauth2 = "https://homeserviceapps.com/integrations/clipit/clipitoauth2";
+
 add_action('admin_menu', 'clipit_settings_page');
 function clipit_settings_page()
 {
@@ -41,8 +44,9 @@ function check_access_token()
     $access_token = get_option('gbp_access_token');
     $refresh_token = get_option('gbp_refresh_token');
 
+
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, "https://wp.digitalapps.studio/clipitoauth2/index.php?action=refresh_token&access_token=" . $access_token . "&refresh_token=" . $refresh_token);
+    curl_setopt($ch, CURLOPT_URL,  $clipitGBPoauth2. "/index.php?action=refresh_token&access_token=" . $access_token . "&refresh_token=" . $refresh_token);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/x-www-form-urlencoded']);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
@@ -69,45 +73,67 @@ $locations = array();
 $i = 0;
 function get_locations($token = null, $i = 0, $locations = array())
 {
-    $access_token = get_option('gbp_access_token');
-    $account_id = get_option('gbp_accounts');
 
+    $allLocations = array();
+    $token = null;
+
+    $featchedData = get_more_locations($token, 0, $allLocations);
+
+    if($featchedData !== ''){
+        if (get_option('gbp_locations') || get_option('gbp_locations') == '') {
+            update_option('gbp_locations', $featchedData, false);
+        } else {
+            add_option('gbp_locations', $featchedData, false);
+        }
+    } 
+
+    return $featchedData;
+    wp_die();
+}
+
+function get_more_locations($token = null, $i = 0, $locations = array())
+{
+    $access_token = get_option('gbp_access_token');
+    $accounts = get_option('gbp_accounts');
     $curl = curl_init();
+    $url = 'https://mybusinessbusinessinformation.googleapis.com/v1/accounts/' . $accounts->accounts . '/locations?readMask=name,title&pageSize=100&pageToken=' . $token;
+
     curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://mybusinessbusinessinformation.googleapis.com/v1/accounts/' . $account_id . '/locations?readMask=name,title&pageSize=100&pageToken=' . $token,
+        CURLOPT_URL => $url,
         CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => '',
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
         CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => 'GET',
+        CURLOPT_CUSTOMREQUEST => "GET",
         CURLOPT_HTTPHEADER => array(
             'Authorization: Bearer ' . $access_token,
         ),
     ));
-    $response = curl_exec($curl);
-    $response = json_decode($response);
 
-    if ($response->error) {
-        echo "Something Wrong";
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
+    curl_close($curl);
+    if ($err) {
+        $oldLocations = get_option('gbp_locations');
+        return $oldLocations;
     } else {
-        foreach ($response->locations as $loc) {
+        $responseObj = json_decode($response);
+
+        foreach ($responseObj->locations as $loc) {
             $locations[$i]['name'] = str_replace('locations/', '', $loc->name);
             $locations[$i]['title'] = $loc->title;
             $i++;
         }
 
-        if ($response->nextPageToken) {
-            $token = $response->nextPageToken;
-            get_locations($token, $i, $locations);
+        if ($responseObj->nextPageToken) {
+            $token = $responseObj->nextPageToken;
+            get_more_locations($token, $i, $locations);
         }
-        $locations = json_encode($locations);
 
-        update_option("gbp_locations", $locations, true);
-        echo "Location Get Succesfully";
+        return $locations;
     }
-    wp_die();
 }
 
 // save selected location
@@ -119,7 +145,7 @@ function save_location()
     foreach ($_POST['location_value'] as $data) {
         array_push($gbp_selected_value, $data);
     }
-    $gbp_selected_value = json_encode($gbp_selected_value);
+    // $gbp_selected_value = json_encode($gbp_selected_value);
     update_option('gbp_selected_location', $gbp_selected_value, true);
     echo "location save successfully";
     wp_die();
@@ -156,6 +182,7 @@ function disconnect_gbp()
     update_option("gbp_accounts", "", true);
     update_option("gbp_locations", "", true);
     update_option("gbp_selected_location", "", true);
+    updated_option('gbp_isConnected', false, false);
     wp_die();
 }
 
@@ -168,7 +195,7 @@ function connection_create()
 
     $curl = curl_init();
     curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://wp.digitalapps.studio/clipitoauth2?domain=' . $_SERVER["HTTP_HOST"] . '&action=connect',
+        CURLOPT_URL => $clipitGBPoauth2.'/?domain=' . $_SERVER["HTTP_HOST"] . '&action=connect',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -195,7 +222,6 @@ function store_client_id()
     echo $_POST['client_id'];
     wp_die();
 }
-
 
 add_action('wp_ajax_save_authentications', 'save_authentications');
 add_action('wp_ajax_nopriv_save_authentications', 'save_authentications');

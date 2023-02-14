@@ -17,12 +17,25 @@ add_action('rest_api_init', function () {
 
 function coupon_options($post)
 {
+    $args = array(
+        'post_type'      => 'page',
+        'post_status'    => 'publish',
+        'posts_per_page' => -1
+    );
+    $pages = get_posts($args);
+
     $values = get_post_custom($post->ID);
     $is_value = esc_html( get_post_meta( $post->ID, 'coupon_fb_like', true ) );
+    $is_featured = esc_html( get_post_meta( $post->ID, 'coupon_featured', true ) );
     $checked;
+    $featured_checked;
     if ( $is_value == "yes" ) { $checked = "checked"; } 
 	else if ( $is_value == "no" ) { $checked = ""; } 
 	else { $checked="";}
+
+    if ( $is_featured == "yes" ) { $featured_checked = "checked"; } 
+	else if ( $is_featured == "no" ) { $featured_checked = ""; } 
+	else { $featured_checked="";}
     $coupon_feature = (isset($values['coupon_feature']) ? esc_attr($values['coupon_feature'][0]) : '');
     $coupon_social = (isset($values['coupon_social']) ? esc_attr($values['coupon_social'][0]) : '');
     $coupon_email = (isset($values['coupon_email']) ? esc_attr($values['coupon_email'][0]) : '');
@@ -36,23 +49,32 @@ function coupon_options($post)
     $coupon_promo_code = (isset($values['coupon_promo_code']) ? esc_attr($values['coupon_promo_code'][0]) : '');
     $coupon_name = (isset($values['coupon_name']) ? esc_attr($values['coupon_name'][0]) : '');
     $coupon_fineprint = (isset($values['coupon_fineprint']) ? esc_attr($values['coupon_fineprint'][0]) : '');
-    $coupon_promo_text = (isset($values['coupon_promo_text']) ? esc_attr($values['coupon_promo_text'][0]) : '');
+    $coupon_pre_text = (isset($values['coupon_pre_text']) ? esc_attr($values['coupon_pre_text'][0]) : '');
     $coupon_button_text = (isset($values['coupon_button_text']) ? esc_attr($values['coupon_button_text'][0]) : '');
     $coupon_fb_like = (isset($values['coupon_fb_like']) ? esc_attr($values['coupon_fb_like'][0]) : '');
+    $page_custom_select = (isset($values['page_custom_select']) ? esc_attr($values['page_custom_select'][0]) : '');
+    $coupon_icon = (isset($values['coupon_icon']) ? esc_attr($values['coupon_icon'][0]) : '');
     $coupon_css_class = (isset($values['coupon_css_class']) ? esc_attr($values['coupon_css_class'][0]) : '');
+    
     wp_nonce_field('my_meta_box_nonce', 'meta_box_nonce');
 ?>
 
-    <!-- <div class="tab">
-	  <div class="tablinks" onclick="openOption(event, 'Actions')" id="defaultOpen">Actions</div>
-	  <div class="tablinks" onclick="openOption(event, 'Fine')">Fine Print & Promo</div>
-	  <div class="tablinks" onclick="openOption(event, 'Styles')">Styles</div>
-	</div> -->
-
     <div id="Actions" class="">
-        <p><label for="coupon_expiration"><?php _e('Coupon Expiration', 'inputname'); ?></label><br />
+        <p>
+            <label for="coupon_featured"><?php _e('Featured Coupon', 'inputname'); ?></label><br/>
+            <label for="coupon_featured"><?php _e('Enable Featured Coupon', 'inputname'); ?>
+                <input type="checkbox" name="coupon_featured" id="coupon_featured" value="yes" <?php echo $featured_checked; ?> />
+            </label>
+        </p>
+        <p>
+            <label id="expireDate" for="coupon_expiration"><?php _e('Coupon Expiration', 'inputname'); ?></label><br />
             <em>Choose a date you would like your coupon will expire.</em><br />
-            <input id="datepicker" class="coupon-text" type="text" size="" name="coupon_expiration" value="<?php echo esc_html($coupon_expiration); ?>" required />
+            <input id="datepicker" onfocus='this.value = ""' class="coupon-text" type="text" size="" name="coupon_expiration" value="<?php echo esc_html($coupon_expiration); ?>" required />
+        <p class="date_err"></p>
+        </p>
+        <p>
+            <label for="coupon_pre_text"><?php _e('Coupon Pre Text', 'inputname'); ?></label><br/>
+            <input class="coupon_pre_text" type="text" size="" name="coupon_pre_text" value="<?php echo esc_html($coupon_pre_text); ?>" />
         </p>
         <p>
             <label for="coupon_fb_like"><?php _e('Enable Facebook Recommend Button', 'inputname'); ?></label><br/>
@@ -83,6 +105,56 @@ function coupon_options($post)
             <em>Enter your coupon shortcode here. <?php _e('Suitable for text and HTML. May include %s tags.', 'coupons'); ?></em>
             <textarea style="width:100%" name="coupon_shorts" id="coupon_shorts" rows="5"><?php echo stripslashes(get_post_meta($post->ID, 'coupon_shorts', true)); ?></textarea><br />
         </p>
+        <p>
+				<label for="coupon_icon"><?php esc_attr_e( 'Coupon Icon', 'coupons' ); ?></label>
+				<select id="coupon_icon" name="coupon_icon">
+					<option value=""><?php esc_html_e( '&ndash; Select &ndash;', 'coupons' ); ?></option>
+                    <option value="<?php echo esc_attr( 'electric_fan_repair_replace_one' ); ?>" <?php selected( $coupon_icon, 'electric_fan_repair_replace_one', true ); ?>><?php esc_html_e( 'Electric - Ceiling Fan', 'coupons' ); ?></option>
+					<option value="<?php echo esc_attr( 'electric_fan_repair_replace_two' ); ?>" <?php selected( $coupon_icon, 'electric_fan_repair_replace_two', true ); ?>><?php esc_html_e( 'Electric - Ceiling Fan Alt', 'coupons' ); ?></option>
+                    <option value="<?php echo esc_attr( 'electric_outlet_repair_replace' ); ?>" <?php selected( $coupon_icon, 'electric_outlet_repair_replace', true ); ?>><?php esc_html_e( 'Electric - Outlet', 'coupons' ); ?></option>
+                    <option value="<?php echo esc_attr( 'electric_panel' ); ?>" <?php selected( $coupon_icon, 'electric_panel', true ); ?>><?php esc_html_e( 'Electric - Panel', 'coupons' ); ?></option>
+                    <option value="<?php echo esc_attr( 'electric_recessed_lights' ); ?>" <?php selected( $coupon_icon, 'electric_recessed_lights', true ); ?>><?php esc_html_e( 'Electric - Recessed Light', 'coupons' ); ?></option>
+                    <option value="<?php echo esc_attr( 'electric_switch_repair_replace' ); ?>" <?php selected( $coupon_icon, 'electric_switch_repair_replace', true ); ?>><?php esc_html_e( 'Electric - Light Switch', 'coupons' ); ?></option>
+                    <option value="<?php echo esc_attr( 'electric_vehicle_charging' ); ?>" <?php selected( $coupon_icon, 'electric_vehicle_charging', true ); ?>><?php esc_html_e( 'Electric - Vehicle Charging', 'coupons' ); ?></option>
+                    <option value="<?php echo esc_attr( 'family_grandparents' ); ?>" <?php selected( $coupon_icon, 'family_grandparents', true ); ?>><?php esc_html_e( 'Family - Grandparents', 'coupons' ); ?></option>
+                    <option value="<?php echo esc_attr( 'garage_door_installation_one' ); ?>" <?php selected( $coupon_icon, 'garage_door_installation_one', true ); ?>><?php esc_html_e( 'Garage Door Installation- ', 'coupons' ); ?></option>
+                    <option value="<?php echo esc_attr( 'garage_door_installation_two' ); ?>" <?php selected( $coupon_icon, 'garage_door_installation_two', true ); ?>><?php esc_html_e( 'Garage Door - Installation Two', 'coupons' ); ?></option>
+                    <option value="<?php echo esc_attr( 'garage_door_repair_one' ); ?>" <?php selected( $coupon_icon, 'garage_door_repair_one', true ); ?>><?php esc_html_e( 'Garage Door - Repair', 'coupons' ); ?></option>
+                    <option value="<?php echo esc_attr( 'garage_door_repair_two' ); ?>" <?php selected( $coupon_icon, 'garage_door_repair_two', true ); ?>><?php esc_html_e( 'Garage Door - Repair Alt', 'coupons' ); ?></option>
+                    <option value="<?php echo esc_attr( 'hvac_ductless_repair_inside' ); ?>" <?php selected( $coupon_icon, 'hvac_ductless_repair_inside', true ); ?>><?php esc_html_e( 'HVAC - Ductless Repair', 'coupons' ); ?></option>
+                    <option value="<?php echo esc_attr( 'hvac_ductless_repair_outside' ); ?>" <?php selected( $coupon_icon, 'hvac_ductless_repair_outside', true ); ?>><?php esc_html_e( 'HVAC - Ductless Repair Alt', 'coupons' ); ?></option>
+                    <option value="<?php echo esc_attr( 'hvac_installation_one' ); ?>" <?php selected( $coupon_icon, 'hvac_installation_one', true ); ?>><?php esc_html_e( 'HVAC Installation', 'coupons' ); ?></option>
+                    <option value="<?php echo esc_attr( 'hvac_installation_two' ); ?>" <?php selected( $coupon_icon, 'hvac_installation_two', true ); ?>><?php esc_html_e( 'HVAC Installation Alt', 'coupons' ); ?></option>
+                    <option value="<?php echo esc_attr( 'hvac_repair_one' ); ?>" <?php selected( $coupon_icon, 'hvac_repair_one', true ); ?>><?php esc_html_e( 'HVAC Repair', 'coupons' ); ?></option>
+                    <option value="<?php echo esc_attr( 'thermostat_digital' ); ?>" <?php selected( $coupon_icon, 'thermostat_digital', true ); ?>><?php esc_html_e( 'HVAC - Thermostat Digital', 'coupons' ); ?></option>
+                    <option value="<?php echo esc_attr( 'thermostat-smart' ); ?>" <?php selected( $coupon_icon, 'thermostat-smart', true ); ?>><?php esc_html_e( 'HVAC - Thermostat Smart', 'coupons' ); ?></option>
+                    <option value="<?php echo esc_attr( 'iaq_filter_replace' ); ?>" <?php selected( $coupon_icon, 'iaq_filter_replace', true ); ?>><?php esc_html_e( 'IAQ - Filter Replace', 'coupons' ); ?></option>
+					<option value="<?php echo esc_attr( 'painting_painters' ); ?>" <?php selected( $coupon_icon, 'painting_painters', true ); ?>><?php esc_html_e( 'Painting - Painters', 'coupons' ); ?></option>
+                    <option value="<?php echo esc_attr( 'plumbing_faucet_replacement' ); ?>" <?php selected( $coupon_icon, 'plumbing_faucet_replacement', true ); ?>><?php esc_html_e( 'Plumbing - Faucet Replace', 'coupons' ); ?></option>
+                    <option value="<?php echo esc_attr( 'plumbing_repair_one' ); ?>" <?php selected( $coupon_icon, 'plumbing_repair_one', true ); ?>><?php esc_html_e( 'Plumbing - Repair', 'coupons' ); ?></option>
+                    <option value="<?php echo esc_attr( 'plumbing_repair_two' ); ?>" <?php selected( $coupon_icon, 'plumbing_repair_two', true ); ?>><?php esc_html_e( 'Plumbing - Repair Two', 'coupons' ); ?></option>
+                    <option value="<?php echo esc_attr( 'plumbing_repair_three' ); ?>" <?php selected( $coupon_icon, 'plumbing_repair_three', true ); ?>><?php esc_html_e( 'Plumbing  - Repair Three', 'coupons' ); ?></option>
+                    <option value="<?php echo esc_attr( 'plumbing_tank_water_heater' ); ?>" <?php selected( $coupon_icon, 'plumbing_tank_water_heater', true ); ?>><?php esc_html_e( 'Plumbing - Tank Water Heater', 'coupons' ); ?></option>
+                    <option value="<?php echo esc_attr( 'plumbing_tankless_water_heater_repair' ); ?>" <?php selected( $coupon_icon, 'plumbing_tankless_water_heater_repair', true ); ?>><?php esc_html_e( 'Plumbing - Tankless Water Heater Repair', 'coupons' ); ?></option>
+                    <option value="<?php echo esc_attr( 'plumbing_tankless_water_heater' ); ?>" <?php selected( $coupon_icon, 'plumbing_tankless_water_heater', true ); ?>><?php esc_html_e( 'Plumbing - Tankless Water Heater', 'coupons' ); ?></option>
+                    <option value="<?php echo esc_attr( 'plumbing_toilet_repair' ); ?>" <?php selected( $coupon_icon, 'plumbing_toilet_repair', true ); ?>><?php esc_html_e( 'Plumbing - Toilet Repair', 'coupons' ); ?></option>
+                    <option value="<?php echo esc_attr( 'plumbing_toilet_repair_two' ); ?>" <?php selected( $coupon_icon, 'plumbing_toilet_repair_two', true ); ?>><?php esc_html_e( 'Plumbing - Toilet Repair Alt', 'coupons' ); ?></option>
+                    <option value="<?php echo esc_attr( 'plumbing_toilet_replacement' ); ?>" <?php selected( $coupon_icon, 'plumbing_toilet_replacement', true ); ?>><?php esc_html_e( 'Plumbing - Toilet Replacement', 'coupons' ); ?></option>
+                    <option value="<?php echo esc_attr( 'roofing_asphault_shingle_installation_one' ); ?>" <?php selected( $coupon_icon, 'roofing_asphault_shingle_installation_one', true ); ?>><?php esc_html_e( 'Roofing - Asphalt Singles', 'coupons' ); ?></option>
+                    <option value="<?php echo esc_attr( 'roofing_asphault_shingle_installation_two' ); ?>" <?php selected( $coupon_icon, 'roofing_asphault_shingle_installation_two', true ); ?>><?php esc_html_e( 'Roofing - Asphalt Singles Alt', 'coupons' ); ?></option>
+                    <option value="<?php echo esc_attr( 'roofing_ceramic_shingles' ); ?>" <?php selected( $coupon_icon, 'roofing_ceramic_shingles', true ); ?>><?php esc_html_e( 'Roofing - Ceramic Singles', 'coupons' ); ?></option>
+                    <option value="<?php echo esc_attr( 'window_replace_one' ); ?>" <?php selected( $coupon_icon, 'window_replace_one', true ); ?>><?php esc_html_e( 'Windows - Replace', 'coupons' ); ?></option>
+                </select>
+			</p>
+            <p>
+                <label for="page_custom_select">Select Coupon Form Page:</label><br>
+                <select id="page_custom_select" name="page_custom_select">
+                    <option value="">Select the page that has your coupon form</option>
+                    <?php foreach ( $pages as $page ) : ?>
+                        <option value="<?php echo esc_attr( $page->ID ); ?>" <?php selected( $page_custom_select, esc_attr( $page->ID ) ); ?>><?php echo esc_html( $page->post_title ); ?></option>
+                        <?php endforeach; ?>
+                </select>
+            </p>
     </div>
     <?php
 }
@@ -107,18 +179,24 @@ function gbp_options($post)
                 List of Locations:
             </p>
             <?php
-            $locations = json_decode(get_option('gbp_locations'));
-            $selected_location_value = json_decode(get_option('gbp_selected_location'));
-
+            $locations = get_option('gbp_locations');
+            $selected_location_value = get_option('gbp_selected_location');
             foreach ($locations as $loc) {
 
-                if (!empty($selected_location_value) && in_array($loc->name, $selected_location_value)) {
+                if (is_array($loc)) {
+                    $locName = $loc['name'];
+                    $locTitle = $loc['title'];
+                } else {
+                    $locName = $loc->name;
+                    $locTitle = $loc->title;
+                }
+
+                if (!empty($selected_location_value) && in_array($locName, $selected_location_value)) {
                     $checked = 'checked';
                 } else {
                     $checked = '';
                 }
-
-                echo "<p><input type='checkbox' name='gbp_box_loc[]' value='" . $loc->name . "' id='" . $loc->title . "' style='display: inline-block;visibility: visible;' " . $checked . "><label for='" . $loc->title . "'>" . $loc->title . "</label></p>";
+                echo "<p><input type='checkbox' name='gbp_box_loc[]' value='" . $locName . "' id='" . $locTitle . "' style='display: inline-block;visibility: visible;' " . $checked . "><label for='" . $locTitle . "'>" . $locTitle . "</label></p>";
                 // echo "<br>";
             }
             ?>
@@ -161,24 +239,19 @@ function gbp_options($post)
                             $("#post_to_gbp").val('');
                         }
                     });
-
                     $('body').on('click', '#publish', function(e) {
                         if ($("#post_to_gbp").prop('checked') == true) {
-
+                            $(".date_err").text('');
                             $(".img_err").text('');
                             $(".url_err").text('')
                             $(".code_err").text('');
                             $(".box_err").text('');
-
                             $(".invalid").removeClass("invalid");
-
                             var url_regex = /^(http|https)?:\/\/[a-zA-Z0-9-\.]+\.[a-z]{2,4}/
-
                             var loc_value = new Array();
                             $("input[name='gbp_box_loc[]']:checked").each(function() {
                                 loc_value.push($(this).val());
                             });
-
                             if (loc_value == '' || loc_value == undefined) {
                                 $("#locations_list").addClass("invalid");
                                 $(".box_err").text('Please Select Atleast One Location');
@@ -204,22 +277,31 @@ function gbp_options($post)
                                 window.location.href = '#gbp_options';
                                 $(".img_err").text('Offer Image Required');
                                 return false;
+                            } else if ($("#datepicker").val() != '') {
+                                var GivenDate = $("#datepicker").val();
+                                var CurrentDate = new Date();
+                                GivenDate = new Date(GivenDate);
+                                if (GivenDate < CurrentDate) {
+                                    $("#datepicker").addClass("invalid");
+                                    window.location.href = '#expireDate';
+                                    $(".date_err").text('Coupon Expiration date is older than the current date.');
+                                    $(".date_err").css('color', "red");
+                                    return false;
+                                }
                             } else {
                                 $(".code_err").text('');
                                 $(".url_err").text('');
                                 $(".img_err").text('');
+                                $(".date_err").text('');
                             }
                         }
                     });
-
                     $('body').on('click', '.gbp_upload_image_button', function(e) {
                         e.preventDefault();
-
                         if ($("#gbp_custom_image").val() != '') {
                             $(".img_err").text('');
                             $("#img_div").css('border', '1px solid #8c8f94');
                         }
-
                         var button = $(this),
                             cp_uploader = wp.media({
                                 title: 'Custom image',
@@ -289,6 +371,12 @@ function cd_meta_box_save($post_id)
         update_post_meta($post_id, 'gbp_custom_image', esc_attr($_POST['gbp_custom_image']));
     }
 
+    if ( isset( $_POST['coupon_featured'] ) && $_POST['coupon_featured'] != '' ) {
+        update_post_meta( $post_id, 'coupon_featured', $_POST['coupon_featured'] );
+    }else {
+        update_post_meta( $post_id, 'coupon_featured', "no" );
+    }
+
     if (isset($_POST['coupon_expiration'])) {
         update_post_meta($post_id, 'coupon_expiration', wp_kses($_POST['coupon_expiration'], $allowed));
     }
@@ -297,6 +385,10 @@ function cd_meta_box_save($post_id)
         update_post_meta( $post_id, 'coupon_fb_like', $_POST['coupon_fb_like'] );
     }else {
         update_post_meta( $post_id, 'coupon_fb_like', "no" );
+    }
+
+    if (isset($_POST['page_custom_select'])) {
+        update_post_meta($post_id, 'page_custom_select', esc_attr($_POST['page_custom_select']));
     }
 
     if (isset($_POST['coupon_type'])) {
@@ -309,6 +401,14 @@ function cd_meta_box_save($post_id)
 
     if (isset($_POST['coupon_shorts'])) {
         update_post_meta($post_id, 'coupon_shorts', $_POST['coupon_shorts']);
+    }
+
+    if ( isset( $_POST['coupon_icon'] ) ) { 
+        update_post_meta( $post_id, 'coupon_icon', sanitize_text_field( wp_unslash( $_POST['coupon_icon'] ) ) );
+    }
+
+    if (isset($_POST['coupon_pre_text'])) {
+        update_post_meta($post_id, 'coupon_pre_text', $_POST['coupon_pre_text']);
     }
 
     if (isset($_POST['coupon_css_class'])) {
@@ -357,18 +457,7 @@ function cd_meta_box_save($post_id)
 
         // $location = json_decode(get_option('gbp_selected_location'));
         // foreach ($location as $value) {
-        foreach ($_POST['gbp_box_loc'] as $value) {
-            $curl = curl_init();
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://mybusiness.googleapis.com/v4/accounts/' . $accounts . '/locations/' . $value . '/localPosts',
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => '',
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 0,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_POSTFIELDS => '{
+            $payload = '{
                 "summary": "' . $summary . '",
                 "event": {
                     "title": "' . $title . '",
@@ -409,39 +498,62 @@ function cd_meta_box_save($post_id)
                 }
               ],
               "topicType": "OFFER"
-            }',
-                CURLOPT_HTTPHEADER => array(
-                    'Content-Type: application/json',
-                    'Authorization: Bearer ' . $access_token,
-                ),
-            ));
+            }';
+    
+            foreach ($_POST['gbp_box_loc'] as $value) {
+            
+                $curl = curl_init();
+                curl_setopt_array($curl, array(
+                    CURLOPT_URL => 'https://mybusiness.googleapis.com/v4/accounts/' . $accounts->accounts . '/locations/' . $value . '/localPosts',
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_ENCODING => '',
+                    CURLOPT_MAXREDIRS => 10,
+                    CURLOPT_TIMEOUT => 0,
+                    CURLOPT_FOLLOWLOCATION => true,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => 'POST',
+                    CURLOPT_POSTFIELDS => $payload,
+                    CURLOPT_HTTPHEADER => array(
+                        'Content-Type: application/json',
+                        'Authorization: Bearer ' . $access_token,
+                    ),
+                ));
+                $response = curl_exec($curl);
+                $result = json_decode($response);
+            }
 
-            $response = curl_exec($curl);
-            $result = json_decode($response);
+            $prevent_publish = false;
+            update_post_meta($post_id, 'post_to_gbp', '');
+            if ($result->error->code == '400') {
+                $status_short_text = $result->error->message;
+                $status_msg = json_encode($result->error->details);
+                echo $status_msg;
+                create_error_log($status_short_text, $status_msg);
+                echo "<script>alert('something wrong');</script>";
+                $prevent_publish = true;
+            }
+            //Set to true if data was invalid.
+            if ($prevent_publish) {
+                // unhook this function to prevent indefinite loop
+                remove_action('save_post', 'cd_meta_box_save');
+                // update the post to change post status
+                wp_update_post(array('ID' => $post_id, 'post_status' => 'draft'));
+                // re-hook this function again
+                add_action('save_post', 'cd_meta_box_save');
+            }
+            remove_action('save_post', 'cd_meta_box_save');
+        } else {
+            update_post_meta($post_id, 'post_to_gbp', '');
+            return;
+            exit;
         }
-
-        update_post_meta($post_id, 'post_to_gbp', '');
-        if ($result->error->code == '400') {
-            $status_short_text = $result->error->message;
-            $status_msg = json_encode($result->error->details);
-            echo $status_msg;
-            create_error_log($status_short_text, $status_msg);
-            echo "<script>alert('something wrong');</script>";
-        }
-        remove_action('save_post', 'cd_meta_box_save');
-    } else {
-        update_post_meta($post_id, 'post_to_gbp', '');
-        return;
-        exit;
     }
-}
-
-/* Write error info into plugin log file. */
-function create_error_log($error_short_text, $error_content)
-{
-    $plugin_dir = plugin_dir_path(__FILE__);
-    $error_date = date("M,d,Y h:i:s A");
-    $error = $error_date . " : " . $error_short_text . " - " . $error_content . "\n----- ------ -----\n";
-    error_log($error, 3, $plugin_dir . "/gbp_plugin.log");
-}
-?>
+    /* Write error info into plugin log file. */
+    function create_error_log($error_short_text, $error_content)
+    {
+        $plugin_dir = plugin_dir_path(__FILE__);
+        $error_date = date("M,d,Y h:i:s A");
+        $error = $error_date . " : " . $error_short_text . " - " . $error_content . "\n----- ------ -----\n";
+        error_log($error, 3, $plugin_dir . "/gbp_plugin.log");
+    }
+    ?>
