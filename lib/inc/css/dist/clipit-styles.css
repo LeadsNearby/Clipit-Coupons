@@ -80,8 +80,7 @@
   text-transform: uppercase;
   font-weight: 700;
   padding: 0.25em 1em 0.75em;
-  -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 0.5em), 0 0);
-          clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 0.5em), 0 0);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 0.5em), 0 0);
 }
 @media screen and (max-width: 480px) {
   .clipit-coupon .clipit-coupon__int .clipit-coupon__save-wrapper {
@@ -326,16 +325,18 @@
   .featured {
     grid-area: auto;
   }
+
   .clipit-coupon__content-wrapper {
     grid-area: 4/1/4/3;
   }
+
   .clipit-coupon__footer-wrapper {
     grid-area: 5/1/5/3;
   }
 }
 @media print {
   body,
-  html {
+html {
     background-color: #fff !important;
   }
-}/*# sourceMappingURL=clipit-styles.css.map */
+}

@@ -64,7 +64,7 @@ if ($query->have_posts()) {
         $coupon_shorts = get_post_meta($post->ID, 'coupon_shorts', true);
         $coupon_social = get_post_meta($post->ID, 'coupon_social', true);
         $coupon_print_qrcode = get_post_meta($post->ID, 'coupon_print_qrcode', true);
-	    $coupon_icon = get_post_meta($post->ID, 'coupon_icon', true);
+		$coupon_icon = get_post_meta($post->ID, 'coupon_icon', true);
         $coupon_css_id = get_post_meta($post->ID, 'coupon_css_id', true);
         $coupon_css_class = get_post_meta($post->ID, 'coupon_css_class', true);
         $plusdate = strtotime($coupon_dynamic_expiration_plus_days);

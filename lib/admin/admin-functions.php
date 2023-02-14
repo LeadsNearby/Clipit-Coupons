@@ -4,6 +4,9 @@
 Admin Scripts
  ********************************/
 
+ global $clipitGBPoauth2;
+$clipitGBPoauth2 = "https://homeserviceapps.com/integrations/clipit/clipitoauth2";
+
 add_action('admin_menu', 'clipit_settings_page');
 function clipit_settings_page()
 {
@@ -41,8 +44,9 @@ function check_access_token()
     $access_token = get_option('gbp_access_token');
     $refresh_token = get_option('gbp_refresh_token');
 
+
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, "https://wp.digitalapps.studio/clipitoauth2/index.php?action=refresh_token&access_token=" . $access_token . "&refresh_token=" . $refresh_token);
+    curl_setopt($ch, CURLOPT_URL,  $clipitGBPoauth2. "/index.php?action=refresh_token&access_token=" . $access_token . "&refresh_token=" . $refresh_token);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/x-www-form-urlencoded']);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
@@ -191,7 +195,7 @@ function connection_create()
 
     $curl = curl_init();
     curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://wp.digitalapps.studio/clipitoauth2?domain=' . $_SERVER["HTTP_HOST"] . '&action=connect',
+        CURLOPT_URL => $clipitGBPoauth2.'/?domain=' . $_SERVER["HTTP_HOST"] . '&action=connect',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,

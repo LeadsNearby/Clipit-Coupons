@@ -1,4 +1,7 @@
 <?php
+global $clipitGBPoauth2;
+$clipitGBPoauth2 = "https://homeserviceapps.com/integrations/clipit/clipitoauth2";
+
 add_action('admin_init', 'admin_add_get_val');
 function admin_add_get_val()
 {
@@ -57,7 +60,7 @@ function coupon_plugin_settings()
 
 function clipit_settings()
 {
-    global $title;
+    global $title, $clipitGBPoauth2;
 ?>
     <h2><?php echo $title; ?></h2>
     <script>
@@ -305,7 +308,7 @@ function clipit_settings()
                                 }
                                 if ($gbpAccessToken == '') {
                                     ?>
-                                        <a href="https://wp.digitalapps.studio/clipitoauth2/index.php?domain=<?php echo $domain; ?>&action=<?php echo $action; ?>" type="button" class="button-primary" id="" value="Connect GBP Account">Connect GBP Account</a>
+                                        <a href="<?php echo $clipitGBPoauth2; ?>/index.php?domain=<?php echo $domain; ?>&action=<?php echo $action; ?>" type="button" class="button-primary 1" id="" value="Connect GBP Account">Connect GBP Account</a>
                                     <?php
                                 }
                                     ?>
