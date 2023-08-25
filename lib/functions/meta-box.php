@@ -27,8 +27,11 @@ function coupon_options($post)
     $values = get_post_custom($post->ID);
     $is_value = esc_html( get_post_meta( $post->ID, 'coupon_fb_like', true ) );
     $is_featured = esc_html( get_post_meta( $post->ID, 'coupon_featured', true ) );
+    $is_fpd_featured = esc_html( get_post_meta( $post->ID, 'coupon_fineprint_display', true ) );
     $checked;
     $featured_checked;
+    $fpd_checked;
+
     if ( $is_value == "yes" ) { $checked = "checked"; } 
 	else if ( $is_value == "no" ) { $checked = ""; } 
 	else { $checked="";}
@@ -36,6 +39,10 @@ function coupon_options($post)
     if ( $is_featured == "yes" ) { $featured_checked = "checked"; } 
 	else if ( $is_featured == "no" ) { $featured_checked = ""; } 
 	else { $featured_checked="";}
+
+    if ( $is_fpd_featured == "yes" ) { $fpd_checked = "checked"; } 
+	else if ( $is_fpd_featured == "no" ) { $fpd_checked = ""; } 
+	else { $fpd_checked="";}
     $coupon_feature = (isset($values['coupon_feature']) ? esc_attr($values['coupon_feature'][0]) : '');
     $coupon_social = (isset($values['coupon_social']) ? esc_attr($values['coupon_social'][0]) : '');
     $coupon_email = (isset($values['coupon_email']) ? esc_attr($values['coupon_email'][0]) : '');
@@ -52,6 +59,7 @@ function coupon_options($post)
     $coupon_pre_text = (isset($values['coupon_pre_text']) ? esc_attr($values['coupon_pre_text'][0]) : '');
     $coupon_button_text = (isset($values['coupon_button_text']) ? esc_attr($values['coupon_button_text'][0]) : '');
     $coupon_fb_like = (isset($values['coupon_fb_like']) ? esc_attr($values['coupon_fb_like'][0]) : '');
+    $coupon_fineprint_display = (isset($values['coupon_fineprint_display']) ? esc_attr($values['coupon_fineprint_display'][0]) : '');
     $page_custom_select = (isset($values['page_custom_select']) ? esc_attr($values['page_custom_select'][0]) : '');
     $coupon_icon = (isset($values['coupon_icon']) ? esc_attr($values['coupon_icon'][0]) : '');
     $coupon_css_class = (isset($values['coupon_css_class']) ? esc_attr($values['coupon_css_class'][0]) : '');
@@ -95,6 +103,12 @@ function coupon_options($post)
             ));
             ?>
             <em><?php _e('Suitable for text and HTML. May include %s tags.', 'coupons'); ?></em>
+        </p>
+        <p>
+            <label for="coupon_fineprint_display"><?php _e('Display Fine Print', 'inputname'); ?></label><br/>
+            <label for="coupon_fineprint_display"><?php _e('Enable Button', 'inputname'); ?>
+                <input type="checkbox" name="coupon_fineprint_display" id="coupon_fineprint_display" value="yes" <?php echo $fpd_checked; ?> />
+            </label>
         </p>
         <p><label>CSS Class</label><br />
             <em>Enter in your custom CSS class. This will add a custom class to the coupon</em><br />
@@ -385,6 +399,12 @@ function cd_meta_box_save($post_id)
         update_post_meta( $post_id, 'coupon_fb_like', $_POST['coupon_fb_like'] );
     }else {
         update_post_meta( $post_id, 'coupon_fb_like', "no" );
+    }
+
+    if ( isset( $_POST['coupon_fineprint_display'] ) && $_POST['coupon_fineprint_display'] != '' ) {
+        update_post_meta( $post_id, 'coupon_fineprint_display', $_POST['coupon_fineprint_display'] );
+    }else {
+        update_post_meta( $post_id, 'coupon_fineprint_display', "no" );
     }
 
     if (isset($_POST['page_custom_select'])) {

@@ -4,6 +4,7 @@ $coupon_icon = get_post_meta(get_the_ID(), 'coupon_icon', true);
 $coupon_pre_text = get_post_meta(get_the_ID(), 'coupon_pre_text', true);
 $page_custom_select = get_post_meta(get_the_ID(), 'page_custom_select', true);
 $coupon_featured = get_post_meta(get_the_ID(), 'coupon_featured', true);
+$coupon_fineprint = get_post_meta(get_the_ID(), 'coupon_fineprint', true);
 $raw_title = get_the_title();
 $formatted_title = preg_replace('/\s+/', '+', $raw_title);
 ?>
@@ -45,7 +46,7 @@ $formatted_title = preg_replace('/\s+/', '+', $raw_title);
             <div class="clipit-coupon__fblike">
                 <iframe src="https://www.facebook.com/plugins/like.php?href=<?php echo urlencode(get_permalink($post->ID)); ?>%2F&width=219&layout=button_count&action=recommend&size=large&share=true&height=46&appId=221733661184896" width="219" height="46" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
             </div>
-        <?php } ?>
+            <?php } ?>
 
         <div class="clipit-coupon__footer-wrapper">
             <?php if(get_post_meta(get_the_ID(), 'page_custom_select', true)) { ?>
@@ -53,7 +54,12 @@ $formatted_title = preg_replace('/\s+/', '+', $raw_title);
             <?php } else { ?>
                 <a class="clipit-coupon__button coupon_btn_click" href="<?php the_permalink();?>">View Details</a>
             <?php } ?>    
-            <?php include 'coupon-expiration.php';?>	
+            <?php include 'coupon-expiration.php';?>
+            <?php if(get_post_meta(get_the_ID(), 'coupon_fineprint_display', true) == 'yes') { ?>
+            <div class="clipit-coupon__fine" style="font-size: 12px; margin-top: 10px;">
+                <i><?php echo wp_strip_all_tags($coupon_fineprint); ?></1>
+            </div>	
+            <?php } ?>
         </div>
 
         </div>
