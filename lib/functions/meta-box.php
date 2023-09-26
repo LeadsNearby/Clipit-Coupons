@@ -157,6 +157,8 @@ function coupon_options($post)
                     <option value="<?php echo esc_attr( 'roofing_asphault_shingle_installation_one' ); ?>" <?php selected( $coupon_icon, 'roofing_asphault_shingle_installation_one', true ); ?>><?php esc_html_e( 'Roofing - Asphalt Singles', 'coupons' ); ?></option>
                     <option value="<?php echo esc_attr( 'roofing_asphault_shingle_installation_two' ); ?>" <?php selected( $coupon_icon, 'roofing_asphault_shingle_installation_two', true ); ?>><?php esc_html_e( 'Roofing - Asphalt Singles Alt', 'coupons' ); ?></option>
                     <option value="<?php echo esc_attr( 'roofing_ceramic_shingles' ); ?>" <?php selected( $coupon_icon, 'roofing_ceramic_shingles', true ); ?>><?php esc_html_e( 'Roofing - Ceramic Singles', 'coupons' ); ?></option>
+                    <option value="<?php echo esc_attr( 'water_filtration_one' ); ?>" <?php selected( $coupon_icon, 'water-filtration-one', true ); ?>><?php esc_html_e( 'Plumbing - Water Filtration', 'coupons' ); ?></option>
+                    <option value="<?php echo esc_attr( 'water_filtration_two' ); ?>" <?php selected( $coupon_icon, 'water-filtration-two', true ); ?>><?php esc_html_e( 'Plumbing - Water Filtration Alt', 'coupons' ); ?></option>
                     <option value="<?php echo esc_attr( 'window_replace_one' ); ?>" <?php selected( $coupon_icon, 'window_replace_one', true ); ?>><?php esc_html_e( 'Windows - Replace', 'coupons' ); ?></option>
                 </select>
 			</p>
