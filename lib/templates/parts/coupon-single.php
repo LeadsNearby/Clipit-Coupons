@@ -23,7 +23,15 @@ $classes = array(
     <?php } ?>
     <?php include 'coupon-expiration.php';?>
     <span class="clipit-coupon__fine">
-        <span><?php echo wp_strip_all_tags($coupon_fineprint); ?></span>
+        <span>
+			<?php 
+			if (!empty($coupon_fineprint)) {
+				echo wp_strip_all_tags($coupon_fineprint);
+			} else {
+				echo 'To redeem, call, or request an appointment on our website and mention this coupon. The offer is valid for one-time use only. It is not redeemable for cash, not valid toward previous purchases, and must be requested while making the appointment. The offer may not be combined with other coupons, discounts, offers, or promotions. This offer is not valid on customer-supplied items';
+			}
+			?>
+		</span>
         <?php include 'coupon-logo.php';?>
     </span>
 </article>
