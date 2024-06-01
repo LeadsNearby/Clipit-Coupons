@@ -5,7 +5,7 @@ $clipitGBPoauth2 = "https://homeserviceapps.com/integrations/clipit/clipitoauth2
 add_action('admin_init', 'admin_add_get_val');
 function admin_add_get_val()
 {
-    if (!is_null($_GET['data']) && !is_null($_GET['accounts']) && !is_null($_GET['locations'])) {
+    if (isset($_GET['data']) && isset($_GET['accounts']) && isset($_GET['locations'])) {
 
         if (!get_option('gbp_isConnected') || get_option('gbp_isConnected') != '') {
 
@@ -51,6 +51,38 @@ function admin_add_get_val()
     }
 }
 
+function get_all_gbp_locations($accessToken, $accountId) {
+    $locations = array();
+    $pageToken = null;
+    
+    do {
+        $apiUrl = "https://mybusiness.googleapis.com/v4/accounts/$accountId/locations?pageSize=100";
+        if ($pageToken) {
+            $apiUrl .= "&pageToken=$pageToken";
+        }
+
+        $response = wp_remote_get($apiUrl, array(
+            'headers' => array(
+                'Authorization' => 'Bearer ' . $accessToken
+            )
+        ));
+
+        if (is_wp_error($response)) {
+            return $locations; // handle error
+        }
+
+        $body = wp_remote_retrieve_body($response);
+        $data = json_decode($body);
+
+        if (isset($data->locations)) {
+            $locations = array_merge($locations, $data->locations);
+        }
+
+        $pageToken = isset($data->nextPageToken) ? $data->nextPageToken : null;
+    } while ($pageToken);
+
+    return $locations;
+}
 
 add_action("admin_menu", "coupon_plugin_settings");
 function coupon_plugin_settings()
@@ -164,7 +196,6 @@ function clipit_settings()
                                 <textarea name="contact_form_default" id="contact_form_default" class="col-input text-style" rows="10" cols="70" style="font-size:11px;"><?php echo stripslashes(get_option('clipit_contact_form_default')); ?></textarea>
                             </td>
                         </tr>
-                        <tr>
                     </table>
                 </fieldset>
                 <p class="submit" style="display:none;">
@@ -388,3 +419,4 @@ function clipit_settings()
 
     </div>
 <?php }
+?>
