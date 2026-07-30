@@ -5,7 +5,7 @@ function coupon_email_settings() {
 }
 function clipit_email_results() { global $title;
 	
-	if (current_user_can( update_plugins )):
+	if (current_user_can('update_plugins')):
 	
 	global $wpdb;
 	$customers = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}clipit_email_table ORDER BY time DESC LIMIT 0 , 30 ");

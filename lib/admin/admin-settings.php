@@ -1,11 +1,12 @@
 <?php
-global $clipitGBPoauth2;
-$clipitGBPoauth2 = "https://homeserviceapps.com/integrations/clipit/clipitoauth2";
 
 add_action('admin_init', 'admin_add_get_val');
 function admin_add_get_val()
 {
     if (isset($_GET['data']) && isset($_GET['accounts']) && isset($_GET['locations'])) {
+        if (!is_string($_GET['data']) || !is_string($_GET['accounts']) || !is_string($_GET['locations'])) {
+            return;
+        }
 
         if (!get_option('gbp_isConnected') || get_option('gbp_isConnected') != '') {
 
@@ -13,40 +14,20 @@ function admin_add_get_val()
             $accounts = json_decode(stripslashes(urldecode($_GET['accounts'])));
             $locations = json_decode(stripslashes(urldecode($_GET['locations'])));
 
-            if (get_option('gbp_locations') || get_option('gbp_locations') == '') {
-                update_option('gbp_locations', $locations, false);
-            } else {
-                add_option('gbp_locations', $locations, false);
-            }
-            if (get_option('gbp_accounts') || get_option('gbp_accounts') == '') {
-                update_option('gbp_accounts', $accounts, false);
-            } else {
-                add_option('gbp_accounts', $accounts, false);
+            if (!is_object($data) || !isset($data->access_token, $data->refresh_token)) {
+                return;
             }
 
-            if (get_option('gbp_access_token') || get_option('gbp_access_token') == '') {
-                update_option('gbp_access_token', $data->access_token, false);
-            } else {
-                add_option('gbp_access_token', $data->access_token, false);
-            }
-            if (get_option('gbp_refresh_token') || get_option('gbp_refresh_token') == '') {
-                update_option('gbp_refresh_token', $data->refresh_token, false);
-            } else {
-                add_option('gbp_refresh_token', $data->refresh_token, false);
-            }
-            if (get_option('gbp_id_token') || get_option('gbp_id_token') == '') {
-                update_option('gbp_id_token', $data->id_token, false);
-            } else {
-                add_option('gbp_id_token', $data->id_token, false);
-            }
-            if (get_option('gbp_scope') || get_option('gbp_scope') == '') {
-                update_option('gbp_scope', $data->scope, false);
-            } else {
-                add_option('gbp_scope', $data->scope, false);
-            }
+            $locations = is_array($locations) ? $locations : array();
+            update_option('gbp_locations', $locations, false);
+            update_option('gbp_accounts', $accounts, false);
+            update_option('gbp_access_token', $data->access_token, false);
+            update_option('gbp_refresh_token', $data->refresh_token, false);
+            update_option('gbp_id_token', isset($data->id_token) ? $data->id_token : '', false);
+            update_option('gbp_scope', isset($data->scope) ? $data->scope : '', false);
             update_option('gbp_isConnected', true, false);
         } else {
-            add_option('gbp_isConnected', true, false);
+            update_option('gbp_isConnected', true, false);
         }
     }
 }
@@ -74,11 +55,11 @@ function get_all_gbp_locations($accessToken, $accountId) {
         $body = wp_remote_retrieve_body($response);
         $data = json_decode($body);
 
-        if (isset($data->locations)) {
+        if (is_object($data) && isset($data->locations) && is_array($data->locations)) {
             $locations = array_merge($locations, $data->locations);
         }
 
-        $pageToken = isset($data->nextPageToken) ? $data->nextPageToken : null;
+        $pageToken = is_object($data) && isset($data->nextPageToken) ? $data->nextPageToken : null;
     } while ($pageToken);
 
     return $locations;
@@ -92,7 +73,7 @@ function coupon_plugin_settings()
 
 function clipit_settings()
 {
-    global $title, $clipitGBPoauth2;
+    global $title;
 ?>
     <h2><?php echo $title; ?></h2>
     <script>
@@ -279,7 +260,10 @@ function clipit_settings()
                                     }
 
                                     $locations = $gbpLocations;
-                                    $selected_location_value = get_option('gbp_selected_location');
+                                    $selected_location_value = get_option('gbp_selected_location', array());
+                                    if (!is_array($selected_location_value)) {
+                                        $selected_location_value = array();
+                                    }
 
                                     if (count($locations) !== 0 || $gbpAccessToken != "") {
                                     ?>
@@ -297,21 +281,25 @@ function clipit_settings()
                                             <?php
                                         }
 
-                                        if (count($locations) !== 0 || $locations != "") {
+                                        if (!empty($locations)) {
                                             foreach ($locations as $loc) {
 
                                                 $checked = '';
                                                 $locName = '';
                                                 $locTitle = '';
                                                 if (is_array($loc)) {
-                                                    $locName = $loc['name'];
-                                                    $locTitle = $loc['title'];
-                                                } else {
+                                                    $locName = isset($loc['name']) ? $loc['name'] : '';
+                                                    $locTitle = isset($loc['title']) ? $loc['title'] : '';
+                                                } elseif (is_object($loc) && isset($loc->name, $loc->title)) {
                                                     $locName = $loc->name;
                                                     $locTitle = $loc->title;
                                                 }
 
-                                                if (!empty($selected_location_value) && in_array($locName, $selected_location_value)) {
+                                                if ($locName === '' || $locTitle === '') {
+                                                    continue;
+                                                }
+
+                                                if (in_array($locName, $selected_location_value, true)) {
                                                     $checked = 'checked';
                                                 } else {
                                                     $checked = '';
@@ -339,7 +327,7 @@ function clipit_settings()
                                 }
                                 if ($gbpAccessToken == '') {
                                     ?>
-                                        <a href="<?php echo $clipitGBPoauth2; ?>/index.php?domain=<?php echo $domain; ?>&action=<?php echo $action; ?>" type="button" class="button-primary 1" id="" value="Connect GBP Account">Connect GBP Account</a>
+                                        <a href="<?php echo CLIPIT_GBP_OAUTH2_URL; ?>/index.php?domain=<?php echo $domain; ?>&action=<?php echo $action; ?>" type="button" class="button-primary 1" id="" value="Connect GBP Account">Connect GBP Account</a>
                                     <?php
                                 }
                                     ?>

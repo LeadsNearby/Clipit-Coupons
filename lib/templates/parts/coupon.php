@@ -1,4 +1,6 @@
 <?php 
+global $post;
+
 wp_enqueue_style('arvo', 'https://fonts.googleapis.com/css?family=Arvo:700&display=swap');
 $coupon_icon = get_post_meta(get_the_ID(), 'coupon_icon', true);
 $coupon_pre_text = get_post_meta(get_the_ID(), 'coupon_pre_text', true);
@@ -32,7 +34,7 @@ $formatted_title = preg_replace('/\s+/', '+', $raw_title);
         <?php } else if(has_post_thumbnail()) { ?>
             <div class="clipit-coupon__asset-wrapper">
                 <div class="clipit-coupon__img">    
-                    <?php echo the_post_thumbnail( $post_id, 'thumbnail' ); ?>
+                    <?php the_post_thumbnail('thumbnail'); ?>
                 </div>
             </div>
         <?php } ?>

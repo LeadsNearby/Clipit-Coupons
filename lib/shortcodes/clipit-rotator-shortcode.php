@@ -8,9 +8,12 @@ function clipit_rotator_shortcode_html($attributes) {
         ),
         $attributes));
     if (is_numeric($tag)) {
-        $tag_id = $tag;
+        $tag_id = absint($tag);
     } else {
         $term = get_term_by('slug', $tag, 'post_tag');
+        if (!$term) {
+            return '';
+        }
         $tag_id = $term->term_id;
     }
     wp_enqueue_style('clipit-rotator');

@@ -1,7 +1,8 @@
 === ClipIt Coupons ===
 Tags: Coupons, Discounts, Coupon
-Requires at least: 3.7
-Tested up to: 4.8
+Requires at least: 6.3
+Tested up to: 6.9
+Requires PHP: 8.2
 License URI: http://LeadsNearby.com
 
 ClipIt Coupons is a powerful plugin that uses CPT to create, upload and preview coupons for your visitors to print, view or use directly on your website or blog.

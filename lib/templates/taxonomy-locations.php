@@ -3,6 +3,8 @@
 Template Name: Coupons Taxonomy
  */
 get_header();
+global $post;
+
 wp_enqueue_style('clipit-styles');
 wp_enqueue_script('jquery-ui-tooltip');
 wp_enqueue_script('jquery-ui-dialog');
@@ -19,13 +21,21 @@ $args = array(
 );
 
 $query = new WP_Query($args);
+$logo_url = '';
+$button_bg = '';
+$button_accent = '';
+$sb = '';
+$use_beta_coupon_display = (
+    get_option('clipit_beta_coupon_display', true) === 'on'
+    && function_exists('clipit_render_single_coupon')
+);
 
 if ($query->have_posts()) {
 
-	if(class_exists('Avada')) {
-		$logo_url = Avada()->settings->get('logo', 'url');
-		$button_bg = Avada()->settings->get('button_gradient_top_color');
-		$button_accent = Avada()->settings->get('button_accent_color');
+		if (class_exists('Avada') && function_exists('Avada')) {
+			$logo_url = Avada()->settings->get('logo', 'url');
+			$button_bg = Avada()->settings->get('button_gradient_top_color');
+			$button_accent = Avada()->settings->get('button_accent_color');
 	}
 
     if (is_active_sidebar('clipit-locations-sidebar')) {
@@ -33,7 +43,7 @@ if ($query->have_posts()) {
 		$sb = ' col-3-4';
     }
 
-	if (get_option('clipit_beta_coupon_display', true) == 'on') {
+		if ($use_beta_coupon_display) {
 		echo '<div class="lnbCoupons" itemscope itemtype ="http://schema.org/Offer">';
 	} else {
 		echo '<div id="clipit" class="coupons'.$sb.'" itemscope itemtype ="http://schema.org/Offer">';
@@ -76,7 +86,7 @@ if ($query->have_posts()) {
             $expirationtime = implode($expirationtime);
         }
 		
-		if (get_option('clipit_beta_coupon_display', true) == 'on' && strtotime($expirationtime . ' + 1 day') >= time()) {
+			if ($use_beta_coupon_display && strtotime($expirationtime . ' + 1 day') >= time()) {
 			$to_be_deprecated = array(
 				'coupon_expiration' => $coupon_expiration,
 				'button_bg' => $button_bg,
@@ -89,7 +99,7 @@ if ($query->have_posts()) {
 
 		wp_enqueue_style('jquery-ui-styles');
 
-        if (strtotime($expirationtime . ' + 1 day') >= time() && get_option('clipit_beta_coupon_display', true) !== 'on') {?>
+	        if (strtotime($expirationtime . ' + 1 day') >= time() && !$use_beta_coupon_display) {?>
 		<div class="post <?php echo ($coupon_css_class); ?>" id="post-<?php the_ID();?> <?php echo ($coupon_css_id); ?>">
 			<div class="grid">
 				<?php if ($coupon_type == 'Upload') {?>
@@ -141,7 +151,7 @@ if ($query->have_posts()) {
 											<?php the_title();?>
 										</div>
 										<p class="description" itemprop="description">
-											<?php the_content($coupon_description, $num_words = 55, $more = null);?>
+												<?php the_content();?>
 										</p>
 										<?php if (get_post_meta($post->ID, 'coupon_fineprint', true)) {?>
         								<hr />
@@ -266,9 +276,26 @@ $args = array(
     'orderby' => 'name',
     'order' => 'ASC',
 );
+$id = get_queried_object_id();
 $categories = wp_get_object_terms($id, 'locations', $args);
+if (is_wp_error($categories)) {
+    $categories = array();
+}
 foreach ($categories as $category) {
-    $term_meta = get_option("taxonomy_$category->term_id");
+    $term_meta = get_option("taxonomy_$category->term_id", array());
+    if (!is_array($term_meta)) {
+        $term_meta = array();
+    }
+    $term_meta = array_merge(
+        array(
+            'custom_term_meta' => '',
+            'custom_street_address_meta' => '',
+            'custom_city_address_meta' => '',
+            'custom_state_address_meta' => '',
+            'custom_zip_address_meta' => '',
+        ),
+        $term_meta
+    );
     $clipit_map_address = str_replace(' ', '+', $term_meta['custom_street_address_meta']);
     echo '<div class="clipit-locale">';
     echo '<div class="col-1-3">';

@@ -90,22 +90,22 @@ function clipit_expand_quick_edit_link($actions, $post) {
 }
 // add_filter('post_row_actions', 'clipit_expand_quick_edit_link', 10, 2);
 
+function clipit_homepage_form_generate_response($type, $message) {
+    global $callback;
+
+    if ($type == "success") {
+        $callback = "<div class='success'>{$message}</div>";
+    } else {
+        $callback = "<div class='error'>{$message}</div>";
+    }
+}
+
 //Email Function
 function clipit_email() {
+    global $callback;
+
     //EMail response generation function
     $callback = "";
-
-    //function to generate response
-    function homepage_form_generate_response($type, $message) {
-        global $callback;
-
-        if ($type == "success") {
-            $callback = "<div class='success'>{$message}</div>";
-        } else {
-            $callback = "<div class='error'>{$message}</div>";
-        }
-
-    }
 
     //response messages
     $not_human = "Human verification incorrect.";
@@ -170,27 +170,27 @@ function clipit_email() {
 
     if (!$human == 0) {
         if ($human != 2) {
-            homepage_form_generate_response("error", $not_human);
+            clipit_homepage_form_generate_response("error", $not_human);
         }
         //not human!
         else {
             //validate email
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                homepage_form_generate_response("error", $email_invalid);
+                clipit_homepage_form_generate_response("error", $email_invalid);
             } else //email is valid
             {
-                //validate presence of name and message
-                if (empty($name) || empty($message)) {
-                    homepage_form_generate_response("error", $missing_content);
+                //validate presence of the required contact details
+                if (empty($name) || empty($phone)) {
+                    clipit_homepage_form_generate_response("error", $missing_content);
                 } else //ready to go!
                 {
                     $sent = wp_mail($to, $subject, $message, $headers);
                     if ($sent) {
-                        homepage_form_generate_response("success", $message_sent);
+                        clipit_homepage_form_generate_response("success", $message_sent);
                     }
                     //message sent!
                     else {
-                        homepage_form_generate_response("error", $message_unsent);
+                        clipit_homepage_form_generate_response("error", $message_unsent);
                     }
                     //message wasn't sent
                 }
@@ -214,7 +214,7 @@ function clipit_widgets_init() {
 add_action('widgets_init', 'clipit_widgets_init');
 
 // Add term page
-function clipit_locations_add_phone_field() {
+function clipit_locations_add_phone_field($taxonomy) {
     // this will add the custom meta field to the add new term page
     ?>
 		<div class="form-field">
@@ -244,7 +244,7 @@ function clipit_locations_add_phone_field() {
 		</div>
 	<?php
 }
-add_action('locations_add_form_fields', 'clipit_locations_add_phone_field', 10, 2);
+add_action('locations_add_form_fields', 'clipit_locations_add_phone_field', 10, 1);
 
 // Edit term page
 function clipit_locations_edit_meta_field($term) {
@@ -253,7 +253,20 @@ function clipit_locations_edit_meta_field($term) {
     $t_id = $term->term_id;
 
     // retrieve the existing value(s) for this meta field. This returns an array
-    $term_meta = get_option("taxonomy_$t_id");?>
+    $term_meta = get_option("taxonomy_$t_id", array());
+    if (!is_array($term_meta)) {
+        $term_meta = array();
+    }
+    $term_meta = array_merge(
+        array(
+            'custom_term_meta' => '',
+            'custom_street_address_meta' => '',
+            'custom_city_address_meta' => '',
+            'custom_state_address_meta' => '',
+            'custom_zip_address_meta' => '',
+        ),
+        $term_meta
+    );?>
 		<tr class="form-field">
 		<th scope="row" valign="top"><label for="term_meta[custom_term_meta]"><?php _e('Phone Number', 'clipit');?></label></th>
 			<td>
@@ -291,13 +304,16 @@ function clipit_locations_edit_meta_field($term) {
 		</tr>
 	<?php
 }
-add_action('locations_edit_form_fields', 'clipit_locations_edit_meta_field', 10, 2);
+add_action('locations_edit_form_fields', 'clipit_locations_edit_meta_field', 10, 1);
 
 // Save extra taxonomy fields callback function.
-function save_taxonomy_custom_meta($term_id) {
-    if (isset($_POST['term_meta'])) {
+function save_taxonomy_custom_meta($term_id, $tt_id = 0) {
+    if (isset($_POST['term_meta']) && is_array($_POST['term_meta'])) {
         $t_id = $term_id;
-        $term_meta = get_option("taxonomy_$t_id");
+        $term_meta = get_option("taxonomy_$t_id", array());
+        if (!is_array($term_meta)) {
+            $term_meta = array();
+        }
         $cat_keys = array_keys($_POST['term_meta']);
         foreach ($cat_keys as $key) {
             if (isset($_POST['term_meta'][$key])) {

@@ -28,9 +28,9 @@ function coupon_options($post)
     $is_value = esc_html( get_post_meta( $post->ID, 'coupon_fb_like', true ) );
     $is_featured = esc_html( get_post_meta( $post->ID, 'coupon_featured', true ) );
     $is_fpd_featured = esc_html( get_post_meta( $post->ID, 'coupon_fineprint_display', true ) );
-    $checked;
-    $featured_checked;
-    $fpd_checked;
+    $checked = '';
+    $featured_checked = '';
+    $fpd_checked = '';
 
     if ( $is_value == "yes" ) { $checked = "checked"; } 
 	else if ( $is_value == "no" ) { $checked = ""; } 
@@ -167,7 +167,7 @@ function coupon_options($post)
                 <select id="page_custom_select" name="page_custom_select">
                     <option value="">Select the page that has your coupon form</option>
                     <?php foreach ( $pages as $page ) : ?>
-                        <option value="<?php echo esc_attr( $page->ID ); ?>" <?php selected( $page_custom_select, esc_attr( $page->ID ) ); ?>><?php echo esc_html( $page->post_title ); ?></option>
+                        <option value="<?php echo esc_attr( (string) $page->ID ); ?>" <?php selected( $page_custom_select, esc_attr( (string) $page->ID ) ); ?>><?php echo esc_html( $page->post_title ); ?></option>
                         <?php endforeach; ?>
                 </select>
             </p>
@@ -184,8 +184,15 @@ function gbp_options($post)
     $post_to_gbp = (isset($values['post_to_gbp']) ? esc_attr($values['post_to_gbp'][0]) : '');
     $image = get_post_meta($post->ID, 'gbp_custom_image', true);
     $token = get_option('gbp_access_token');
-    $locations = get_option('gbp_locations');
-    $selected_location = get_option('gbp_selected_location');
+    $locations = get_option('gbp_locations', array());
+    $selected_location = get_option('gbp_selected_location', array());
+
+    if (!is_array($locations)) {
+        $locations = array();
+    }
+    if (!is_array($selected_location)) {
+        $selected_location = array();
+    }
 
     if ($token != null && $locations != null && $selected_location != null) {
     ?>
@@ -195,19 +202,24 @@ function gbp_options($post)
                 List of Locations:
             </p>
             <?php
-            $locations = get_option('gbp_locations');
-            $selected_location_value = get_option('gbp_selected_location');
+            $selected_location_value = $selected_location;
             foreach ($locations as $loc) {
 
                 if (is_array($loc)) {
-                    $locName = $loc['name'];
-                    $locTitle = $loc['title'];
-                } else {
+                    $locName = isset($loc['name']) ? $loc['name'] : '';
+                    $locTitle = isset($loc['title']) ? $loc['title'] : '';
+                } elseif (is_object($loc) && isset($loc->name, $loc->title)) {
                     $locName = $loc->name;
                     $locTitle = $loc->title;
+                } else {
+                    continue;
                 }
 
-                if (!empty($selected_location_value) && in_array($locName, $selected_location_value)) {
+                if ($locName === '' || $locTitle === '') {
+                    continue;
+                }
+
+                if (in_array($locName, $selected_location_value, true)) {
                     $checked = 'checked';
                 } else {
                     $checked = '';
@@ -439,6 +451,10 @@ function cd_meta_box_save($post_id)
 
     if (isset($_POST['post_to_gbp'])) {
         $accounts = get_option('gbp_accounts');
+        $account_id = is_object($accounts) && isset($accounts->accounts)
+            ? $accounts->accounts
+            : $accounts;
+        $account_id = is_string($account_id) ? str_replace('accounts/', '', $account_id) : '';
         $access_token = get_option('gbp_access_token');
         $coupon_code = $_POST['gbp_coupon_code'];
         $summary = $_POST['coupon_fineprint'];
@@ -522,11 +538,16 @@ function cd_meta_box_save($post_id)
               "topicType": "OFFER"
             }';
     
-            foreach ($_POST['gbp_box_loc'] as $value) {
+            $gbp_locations = isset($_POST['gbp_box_loc']) && is_array($_POST['gbp_box_loc'])
+                ? $_POST['gbp_box_loc']
+                : array();
+            $result = null;
+
+            foreach ($gbp_locations as $value) {
             
                 $curl = curl_init();
                 curl_setopt_array($curl, array(
-                    CURLOPT_URL => 'https://mybusiness.googleapis.com/v4/accounts/' . $accounts->accounts . '/locations/' . $value . '/localPosts',
+                    CURLOPT_URL => 'https://mybusiness.googleapis.com/v4/accounts/' . $account_id . '/locations/' . $value . '/localPosts',
                     CURLOPT_RETURNTRANSFER => true,
                     CURLOPT_ENCODING => '',
                     CURLOPT_MAXREDIRS => 10,
@@ -541,14 +562,24 @@ function cd_meta_box_save($post_id)
                     ),
                 ));
                 $response = curl_exec($curl);
-                $result = json_decode($response);
+                $result = is_string($response) ? json_decode($response) : null;
             }
 
             $prevent_publish = false;
             update_post_meta($post_id, 'post_to_gbp', '');
-            if ($result->error->code == '400') {
-                $status_short_text = $result->error->message;
-                $status_msg = json_encode($result->error->details);
+            if (
+                is_object($result)
+                && isset($result->error)
+                && is_object($result->error)
+                && isset($result->error->code)
+                && (int) $result->error->code === 400
+            ) {
+                $status_short_text = isset($result->error->message)
+                    ? $result->error->message
+                    : 'Google Business Profile request failed.';
+                $status_msg = isset($result->error->details)
+                    ? json_encode($result->error->details)
+                    : '';
                 echo $status_msg;
                 create_error_log($status_short_text, $status_msg);
                 echo "<script>alert('something wrong');</script>";
@@ -567,7 +598,6 @@ function cd_meta_box_save($post_id)
         } else {
             update_post_meta($post_id, 'post_to_gbp', '');
             return;
-            exit;
         }
     }
     /* Write error info into plugin log file. */
