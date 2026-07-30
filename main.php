@@ -3,7 +3,7 @@
 Plugin Name: ClipIt Coupons
 Plugin URI: https://leadsnearby.com
 Description: ClipIt Coupons is a basic but powerful plugin that uses to create, upload and preview coupons for your visitors to print, view or use directly on your website or blog. With a few words and and even fewer clicks you will be on your way to displaying awesome coupons on your website or blog.
-Version: 3.0.1
+Version: 3.0.2
 Requires at least: 6.3
 Requires PHP: 8.2
 Author: LeadsNearby

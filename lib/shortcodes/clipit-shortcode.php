@@ -6,7 +6,7 @@
 
 add_shortcode('clipit_coupons', 'shortcode_clipit_coupons');
 function shortcode_clipit_coupons($atts) {
-    wp_enqueue_style('clipit-styles');
+    clipit_enqueue_frontend_styles();
 
     extract(shortcode_atts(array(
         'tag' => '',
